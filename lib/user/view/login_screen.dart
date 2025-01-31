@@ -34,7 +34,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     bool isTablet = MediaQuery.of(context).size.width > 600;
 
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -63,7 +63,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       width: 200.0,
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-                    Container(
+                    SizedBox(
                       width: MediaQuery.of(context).size.width * 0.8,
                       child: CustomTextFormField(
                         hintText: '이메일을 입력해주세요.',
@@ -71,7 +71,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ),
                     ),
                     const SizedBox(height: 16.0),
-                    Container(
+                    SizedBox(
                       width: MediaQuery.of(context).size.width * 0.8,
                       child: CustomTextFormField(
                         hintText: '비밀번호를 입력해주세요.',
@@ -86,7 +86,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           onPressed: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (_) => SignupScreen(),
+                                builder: (_) => const SignupScreen(),
                               ),
                             );
                           },

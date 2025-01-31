@@ -95,7 +95,7 @@ class _ConsultingTabState extends State<ConsultingTab> {
                             ),
                           ),
                         Padding(
-                          padding: EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: Text(messages[index].text),
                         ),
                         if (isCurrentUser)
@@ -114,7 +114,7 @@ class _ConsultingTabState extends State<ConsultingTab> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Row(
                 children: [
                   Expanded(
@@ -122,15 +122,15 @@ class _ConsultingTabState extends State<ConsultingTab> {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: TextField(
                         controller: messageController,
-                        style: TextStyle(fontSize: 14.0),
-                        decoration: InputDecoration(
+                        style: const TextStyle(fontSize: 14.0),
+                        decoration: const InputDecoration(
                           hintText: '메시지를 입력해주세요',
                         ),
                       ),
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.send),
+                    icon: const Icon(Icons.send),
                     onPressed: sendMessage,
                   ),
                 ],

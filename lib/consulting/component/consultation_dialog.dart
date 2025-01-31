@@ -23,22 +23,10 @@ class ConsultationDialog extends ConsumerWidget {
         ref.read(consultingMessageProvider.notifier);
     final currentUser = ref.watch(userProvider);
 
-    final ConsultingMessageModel? consultingMessage =
+    final ConsultingMessageModel consultingMessage =
         ref.watch(consultingMessageProvider).firstWhere(
               (message) => message.consultingId == consultingId,
             );
-
-    if (consultingMessage == null) {
-      return AlertDialog(
-        title: Text('컨설팅 정보를 불러올 수 없습니다'),
-        actions: <Widget>[
-          TextButton(
-            child: Text('닫기'),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-        ],
-      );
-    }
 
     return AlertDialog(
       title: Row(
@@ -60,7 +48,7 @@ class ConsultationDialog extends ConsumerWidget {
           ),
         ],
       ),
-      content: Container(
+      content: SizedBox(
         width: MediaQuery.of(context).size.width * 0.8,
         height: MediaQuery.of(context).size.height * 0.6,
         child: SingleChildScrollView(
@@ -78,8 +66,8 @@ class ConsultationDialog extends ConsumerWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 10),
-              Divider(),
+              const SizedBox(height: 10),
+              const Divider(),
               ...consultingMessage.comments.map((comment) {
                 final isCurrentUser = comment.userId == currentUser.userId;
                 final localCreatedAt = comment.createdAt.toLocal();
@@ -94,19 +82,18 @@ class ConsultationDialog extends ConsumerWidget {
                       children: [
                         if (!isCurrentUser) // 현재 사용자가 아닐 때 왼쪽에 프로필 사진 표시
                           CircleAvatar(
-                            backgroundImage: (comment.profileUrl != null &&
-                                    comment.profileUrl!.isNotEmpty)
-                                ? NetworkImage(comment.profileUrl!)
+                            backgroundImage: (comment.profileUrl.isNotEmpty)
+                                ? NetworkImage(comment.profileUrl)
                                     as ImageProvider<Object>
-                                : AssetImage(
+                                : const AssetImage(
                                         'asset/img/misc/user_placeholder.png')
                                     as ImageProvider<Object>,
                             radius: isTablet ? 20.0 : 12.0,
                           ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         Flexible(
                           child: Container(
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
                               color: isCurrentUser
                                   ? Colors.yellow[200]
@@ -119,14 +106,13 @@ class ConsultationDialog extends ConsumerWidget {
                             ),
                           ),
                         ),
-                        if (isCurrentUser) SizedBox(width: 8),
+                        if (isCurrentUser) const SizedBox(width: 8),
                         if (isCurrentUser) // 현재 사용자일 때 오른쪽에 프로필 사진 표시
                           CircleAvatar(
-                            backgroundImage: (comment.profileUrl != null &&
-                                    comment.profileUrl!.isNotEmpty)
-                                ? NetworkImage(comment.profileUrl!)
+                            backgroundImage: (comment.profileUrl.isNotEmpty)
+                                ? NetworkImage(comment.profileUrl)
                                     as ImageProvider<Object>
-                                : AssetImage(
+                                : const AssetImage(
                                         'asset/img/misc/user_placeholder.png')
                                     as ImageProvider<Object>,
                             radius: isTablet ? 24.0 : 12.0,
@@ -134,7 +120,7 @@ class ConsultationDialog extends ConsumerWidget {
                       ],
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 4, bottom: 8),
+                      padding: const EdgeInsets.only(top: 4, bottom: 8),
                       child: Align(
                         alignment: isCurrentUser
                             ? Alignment.bottomRight
@@ -156,23 +142,23 @@ class ConsultationDialog extends ConsumerWidget {
         ),
       ),
       actions: <Widget>[
-        Container(
+        SizedBox(
           height: 40,
           child: Row(
             children: [
               Expanded(
                 child: TextField(
                   controller: commentController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: '댓글을 작성해주세요.',
                     labelStyle: TextStyle(fontSize: 12),
                     border: OutlineInputBorder(),
                   ),
-                  style: TextStyle(fontSize: 12),
+                  style: const TextStyle(fontSize: 12),
                 ),
               ),
               IconButton(
-                icon: Icon(Icons.send),
+                icon: const Icon(Icons.send),
                 onPressed: () async {
                   final content = commentController.text;
                   if (content.isNotEmpty) {
@@ -193,7 +179,7 @@ class ConsultationDialog extends ConsumerWidget {
           ),
         ),
         TextButton(
-          child: Text('닫기'),
+          child: const Text('닫기'),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ],

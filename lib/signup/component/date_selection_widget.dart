@@ -60,12 +60,12 @@ class _DateSelectionWidgetState extends State<DateSelectionWidget> {
     return Center(
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        children: [
+        children: <Widget>[
           Container(
             decoration: BoxDecoration(
-              color: Color(0xFF004D80),
+              color: const Color(0xFF004D80),
               border: Border.all(
-                color: Color(0xFF47739F),
+                color: const Color(0xFF47739F),
                 width: 1.0,
               ),
             ),
@@ -82,20 +82,20 @@ class _DateSelectionWidgetState extends State<DateSelectionWidget> {
               ),
             ),
           ),
-          SizedBox(width: 8.0),
+          const SizedBox(width: 8.0),
           InkWell(
             onTap: () => _showCupertinoDatePicker(context),
             child: Container(
               width: MediaQuery.of(context).size.width * 0.55,
               height: 36.0,
               alignment: Alignment.centerLeft,
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              decoration: const BoxDecoration(
                 border: Border(bottom: BorderSide(color: Colors.grey)),
               ),
               child: Text(
                 DateFormat('yyyy-MM-dd').format(selectedDate),
-                style: TextStyle(fontSize: 16.0, color: Colors.white),
+                style: const TextStyle(fontSize: 16.0, color: Colors.white),
               ),
             ),
           ),

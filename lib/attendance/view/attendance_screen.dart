@@ -86,7 +86,7 @@ class _AttendanceList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     if (attendanceList.isEmpty) {
-      return Expanded(child: Center(child: Text('등하원 기록이 없습니다.')));
+      return const Expanded(child: Center(child: Text('등하원 기록이 없습니다.')));
     }
 
     return Expanded(

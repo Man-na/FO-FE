@@ -58,7 +58,7 @@ class Calendar extends StatelessWidget {
         selectedTextStyle: defaultTextStyle.copyWith(
           color: PRIMARY_COLOR,
         ),
-        cellMargin: EdgeInsets.all(4.0),
+        cellMargin: const EdgeInsets.all(4.0),
       ),
       calendarBuilders: CalendarBuilders(
         defaultBuilder: (context, date, _) {
@@ -99,7 +99,6 @@ class Calendar extends StatelessWidget {
         selectedBuilder: (context, date, _) {
           DateTime normalizedDate = DateTime(date.year, date.month, date.day);
           double? completion = (averageCompletion ?? {})[normalizedDate];
-          int scheduleCount = (scheduleCounts ?? {})[normalizedDate] ?? 0;
           Color borderColor = _getBorderColor(completion);
           return Padding(
             padding: const EdgeInsets.all(4.0),
@@ -115,24 +114,19 @@ class Calendar extends StatelessWidget {
                 children: [
                   Text(
                     '${date.day}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: PRIMARY_COLOR,
                       fontWeight: FontWeight.w700,
                       fontSize: 14.0,
                     ),
                   ),
-                  // Positioned(
-                  //   bottom: 4,
-                  //   right: 4,
-                  //   child: _buildDots(scheduleCount),
-                  // ),
                 ],
               ),
             ),
           );
         },
       ),
-      daysOfWeekStyle: DaysOfWeekStyle(
+      daysOfWeekStyle: const DaysOfWeekStyle(
         weekdayStyle: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 12.0,
@@ -173,8 +167,8 @@ class Calendar extends StatelessWidget {
         Container(
           width: 4.0,
           height: 4.0,
-          margin: EdgeInsets.symmetric(horizontal: 1.0),
-          decoration: BoxDecoration(
+          margin: const EdgeInsets.symmetric(horizontal: 1.0),
+          decoration: const BoxDecoration(
             shape: BoxShape.circle,
             color: Colors.black,
           ),

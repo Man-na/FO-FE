@@ -27,7 +27,7 @@ class HeaderWidget extends StatelessWidget {
               ],
             ),
           ),
-          Container(
+          SizedBox(
             width: isTablet ? 200 : 100,
             child: Image.asset('asset/img/link/bluewhalelink_white.png'),
           ),

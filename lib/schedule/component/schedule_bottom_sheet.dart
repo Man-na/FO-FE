@@ -59,7 +59,7 @@ class _ScheduleBottomSheetState extends ConsumerState<ScheduleBottomSheet> {
       child: SafeArea(
         child: Container(
           height: MediaQuery.of(context).size.height / 2 + bottomInset,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20.0),
@@ -136,7 +136,7 @@ class _ScheduleBottomSheetState extends ConsumerState<ScheduleBottomSheet> {
 
         Navigator.of(context).pop();
       } catch (e) {
-          // 여기에 에러 처리 로직 추가
+        // 여기에 에러 처리 로직 추가
       }
     } else {
       // 여기에 유효성 검사 실패 시 처리 로직 추가
@@ -167,7 +167,7 @@ class _Time extends StatelessWidget {
 
   Future<void> _selectTime(BuildContext context, bool isStartTime) async {
     TimeOfDay initialTime = (startInitialValue == null && isStartTime)
-        ? TimeOfDay(hour: 12, minute: 0)
+        ? const TimeOfDay(hour: 12, minute: 0)
         : _convertMinutesToTimeOfDay(
             isStartTime ? startInitialValue : endInitialValue);
 
@@ -179,7 +179,7 @@ class _Time extends StatelessWidget {
       builder: (BuildContext context) {
         return StatefulBuilder(
           builder: (context, setState) {
-            return Container(
+            return SizedBox(
               height: MediaQuery.of(context).copyWith().size.height / 3,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -191,7 +191,7 @@ class _Time extends StatelessWidget {
                         value: selectedHour,
                         minValue: 0,
                         maxValue: 23,
-                        textMapper: (value) => "${value}시",
+                        textMapper: (value) => "$value시",
                         onChanged: (newValue) =>
                             setState(() => selectedHour = newValue),
                       ),
@@ -199,7 +199,7 @@ class _Time extends StatelessWidget {
                         value: selectedMinute,
                         minValue: 0,
                         maxValue: 59,
-                        textMapper: (value) => "${value}분",
+                        textMapper: (value) => "$value분",
                         onChanged: (newValue) =>
                             setState(() => selectedMinute = newValue),
                       ),
@@ -219,7 +219,7 @@ class _Time extends StatelessWidget {
 
                         if (startInMinutes >= endInMinutes) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                               content: Text('시작 시간은 종료 시간보다 늦게 설정할 수 없습니다!'),
                               duration: Duration(seconds: 2),
                             ),
@@ -239,7 +239,7 @@ class _Time extends StatelessWidget {
 
                         if (endInMinutes <= startInMinutes) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                               content: Text('종료 시간은 시작 시간보다 빠르게 설정할 수 없습니다!'),
                               duration: Duration(seconds: 2),
                             ),
@@ -285,7 +285,7 @@ class _Time extends StatelessWidget {
             onPressed: () => _selectTime(context, true),
             child: Text(
               _formatTime(startInitialValue, true),
-              style: TextStyle(color: PRIMARY_COLOR),
+              style: const TextStyle(color: PRIMARY_COLOR),
             ),
           ),
         ),
@@ -295,7 +295,7 @@ class _Time extends StatelessWidget {
             onPressed: () => _selectTime(context, false),
             child: Text(
               _formatTime(endInitialValue, false),
-              style: TextStyle(color: PRIMARY_COLOR),
+              style: const TextStyle(color: PRIMARY_COLOR),
             ),
           ),
         ),
@@ -339,7 +339,7 @@ class _Subject extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 200,
       height: 72,
       child: CustomTextField(
@@ -353,55 +353,6 @@ class _Subject extends StatelessWidget {
 }
 
 typedef ColorIdSetter = Function(int id);
-
-class _ColorPicker extends StatelessWidget {
-  final List<ColorModel> colors;
-  final int? selectedColorId;
-  final ColorIdSetter colorIdSetter;
-
-  const _ColorPicker({
-    required this.colors,
-    required this.selectedColorId,
-    required this.colorIdSetter,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 8.0,
-      runSpacing: 10.0,
-      children: colors.map((color) {
-        return GestureDetector(
-          onTap: () {
-            colorIdSetter(color.subjectId);
-          },
-          child: renderColor(
-            color.subjectColor,
-            selectedColorId == color.subjectId,
-          ),
-        );
-      }).toList(),
-    );
-  }
-
-  Widget renderColor(String hexColor, bool isSelected) {
-    return Container(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: Color(int.parse('FF$hexColor', radix: 16)),
-        border: isSelected
-            ? Border.all(
-                color: Colors.black,
-                width: 4.0,
-              )
-            : null,
-      ),
-      width: 32.0,
-      height: 32.0,
-    );
-  }
-}
 
 class _SaveButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -419,7 +370,7 @@ class _SaveButton extends StatelessWidget {
           child: ElevatedButton(
             onPressed: onPressed,
             style: ElevatedButton.styleFrom(backgroundColor: PRIMARY_COLOR),
-            child: Align(
+            child: const Align(
                 alignment: Alignment.center,
                 child: Text(
                   "저장",
@@ -489,9 +440,9 @@ class _CompletionSliderState extends State<_CompletionSlider> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4.0),
-            child: const Text(
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 4.0),
+            child: Text(
               '완성도',
               style: TextStyle(
                 color: PRIMARY_COLOR,
@@ -499,7 +450,7 @@ class _CompletionSliderState extends State<_CompletionSlider> {
               ),
             ),
           ),
-          Container(
+          SizedBox(
             height: 40,
             child: Row(
               children: [
@@ -513,15 +464,15 @@ class _CompletionSliderState extends State<_CompletionSlider> {
                     onChanged: _handleSliderChange,
                   ),
                 ),
-                SizedBox(width: 4),
-                Container(
+                const SizedBox(width: 4),
+                SizedBox(
                   width: 50,
                   child: TextField(
                     controller: textEditingController,
                     onChanged: _handleTextChange,
                     onSubmitted: _handleTextChange,
                     keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: '0-100',
                       border: OutlineInputBorder(),
                       contentPadding: EdgeInsets.symmetric(vertical: 10),

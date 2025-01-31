@@ -82,7 +82,7 @@ class _MockTestGraphState extends ConsumerState<MockTestGraph> {
             maxX: 12,
             minY: 1,
             maxY: 7,
-            gridData: FlGridData(show: true),
+            gridData: const FlGridData(show: true),
             titlesData: FlTitlesData(
               bottomTitles: AxisTitles(
                 sideTitles: SideTitles(
@@ -112,10 +112,10 @@ class _MockTestGraphState extends ConsumerState<MockTestGraph> {
                   },
                 ),
               ),
-              topTitles: AxisTitles(
+              topTitles: const AxisTitles(
                 sideTitles: SideTitles(showTitles: false),
               ),
-              rightTitles: AxisTitles(
+              rightTitles: const AxisTitles(
                 sideTitles: SideTitles(showTitles: false),
               ),
             ),

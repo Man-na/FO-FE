@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:bluewhale_link/common/const/questions.dart';
 
 class InterviewScreen extends StatefulWidget {
+  const InterviewScreen({super.key});
+
   @override
   _InterviewScreenState createState() => _InterviewScreenState();
 }
 
 class _InterviewScreenState extends State<InterviewScreen> {
-  List<int> _scores = List.filled(40, 0);
-  Map<int, TextEditingController> _textControllers = {};
+  final List<int> _scores = List.filled(40, 0);
+  final Map<int, TextEditingController> _textControllers = {};
   int _currentPage = 0;
 
   @override
@@ -54,9 +56,9 @@ class _InterviewScreenState extends State<InterviewScreen> {
                         _currentPage--;
                       });
                     },
-                    child: Text('이전'),
+                    child: const Text('이전'),
                   ),
-                SizedBox(width: 16.0),
+                const SizedBox(width: 16.0),
                 if (_currentPage * 5 + 5 < questions.length)
                   ElevatedButton(
                     onPressed: () {
@@ -64,12 +66,12 @@ class _InterviewScreenState extends State<InterviewScreen> {
                         _currentPage++;
                       });
                     },
-                    child: Text('다음'),
+                    child: const Text('다음'),
                   ),
                 if (_currentPage * 5 + 5 >= questions.length)
                   ElevatedButton(
                     onPressed: _submitSurvey,
-                    child: Text('제출하기'),
+                    child: const Text('제출하기'),
                   ),
               ],
             ),
@@ -91,7 +93,7 @@ class _InterviewScreenState extends State<InterviewScreen> {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               questions[questionIndex],
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
           Row(
@@ -131,11 +133,11 @@ class _InterviewScreenState extends State<InterviewScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('미응답 설문 알림'),
-          content: Text('${questionNumber}번 질문에 응답해주세요!'),
+          title: const Text('미응답 설문 알림'),
+          content: Text('$questionNumber번 질문에 응답해주세요!'),
           actions: <Widget>[
             TextButton(
-              child: Text('확인'),
+              child: const Text('확인'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -154,12 +156,12 @@ class _InterviewScreenState extends State<InterviewScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Text(
             questions[questionIndex],
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
         TextField(
           controller: _textControllers[questionIndex],
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: '답변을 작성해주세요.',
           ),
         ),

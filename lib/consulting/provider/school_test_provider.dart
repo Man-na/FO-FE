@@ -28,10 +28,8 @@ class SchoolTestStateNotifier extends StateNotifier<List<SchoolTestScoreModel>> 
   Future<void> addSchoolTest(SchoolTestScoreModel score) async {
     try {
       var newScore = await repository.createSchoolTest(score.toMap());
-      if (newScore != null) {
-        state = [...state, newScore];
-      }
-    } catch (e) {
+      state = [...state, newScore];
+        } catch (e) {
       print("내신 성적 추가 실패: $e");
     }
   }
@@ -39,10 +37,8 @@ class SchoolTestStateNotifier extends StateNotifier<List<SchoolTestScoreModel>> 
   Future<void> updateSchoolTest(int id, SchoolTestScoreModel updatedScore) async {
     try {
       var newScore = await repository.updateSchoolTest(id, updatedScore.toMap());
-      if (newScore != null) {
-        state = state.map((score) => score.id == id ? newScore : score).toList();
-      }
-    } catch (e) {
+      state = state.map((score) => score.id == id ? newScore : score).toList();
+        } catch (e) {
       print("내신 성적 수정 실패: $e");
     }
   }

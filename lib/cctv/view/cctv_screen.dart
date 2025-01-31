@@ -6,7 +6,7 @@ class CctvScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultLayout(
+    return const DefaultLayout(
       title: 'CCTV',
       child: Center(
         child: Text('준비 중인 기능입니다.'),

@@ -49,16 +49,16 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
             child: Wrap(
               children: <Widget>[
                 ListTile(
-                  leading: Icon(Icons.photo_library),
-                  title: Text('갤러리에서 선택'),
+                  leading: const Icon(Icons.photo_library),
+                  title: const Text('갤러리에서 선택'),
                   onTap: () {
                     Navigator.of(context).pop();
                     pickImage(ImageSource.gallery);
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.photo_camera),
-                  title: Text('카메라로 촬영'),
+                  leading: const Icon(Icons.photo_camera),
+                  title: const Text('카메라로 촬영'),
                   onTap: () {
                     Navigator.of(context).pop();
                     pickImage(ImageSource.camera);
@@ -143,17 +143,17 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
                         userData.profileUrl!.isNotEmpty)
                     ? NetworkImage(userData.profileUrl!)
                         as ImageProvider<Object>
-                    : AssetImage('asset/img/misc/user_placeholder.png')
+                    : const AssetImage('asset/img/misc/user_placeholder.png')
                         as ImageProvider<Object>,
                 radius: 60.0,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               userData.userName,
-              style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600),
+              style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _buildPersonalMessageSection(),
             _buildNotificationButton(),
             if (userData.role == 'admin') _buildDialScreenButton(),
@@ -176,14 +176,14 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
         : (userData.motto ?? '나의 목표');
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
           top: BorderSide(color: Colors.black),
         ),
       ),
       child: Row(
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(left: 24, right: 8),
             child: Icon(Icons.person, color: Colors.black),
           ),
@@ -191,7 +191,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
             child: isEditing
                 ? TextField(
                     controller: personalMessageController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: InputBorder.none,
                       hintText: '나의 목표',
                     ),
@@ -200,7 +200,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
                   )
                 : Text(
                     userMotto,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 16.0,
                       fontWeight: FontWeight.w500,
@@ -209,11 +209,11 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
           ),
           isEditing
               ? IconButton(
-                  icon: Icon(Icons.check),
+                  icon: const Icon(Icons.check),
                   onPressed: _saveEdit,
                 )
               : IconButton(
-                  icon: Icon(Icons.edit),
+                  icon: const Icon(Icons.edit),
                   onPressed: _toggleEditMode,
                 ),
         ],
@@ -225,7 +225,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
     return Container(
       width: double.infinity,
       height: 48.0,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(color: Colors.black),
         ),
@@ -239,11 +239,11 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
         onPressed: () {
           deleteToken();
           Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => LoginScreen()),
+            MaterialPageRoute(builder: (context) => const LoginScreen()),
             (Route<dynamic> route) => false,
           );
         },
-        child: Row(
+        child: const Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(Icons.logout, color: Colors.black),
@@ -264,7 +264,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
     return Container(
       width: double.infinity,
       height: 48.0,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(color: Colors.black),
         ),
@@ -278,11 +278,11 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (_) => AttendanceScreen(),
+              builder: (_) => const AttendanceScreen(),
             ),
           );
         },
-        child: Row(
+        child: const Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(Icons.check, color: Colors.black),
@@ -303,7 +303,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
     return Container(
       width: double.infinity,
       height: 48.0,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border.symmetric(horizontal: BorderSide(color: Colors.black)),
       ),
       child: ElevatedButton(
@@ -315,11 +315,11 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (_) => NotificationScreen(),
+              builder: (_) => const NotificationScreen(),
             ),
           );
         },
-        child: Row(
+        child: const Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(Icons.campaign_outlined, color: Colors.black),
@@ -340,7 +340,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
     return Container(
       width: double.infinity,
       height: 48.0,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(color: Colors.black),
         ),
@@ -354,11 +354,11 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (_) => CctvScreen(),
+              builder: (_) => const CctvScreen(),
             ),
           );
         },
-        child: Row(
+        child: const Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(Icons.camera_alt_outlined, color: Colors.black),
@@ -379,7 +379,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
     return Container(
       width: double.infinity,
       height: 48.0,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(color: Colors.black),
         ),
@@ -393,11 +393,11 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (_) => DialScreen(),
+              builder: (_) => const DialScreen(),
             ),
           );
         },
-        child: Row(
+        child: const Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(Icons.dialpad, color: Colors.black),
@@ -418,7 +418,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
     return Container(
       width: double.infinity,
       height: 48.0,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(color: Colors.black),
         ),
@@ -433,16 +433,16 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
           final result = await showDialog<bool>(
             context: context,
             builder: (context) => AlertDialog(
-              title: Text('회원 탈퇴'),
-              content: Text('탈퇴하시겠습니까? \n탈퇴 시 회원의 모든 정보가 사라집니다.'),
+              title: const Text('회원 탈퇴'),
+              content: const Text('탈퇴하시겠습니까? \n탈퇴 시 회원의 모든 정보가 사라집니다.'),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(false),
-                  child: Text('아니오'),
+                  child: const Text('아니오'),
                 ),
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(true),
-                  child: Text('예'),
+                  child: const Text('예'),
                 ),
               ],
             ),
@@ -455,7 +455,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
               await userRepository.deleteUserInfo();
               deleteToken();
               Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => LoginScreen()),
+                MaterialPageRoute(builder: (context) => const LoginScreen()),
                 (Route<dynamic> route) => false,
               );
             } catch (e) {
@@ -463,7 +463,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
             }
           }
         },
-        child: Row(
+        child: const Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(Icons.do_not_disturb_alt_outlined, color: Colors.black),
@@ -484,7 +484,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
     return Container(
       width: double.infinity,
       height: 48.0,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border.symmetric(horizontal: BorderSide(color: Colors.black)),
       ),
       child: ElevatedButton(
@@ -499,13 +499,13 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
             MaterialPageRoute(builder: (context) => QRScanScreen()),
           );
         },
-        child: Row(
+        child: const Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(Icons.logout, color: Colors.black),
             SizedBox(width: 8.0),
             Padding(
-              padding: const EdgeInsets.only(bottom: 4.0),
+              padding: EdgeInsets.only(bottom: 4.0),
               child: Text(
                 'QR',
                 style: TextStyle(

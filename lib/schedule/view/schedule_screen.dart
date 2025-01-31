@@ -1,15 +1,11 @@
 import 'package:bluewhale_link/schedule/repository/schedule_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:bluewhale_link/OPUS/provider/opus_provider.dart';
-import 'package:bluewhale_link/consulting/provider/mock_test_provider.dart';
-import 'package:bluewhale_link/consulting/provider/school_test_provider.dart';
 import 'package:bluewhale_link/schedule/component/schedule_calendar.dart';
 import 'package:bluewhale_link/schedule/component/schedule_bottom_sheet.dart';
 import 'package:bluewhale_link/schedule/component/schedule_card.dart';
 import 'package:bluewhale_link/schedule/component/today_banner.dart';
 import 'package:bluewhale_link/common/const/colors.dart';
 import 'package:bluewhale_link/schedule/model/schedule_model.dart';
-import 'package:bluewhale_link/schedule/provider/color_provider.dart';
 import 'package:bluewhale_link/schedule/provider/schedule_provider.dart';
 import 'package:bluewhale_link/user/provider/user_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -84,7 +80,7 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
           children: [
             Container(
               height: 40.0,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
                     color: PRIMARY_COLOR,
@@ -95,7 +91,7 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
               child: Center(
                 child: Text(
                   userData.motto ?? '나의 목표',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14.0,
                     fontWeight: FontWeight.w600,
                   ),
@@ -146,11 +142,11 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
           },
         );
       },
-      child: Icon(
+      backgroundColor: PRIMARY_COLOR,
+      child: const Icon(
         Icons.add,
         color: Colors.white,
       ),
-      backgroundColor: PRIMARY_COLOR,
     );
   }
 }
@@ -173,7 +169,7 @@ class _ScheduleList extends ConsumerWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: schedules.isEmpty
-            ? Center(
+            ? const Center(
                 child: Text('스케줄이 없습니다.'),
               )
             : ListView.separated(
@@ -205,7 +201,7 @@ class _ScheduleList extends ConsumerWidget {
                                   .fetchSchedules();
                             } catch (e) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text('삭제 중 오류가 발생했습니다.')));
+                                  const SnackBar(content: Text('삭제 중 오류가 발생했습니다.')));
                             }
                           },
                     child: GestureDetector(

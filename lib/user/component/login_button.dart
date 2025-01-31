@@ -3,9 +3,6 @@ import 'dart:convert';
 import 'package:bluewhale_link/OPUS/provider/opus_provider.dart';
 import 'package:bluewhale_link/common/secure_storage/secure_storage.dart';
 import 'package:bluewhale_link/consulting/provider/consulting_message_provider.dart';
-import 'package:bluewhale_link/consulting/provider/mock_test_provider.dart';
-import 'package:bluewhale_link/consulting/provider/school_test_provider.dart';
-import 'package:bluewhale_link/consulting/repository/consulting_message_comment_repository.dart';
 import 'package:bluewhale_link/schedule/provider/color_provider.dart';
 import 'package:bluewhale_link/schedule/provider/schedule_provider.dart';
 import 'package:bluewhale_link/user/provider/user_provider.dart';
@@ -34,7 +31,7 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final dio = Dio();
 
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width * 0.4,
       child: ElevatedButton(
         onPressed: () async {
@@ -51,7 +48,7 @@ class LoginButton extends StatelessWidget {
 
             final responseData = res.data as Map<String, dynamic>;
             if (!responseData['user']['isAccepted']) {
-              final snackBar = SnackBar(
+              const snackBar = SnackBar(
                 content: Center(
                   child: Text(
                     '관리자의 승인이 필요합니다.\n잠시만 기다려주세요!',
@@ -78,12 +75,12 @@ class LoginButton extends StatelessWidget {
                 .fetchConsultingMessages();
 
             Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => RootTab()),
+              MaterialPageRoute(builder: (context) => const RootTab()),
               (Route<dynamic> route) => false,
             );
           } catch (e) {
             print(e);
-            final snackBar = SnackBar(
+            const snackBar = SnackBar(
               content: Text('로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.'),
               backgroundColor: Colors.red,
             );

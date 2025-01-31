@@ -31,7 +31,7 @@ class _NotificationScreenState extends ConsumerState<NotificationScreen> {
           _buildHeaderRow(context),
           Expanded(
             child: notifications.isEmpty
-                ? Center(child: Text('공지사항이 없습니다.'))
+                ? const Center(child: Text('공지사항이 없습니다.'))
                 : ListView.builder(
                     itemCount: notifications.length,
                     itemBuilder: (BuildContext context, int index) {
@@ -77,7 +77,7 @@ class _NotificationScreenState extends ConsumerState<NotificationScreen> {
                               Expanded(
                                 child: Container(
                                   alignment: Alignment.centerLeft,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     border: Border(
                                       bottom: BorderSide(
                                         color: Colors.grey,
@@ -112,8 +112,7 @@ class _NotificationScreenState extends ConsumerState<NotificationScreen> {
       width: width,
       height: 40,
       alignment: Alignment.center,
-      child: child,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(
             color: Colors.grey,
@@ -121,13 +120,14 @@ class _NotificationScreenState extends ConsumerState<NotificationScreen> {
           ),
         ),
       ),
+      child: child,
     );
   }
 
   Widget _buildHeaderRow(BuildContext context) {
     bool isTablet = MediaQuery.of(context).size.width > 600;
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(bottom: BorderSide(color: Colors.grey, width: 1.0)),
       ),
       child: Row(
@@ -144,7 +144,7 @@ class _NotificationScreenState extends ConsumerState<NotificationScreen> {
       BuildContext context, String text, double? widthFactor) {
     bool isTablet = MediaQuery.of(context).size.width > 600;
 
-    return Container(
+    return SizedBox(
       width: widthFactor != null
           ? MediaQuery.of(context).size.width * widthFactor
           : null,
@@ -169,7 +169,7 @@ class _NotificationScreenState extends ConsumerState<NotificationScreen> {
           content: Text(notification.content),
           actions: <Widget>[
             TextButton(
-              child: Text('닫기'),
+              child: const Text('닫기'),
               onPressed: () => Navigator.of(context).pop(),
             ),
           ],

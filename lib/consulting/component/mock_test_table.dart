@@ -43,7 +43,7 @@ class _MockTestTableState extends ConsumerState<MockTestTable> {
       return ref.watch(mockTestRepositoryProvider).createMockTest(data);
     } catch (e) {
       print("모의고사 성적 생성에 실패하였습니다. $e");
-      throw e;
+      rethrow;
     }
   }
 
@@ -68,7 +68,7 @@ class _MockTestTableState extends ConsumerState<MockTestTable> {
           .updateMockTest(score.id!, data);
     } catch (e) {
       print("모의고사 성적 수정에 실패했습니다. $e");
-      throw e;
+      rethrow;
     }
   }
 
@@ -77,7 +77,7 @@ class _MockTestTableState extends ConsumerState<MockTestTable> {
       return ref.watch(mockTestRepositoryProvider).deleteMockTest(id);
     } catch (e) {
       print("모의고사 성적 삭제에 실패하였습니다. $e");
-      throw e;
+      rethrow;
     }
   }
 
@@ -157,11 +157,11 @@ class _MockTestTableState extends ConsumerState<MockTestTable> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('안내'),
+          title: const Text('안내'),
           content: Text(message),
           actions: <Widget>[
             TextButton(
-              child: Text('확인'),
+              child: const Text('확인'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -218,12 +218,12 @@ class _MockTestTableState extends ConsumerState<MockTestTable> {
 
   Widget _buildEditButtons(int index) {
     if (editingRow != null && editingRow != index) {
-      return SizedBox();
+      return const SizedBox();
     }
 
     if (newRowAdded && index == widget.mockTestScores.length - 1) {
       return IconButton(
-        icon: Icon(Icons.check),
+        icon: const Icon(Icons.check),
         onPressed: _saveNewRow,
       );
     }
@@ -233,11 +233,11 @@ class _MockTestTableState extends ConsumerState<MockTestTable> {
         mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
-            icon: Icon(Icons.check),
+            icon: const Icon(Icons.check),
             onPressed: _saveNewRow,
           ),
           IconButton(
-            icon: Icon(Icons.close),
+            icon: const Icon(Icons.close),
             onPressed: _cancelEditing,
           ),
         ],
@@ -247,11 +247,11 @@ class _MockTestTableState extends ConsumerState<MockTestTable> {
         mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
-            icon: Icon(Icons.edit),
+            icon: const Icon(Icons.edit),
             onPressed: () => _startEditing(index),
           ),
           IconButton(
-            icon: Icon(Icons.delete),
+            icon: const Icon(Icons.delete),
             onPressed: () => _deleteRow(index),
           ),
         ],
@@ -290,7 +290,7 @@ class _MockTestTableState extends ConsumerState<MockTestTable> {
                 DataCell(isRowEditable || isRowEditing
                     ? TextField(
                         controller: score.monthController,
-                        decoration: InputDecoration(hintText: '월 입력'),
+                        decoration: const InputDecoration(hintText: '월 입력'),
                         textAlign: TextAlign.center,
                         keyboardType: TextInputType.number,
                       )
@@ -302,7 +302,7 @@ class _MockTestTableState extends ConsumerState<MockTestTable> {
                 DataCell(isRowEditable || isRowEditing
                     ? TextField(
                         controller: score.originalScoreController,
-                        decoration: InputDecoration(hintText: '원점수 입력'),
+                        decoration: const InputDecoration(hintText: '원점수 입력'),
                         textAlign: TextAlign.center,
                         keyboardType: TextInputType.number,
                       )
@@ -314,7 +314,7 @@ class _MockTestTableState extends ConsumerState<MockTestTable> {
                 DataCell(isRowEditable || isRowEditing
                     ? TextField(
                         controller: score.standardScoreController,
-                        decoration: InputDecoration(hintText: '표준점수 입력'),
+                        decoration: const InputDecoration(hintText: '표준점수 입력'),
                         textAlign: TextAlign.center,
                         keyboardType: TextInputType.number,
                       )
@@ -326,7 +326,7 @@ class _MockTestTableState extends ConsumerState<MockTestTable> {
                 DataCell(isRowEditable || isRowEditing
                     ? TextField(
                         controller: score.percentageController,
-                        decoration: InputDecoration(hintText: '백분위 입력'),
+                        decoration: const InputDecoration(hintText: '백분위 입력'),
                         textAlign: TextAlign.center,
                         keyboardType: TextInputType.number,
                       )
@@ -338,7 +338,7 @@ class _MockTestTableState extends ConsumerState<MockTestTable> {
                 DataCell(isRowEditable || isRowEditing
                     ? TextField(
                         controller: score.rankController,
-                        decoration: InputDecoration(hintText: '등급 입력'),
+                        decoration: const InputDecoration(hintText: '등급 입력'),
                         textAlign: TextAlign.center,
                         keyboardType: TextInputType.number,
                       )

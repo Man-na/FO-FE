@@ -10,14 +10,14 @@ class YoutubePlayerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     YoutubePlayerController _controller = YoutubePlayerController(
       initialVideoId: videoId,
-      flags: YoutubePlayerFlags(
+      flags: const YoutubePlayerFlags(
         autoPlay: true,
         mute: false,
       ),
     );
 
     return Scaffold(
-      appBar: AppBar(title: Text('청경학원 안내')),
+      appBar: AppBar(title: const Text('청경학원 안내')),
       body: YoutubePlayer(
         controller: _controller,
         showVideoProgressIndicator: true,

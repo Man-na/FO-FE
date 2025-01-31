@@ -57,7 +57,7 @@ class Calendar extends StatelessWidget {
         selectedTextStyle: defaultTextStyle.copyWith(
           color: PRIMARY_COLOR,
         ),
-        cellMargin: EdgeInsets.all(4.0),
+        cellMargin: const EdgeInsets.all(4.0),
       ),
       calendarBuilders: CalendarBuilders(
         defaultBuilder: (context, date, _) {
@@ -69,7 +69,7 @@ class Calendar extends StatelessWidget {
           return _buildDateCell(date, attendances, isSelected: true);
         },
       ),
-      daysOfWeekStyle: DaysOfWeekStyle(
+      daysOfWeekStyle: const DaysOfWeekStyle(
         weekdayStyle: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 12.0,
@@ -93,14 +93,6 @@ class Calendar extends StatelessWidget {
     );
   }
 
-  Color _getBorderColor(double? completion) {
-    if (completion == null) return Colors.transparent;
-    if (completion <= 25) return Colors.red;
-    if (completion <= 50) return Colors.orange;
-    if (completion <= 75) return Colors.yellow;
-    if (completion < 100) return Colors.green;
-    return Colors.blue;
-  }
 
   List<AttendanceModel> _getAttendancesForDate(DateTime date) {
     return attendanceList.where((attendance) {
@@ -154,7 +146,7 @@ class Calendar extends StatelessWidget {
         return Container(
           width: 6.0,
           height: 6.0,
-          margin: EdgeInsets.symmetric(horizontal: 1.0),
+          margin: const EdgeInsets.symmetric(horizontal: 1.0),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: attendance.onLink ? Colors.green : Colors.red,

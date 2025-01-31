@@ -40,7 +40,7 @@ class _OpusScreenState extends ConsumerState<OpusScreen> {
           children: [
             Container(
               height: 40.0,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
                     color: PRIMARY_COLOR,
@@ -51,7 +51,7 @@ class _OpusScreenState extends ConsumerState<OpusScreen> {
               child: Center(
                 child: Text(
                   userData.motto ?? '나의 목표',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14.0,
                     fontWeight: FontWeight.w600,
                   ),
@@ -102,7 +102,7 @@ class _OpusList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     if (opusList.isEmpty) {
-      return Expanded(child: Center(child: Text('스케줄이 없습니다.')));
+      return const Expanded(child: Center(child: Text('스케줄이 없습니다.')));
     }
 
     return Expanded(
@@ -165,12 +165,12 @@ class _OpusList extends ConsumerWidget {
                         },
                         child: RichText(
                           text: TextSpan(
-                            style: TextStyle(color: Colors.black),
+                            style: const TextStyle(color: Colors.black),
                             children: <TextSpan>[
-                              TextSpan(text: '링크: '),
+                              const TextSpan(text: '링크: '),
                               TextSpan(
                                 text: opus.opusUrl ?? '링크 없음',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.blue,
                                   decoration: TextDecoration.underline,
                                 ),
@@ -193,8 +193,8 @@ class _OpusList extends ConsumerWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(height: 10),
-                            Text('첨부파일:'),
+                            const SizedBox(height: 10),
+                            const Text('첨부파일:'),
                             if (opus.fileName0 != "" &&
                                 opus.fileName0!.isNotEmpty)
                               _buildFileLink(opus.fileName0!, opus.fileUrl0!),
@@ -211,7 +211,7 @@ class _OpusList extends ConsumerWidget {
                 ),
                 actions: <Widget>[
                   TextButton(
-                    child: Text('닫기'),
+                    child: const Text('닫기'),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
@@ -235,7 +235,7 @@ class _OpusList extends ConsumerWidget {
       onTap: () => _launchURL(fileUrl),
       child: Text(
         fileName,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.blue,
           decoration: TextDecoration.underline,
         ),

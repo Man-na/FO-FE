@@ -42,17 +42,18 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       );
 
       Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => RootTab()),
+        MaterialPageRoute(builder: (_) => const RootTab()),
         (route) => false,
       );
     } catch (e) {
       Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => LoginScreen()),
+        MaterialPageRoute(builder: (_) => const LoginScreen()),
         (route) => false,
       );
     }
   }
 
+  @override
   Widget build(BuildContext context) {
     return DefaultLayout(
       backgroundColor: Colors.white,
@@ -69,7 +70,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
             const SizedBox(
               height: 16.0,
             ),
-            CircularProgressIndicator(
+            const CircularProgressIndicator(
               color: Colors.white,
             )
           ],

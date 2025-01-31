@@ -56,18 +56,6 @@ class _RootTabState extends State<RootTab> with SingleTickerProviderStateMixin {
 
     return DefaultLayout(
       title: title,
-      child: TabBarView(
-        physics: NeverScrollableScrollPhysics(),
-        controller: controller,
-        children: [
-          ScheduleScreen(),
-          OpusScreen(),
-          SettingScreen(),
-          ConsultingScreen(),
-          LinkScreen(),
-          // InterviewScreen(),
-        ],
-      ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: PRIMARY_COLOR,
         unselectedItemColor: BODY_TEXT_COLOR,
@@ -78,7 +66,7 @@ class _RootTabState extends State<RootTab> with SingleTickerProviderStateMixin {
           controller.animateTo(index);
         },
         currentIndex: index,
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_month),
             label: "계획",
@@ -99,6 +87,18 @@ class _RootTabState extends State<RootTab> with SingleTickerProviderStateMixin {
             icon: Icon(Icons.add_location_alt_outlined),
             label: "링크",
           ),
+        ],
+      ),
+      child: TabBarView(
+        physics: const NeverScrollableScrollPhysics(),
+        controller: controller,
+        children: const [
+          ScheduleScreen(),
+          OpusScreen(),
+          SettingScreen(),
+          ConsultingScreen(),
+          LinkScreen(),
+          // InterviewScreen(),
         ],
       ),
     );

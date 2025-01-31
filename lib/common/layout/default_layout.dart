@@ -39,25 +39,25 @@ class DefaultLayout extends ConsumerWidget {
         elevation: 0,
         title: Text(
           title!,
-          style: TextStyle(
+          style: const TextStyle(
               fontSize: 18.0, fontWeight: FontWeight.w500, color: Colors.white),
         ),
         actions: [
           if (userName != null)
             Padding(
-              padding: EdgeInsets.only(right: 16.0),
+              padding: const EdgeInsets.only(right: 16.0),
               child: Row(
                 children: [
                   CircleAvatar(
                     backgroundImage: (profileUrl != null && profileUrl.isNotEmpty)
                         ? NetworkImage(profileUrl) as ImageProvider<Object>
-                        : AssetImage('asset/img/misc/user_placeholder.png') as ImageProvider<Object>,
+                        : const AssetImage('asset/img/misc/user_placeholder.png') as ImageProvider<Object>,
                     radius: 16.0,
                   ),
-                  SizedBox(width: 8.0),
+                  const SizedBox(width: 8.0),
                   Text(
-                    '$userName',
-                    style: TextStyle(
+                    userName,
+                    style: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w500,
                         color: Colors.white),
@@ -67,7 +67,7 @@ class DefaultLayout extends ConsumerWidget {
             ),
         ],
         foregroundColor: Colors.black,
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.white,
         ),
       );

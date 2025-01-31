@@ -72,7 +72,7 @@ class _ConsultingScreenState extends ConsumerState<ConsultingScreen>
     return Center(
       child: Text(
         message,
-        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
       ),
     );
   }
@@ -105,7 +105,7 @@ class _ConsultingScreenState extends ConsumerState<ConsultingScreen>
     bool isTablet = MediaQuery.of(context).size.width > 500;
 
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(bottom: BorderSide(color: Colors.grey, width: 1.0)),
       ),
       child: Padding(
@@ -124,7 +124,7 @@ class _ConsultingScreenState extends ConsumerState<ConsultingScreen>
                   ),
                 ),
               ),
-              Container(
+              SizedBox(
                 width: isTablet ? 60 : 40,
                 child: Text(
                   message.isRead ? '' : 'New!',
@@ -158,7 +158,7 @@ class _ConsultingScreenState extends ConsumerState<ConsultingScreen>
                   ],
                 ),
               ),
-              Container(
+              SizedBox(
                 width: 40,
                 child: Image.asset('asset/img/link/consulting.png'),
               )

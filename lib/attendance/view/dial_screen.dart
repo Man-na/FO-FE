@@ -61,14 +61,14 @@ class _DialScreenState extends ConsumerState<DialScreen> {
           children: [
             Text(
               enteredNumbers,
-              style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20),
-            Container(
+            const SizedBox(height: 20),
+            SizedBox(
               width: isTablet? MediaQuery.of(context).size.width * 0.6: MediaQuery.of(context).size.width * 0.8,
               child: _buildDialPad(),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _buildAttendanceButtons(),
           ],
         ),
@@ -80,7 +80,7 @@ class _DialScreenState extends ConsumerState<DialScreen> {
     bool isTablet = MediaQuery.of(context).size.width > 600;
     double fontSize = isTablet ? 40 : 20;
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child: GridView.count(
         shrinkWrap: true,
         crossAxisCount: 3,
@@ -123,9 +123,7 @@ class _DialScreenState extends ConsumerState<DialScreen> {
   }
 
   Widget _buildAttendanceButtons() {
-    bool isTablet = MediaQuery.of(context).size.width > 600;
-
-    return Container(
+    return SizedBox(
       width:  MediaQuery.of(context).size.width * 0.6,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -135,26 +133,26 @@ class _DialScreenState extends ConsumerState<DialScreen> {
               onPressed: () => _sendAttendance("등원"),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
-                textStyle: TextStyle(fontSize: 24.0, color: Colors.white),
-                padding: EdgeInsets.symmetric(vertical: 16.0),
+                textStyle: const TextStyle(fontSize: 24.0, color: Colors.white),
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
               ),
-              child: Text(
+              child: const Text(
                 '등원',
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
               ),
             ),
           ),
-          SizedBox(width: 8.0),
+          const SizedBox(width: 8.0),
           Expanded(
             child: ElevatedButton(
               onPressed: () => _sendAttendance("하원"),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,
-                padding: EdgeInsets.symmetric(vertical: 16.0),
-                textStyle: TextStyle(fontSize: 24.0, color: Colors.white),
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                textStyle: const TextStyle(fontSize: 24.0, color: Colors.white),
               ),
-              child: Text(
+              child: const Text(
                 '하원',
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.w600),

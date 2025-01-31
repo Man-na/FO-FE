@@ -28,10 +28,8 @@ class MockTestStateNotifier extends StateNotifier<List<MockTestScoreModel>> {
   Future<void> addMockTest(MockTestScoreModel score) async {
     try {
       var newScore = await repository.createMockTest(score.toMap());
-      if (newScore != null) {
-        state = [...state, newScore];
-      }
-    } catch (e) {
+      state = [...state, newScore];
+        } catch (e) {
       print("모의고사 성적 추가 실패: $e");
     }
   }
@@ -39,10 +37,8 @@ class MockTestStateNotifier extends StateNotifier<List<MockTestScoreModel>> {
   Future<void> updateMockTest(int id, MockTestScoreModel updatedScore) async {
     try {
       var newScore = await repository.updateMockTest(id, updatedScore.toMap());
-      if (newScore != null) {
-        state = state.map((score) => score.id == id ? newScore : score).toList();
-      }
-    } catch (e) {
+      state = state.map((score) => score.id == id ? newScore : score).toList();
+        } catch (e) {
       print("모의고사 성적 수정 실패: $e");
     }
   }

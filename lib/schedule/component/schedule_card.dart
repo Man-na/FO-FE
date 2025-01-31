@@ -46,7 +46,7 @@ class _ScheduleCardState extends ConsumerState<ScheduleCard> {
       isRunning = true;
       isPaused = false;
     });
-    timer = Timer.periodic(Duration(seconds: 1), (_) {
+    timer = Timer.periodic(const Duration(seconds: 1), (_) {
       setState(() {
         timeInSeconds++;
       });
@@ -110,7 +110,7 @@ class _ScheduleCardState extends ConsumerState<ScheduleCard> {
             children: [
               Text(
                 widget.subject ?? '과목',
-                style: TextStyle(fontWeight: FontWeight.w600),
+                style: const TextStyle(fontWeight: FontWeight.w600),
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(width: 8.0),
@@ -125,7 +125,7 @@ class _ScheduleCardState extends ConsumerState<ScheduleCard> {
                     children: [
                       Text(
                         '${(widget.completion).toStringAsFixed(0)}%',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12.0,
                           fontWeight: FontWeight.w500,
                         ),
@@ -135,31 +135,31 @@ class _ScheduleCardState extends ConsumerState<ScheduleCard> {
                       ),
                       Text(
                         _formatTime(timeInSeconds),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12.0,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                       if (!isRunning) // 처음 상태: 재생 버튼만 표시
                         IconButton(
-                          icon: Icon(Icons.play_arrow),
+                          icon: const Icon(Icons.play_arrow),
                           onPressed: startTimer,
                         ),
                       if (isRunning &&
                           !isPaused) // 실행 중이지만 일시정지 상태가 아닐 때: 일시정지와 정지 버튼 표시
                         IconButton(
-                          icon: Icon(Icons.pause),
+                          icon: const Icon(Icons.pause),
                           onPressed: pauseTimer,
                         ),
                       if (isRunning &&
                           isPaused) // 실행 중이면서 일시정지 상태일 때: 재생과 정지 버튼 표시
                         IconButton(
-                          icon: Icon(Icons.play_arrow),
+                          icon: const Icon(Icons.play_arrow),
                           onPressed: startTimer,
                         ),
                       if (isRunning) // 실행 중일 때 (일시정지 상태 무관): 정지 버튼 표시
                         IconButton(
-                          icon: Icon(Icons.stop),
+                          icon: const Icon(Icons.stop),
                           onPressed: stopTimer,
                         ),
                     ],

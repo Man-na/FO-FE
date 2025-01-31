@@ -14,7 +14,7 @@ import 'package:intl/intl.dart';
 enum UserType { Parent, Student }
 
 class SignupScreen extends ConsumerStatefulWidget {
-  SignupScreen({super.key});
+  const SignupScreen({super.key});
 
   @override
   _SignupScreenState createState() => _SignupScreenState();
@@ -50,9 +50,9 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
               SafeArea(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Color(0xFF004D80),
+                    color: const Color(0xFF004D80),
                     border: Border.all(
-                      color: Color(0xFF47739F),
+                      color: const Color(0xFF47739F),
                       width: 1.0,
                     ),
                   ),
@@ -70,11 +70,11 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 8.0),
+              const SizedBox(height: 8.0),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4.0),
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     border: Border(
                       bottom: BorderSide(
                         color: Colors.white,
@@ -102,7 +102,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                           },
                           activeColor: Colors.white,
                           contentPadding:
-                              EdgeInsets.symmetric(horizontal: 2.0), // 여기를 조절
+                              const EdgeInsets.symmetric(horizontal: 2.0),
                         ),
                       ),
                       Expanded(
@@ -122,7 +122,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                           },
                           activeColor: Colors.white,
                           contentPadding:
-                              EdgeInsets.symmetric(horizontal: 2.0), // 여기를 조절
+                              const EdgeInsets.symmetric(horizontal: 2.0),
                         ),
                       ),
                     ],
@@ -154,11 +154,11 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('안내'),
+            title: const Text('안내'),
             content: Text(message),
             actions: <Widget>[
               TextButton(
-                child: Text('OK'),
+                child: const Text('OK'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -226,7 +226,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
       try {
         await repository.signupStudent(signupData.toJson());
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => LoginScreen()),
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
         );
       } catch (e) {
         print(e);
@@ -270,15 +270,15 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
           isDisabled: _isEmailChecked,
           extraWidget: ElevatedButton(
             onPressed: _isEmailChecked ? null : _checkEmailDuplication,
-            child: Center(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF004D80),
+              foregroundColor: Colors.white,
+            ),
+            child: const Center(
               child: Text(
                 '중복 확인',
                 style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12.0),
               ),
-            ),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFF004D80),
-              foregroundColor: Colors.white,
             ),
           ),
         ),
@@ -293,57 +293,57 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 64.0),
+                const SizedBox(height: 64.0),
                 HeaderWidget(isTablet: isTablet),
                 SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
-                      children: [
+                      children: <Widget>[
                         _buildUserTypeSelection(),
-                        SizedBox(height: 8.0),
+                        const SizedBox(height: 8.0),
                         if (userType == UserType.Student)
                           CustomRowWidget(
                             label: '학교',
                             controller: schoolController,
                           ),
-                        SizedBox(height: 8.0),
+                        const SizedBox(height: 8.0),
                         CustomRowWidget(
                           label: '이름',
                           controller: nameController,
                         ),
-                        SizedBox(height: 8.0),
+                        const SizedBox(height: 8.0),
                         CustomRowWidget(
                           label: '휴대전화',
                           controller: phoneController,
                         ),
-                        SizedBox(height: 8.0),
+                        const SizedBox(height: 8.0),
                         DateSelectionWidget(
                           label: '생년월일',
                           initialDate: initialDate,
                           onDateSelected: handleDateChange,
                           dateController: dobController,
                         ),
-                        SizedBox(height: 8.0),
+                        const SizedBox(height: 8.0),
                         _buildEmailInput(),
-                        SizedBox(height: 8.0),
+                        const SizedBox(height: 8.0),
                         CustomRowWidget(
                           label: '비밀번호',
                           controller: passwordController,
                           isPassword: true,
                         ),
-                        SizedBox(height: 8.0),
+                        const SizedBox(height: 8.0),
                         CustomRowWidget(
                           label: '비밀번호 재확인',
                           controller: confirmPasswordController,
                           isPassword: true,
                         ),
-                        SizedBox(height: 32.0),
-                        Container(
+                        const SizedBox(height: 32.0),
+                        SizedBox(
                           width: MediaQuery.of(context).size.width * 0.8,
                           child: ElevatedButton(
                             onPressed: signup,
-                            child: Text(
+                            child: const Text(
                               '회원가입',
                               style: TextStyle(
                                 color: PRIMARY_COLOR,
@@ -353,17 +353,17 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 16.0),
-                        Container(
+                        const SizedBox(height: 16.0),
+                        SizedBox(
                           width: MediaQuery.of(context).size.width * 0.4,
                           child: ElevatedButton(
                             onPressed: () => {
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
-                                    builder: (context) => LoginScreen()),
+                                    builder: (context) => const LoginScreen()),
                               )
                             },
-                            child: Text(
+                            child: const Text(
                               '로그인 페이지',
                               style: TextStyle(
                                 color: PRIMARY_COLOR,

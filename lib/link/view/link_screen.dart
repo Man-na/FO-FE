@@ -9,46 +9,46 @@ class LinkScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        SizedBox(height: 8.0),
-        LinkItem(
+        const SizedBox(height: 8.0),
+        const LinkItem(
           title: "청경학원 홈페이지",
           imagePath: 'asset/img/link/bluewhalelink.png',
           url: 'https://www.bluewhalelink.com/',
         ),
-        SizedBox(height: 8.0),
-        LinkItem(
+        const SizedBox(height: 8.0),
+        const LinkItem(
           title: "청경학원 블로그",
           imagePath: 'asset/img/link/blog.png',
           url: 'https://blog.naver.com/bluewhalelink',
         ),
-        SizedBox(height: 8.0),
-        LinkItem(
+        const SizedBox(height: 8.0),
+        const LinkItem(
           title: "청경 인스타그램",
           imagePath: 'asset/img/link/instagram.jpeg',
           url: 'https://www.instagram.com/bluewhalelink',
         ),
-        SizedBox(height: 8.0),
-        LinkItem(
+        const SizedBox(height: 8.0),
+        const LinkItem(
           title: "이투스",
           imagePath: 'asset/img/link/etoos.png',
           url: 'https://www.etoos.com/home/default.asp',
         ),
-        SizedBox(height: 8.0),
-        LinkItem(
+        const SizedBox(height: 8.0),
+        const LinkItem(
           title: "(문의) 청경학원",
           imagePath: 'asset/img/link/helper.png',
           url: 'https://pf.kakao.com/_SVxdaxb',
         ),
-        SizedBox(height: 8.0),
-        LinkItem(
+        const SizedBox(height: 8.0),
+        const LinkItem(
           title: "(문의) 청경 Consulting",
           imagePath: 'asset/img/link/consulting.png',
           url: 'https://pf.kakao.com/_xiCDxdG',
         ),
-        SizedBox(height: 8.0),
+        const SizedBox(height: 8.0),
         _buildYoutubeThumbnail(context),
-        SizedBox(height: 8.0),
-        LinkItem(
+        const SizedBox(height: 8.0),
+        const LinkItem(
           title: "전화 문의 041.545.4229\n아산시 번영로234번길 2 메디포스 9층",
           isMultiLine: true,
         ),
@@ -60,7 +60,7 @@ class LinkScreen extends StatelessWidget {
     return InkWell(
       onTap: () => Navigator.of(context).push(
         MaterialPageRoute(
-            builder: (_) => YoutubePlayerScreen(videoId: '48pasnobnn4')),
+            builder: (_) => const YoutubePlayerScreen(videoId: '48pasnobnn4')),
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -69,7 +69,7 @@ class LinkScreen extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
-            image: DecorationImage(
+            image: const DecorationImage(
               image:
                   NetworkImage('https://img.youtube.com/vi/48pasnobnn4/0.jpg'),
               fit: BoxFit.cover,
@@ -132,7 +132,7 @@ class LinkItem extends StatelessWidget {
                 child: Text(
                   title,
                   textAlign: isMultiLine ? TextAlign.center : TextAlign.left,
-                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600),
+                  style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600),
                 ),
               ),
             ],

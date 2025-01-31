@@ -61,7 +61,7 @@ class Calendar extends StatelessWidget {
         selectedTextStyle: defaultTextStyle.copyWith(
           color: PRIMARY_COLOR,
         ),
-        cellMargin: EdgeInsets.all(4.0),
+        cellMargin: const EdgeInsets.all(4.0),
       ),
       calendarBuilders: CalendarBuilders(
         defaultBuilder: (context, date, _) {
@@ -112,7 +112,7 @@ class Calendar extends StatelessWidget {
                 children: [
                   Text(
                     '${date.day}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: PRIMARY_COLOR,
                       fontWeight: FontWeight.w700,
                       fontSize: 14.0,
@@ -131,7 +131,7 @@ class Calendar extends StatelessWidget {
           );
         },
       ),
-      daysOfWeekStyle: DaysOfWeekStyle(
+      daysOfWeekStyle: const DaysOfWeekStyle(
         weekdayStyle: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 12.0,
@@ -155,15 +155,6 @@ class Calendar extends StatelessWidget {
     );
   }
 
-  Color _getBorderColor(double? completion) {
-    if (completion == null) return Colors.transparent;
-    if (completion <= 20) return Colors.red;
-    if (completion <= 40) return Colors.orange;
-    if (completion <= 60) return Colors.yellow;
-    if (completion <= 80) return Colors.green;
-    return Colors.blue;
-  }
-
   // 점을 그리는 함수
   Widget _buildDots(DateTime date) {
     List<Widget> dots = [];
@@ -172,7 +163,7 @@ class Calendar extends StatelessWidget {
         Container(
           width: 8.0,
           height: 8.0,
-          margin: EdgeInsets.symmetric(horizontal: 1.0),
+          margin: const EdgeInsets.symmetric(horizontal: 1.0),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: opus.subjectColor,

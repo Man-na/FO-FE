@@ -33,9 +33,9 @@ class _CustomRowWidgetState extends State<CustomRowWidget> {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: Color(0xFF004D80),
+              color: const Color(0xFF004D80),
               border: Border.all(
-                color: Color(0xFF47739F),
+                color: const Color(0xFF47739F),
                 width: 1.0,
               ),
             ),
@@ -52,8 +52,8 @@ class _CustomRowWidgetState extends State<CustomRowWidget> {
               ),
             ),
           ),
-          SizedBox(width: 8.0),
-          Container(
+          const SizedBox(width: 8.0),
+          SizedBox(
             width: widget.extraWidget != null
                 ? isTablet? MediaQuery.of(context).size.width * 0.46 : MediaQuery.of(context).size.width * 0.31
                 : MediaQuery.of(context).size.width * 0.55,
@@ -61,22 +61,22 @@ class _CustomRowWidgetState extends State<CustomRowWidget> {
               controller: widget.controller,
               enabled: !widget.isDisabled,
               obscureText: widget.isPassword ? _obscureText : false,
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
-                border: UnderlineInputBorder(
+                border: const UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white),
                 ),
-                enabledBorder: UnderlineInputBorder(
+                enabledBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white),
                 ),
-                disabledBorder: UnderlineInputBorder(
+                disabledBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white),
                 ),
-                focusedBorder: UnderlineInputBorder(
+                focusedBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white),
                 ),
                 contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                 suffixIcon: widget.isPassword
                     ? IconButton(
                         icon: Icon(

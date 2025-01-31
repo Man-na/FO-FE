@@ -48,7 +48,7 @@ class _SchoolTestTableState extends ConsumerState<SchoolTestTable> {
       return ref.watch(schoolTestRepositoryProvider).createSchoolTest(data);
     } catch (e) {
       print("내신 성적 생성에 실패하였습니다. $e");
-      throw e;
+      rethrow;
     }
   }
 
@@ -73,7 +73,7 @@ class _SchoolTestTableState extends ConsumerState<SchoolTestTable> {
           .updateSchoolTest(score.id!, data);
     } catch (e) {
       print("내신 성적 수정에 실패하였습니다. $e");
-      throw e;
+      rethrow;
     }
   }
 
@@ -82,7 +82,7 @@ class _SchoolTestTableState extends ConsumerState<SchoolTestTable> {
       return ref.watch(schoolTestRepositoryProvider).deleteSchoolTest(id);
     } catch (e) {
       print("내신 성적 삭제에 실패하였습니다. $e");
-      throw e;
+      rethrow;
     }
   }
 
@@ -172,11 +172,11 @@ class _SchoolTestTableState extends ConsumerState<SchoolTestTable> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('안내'),
+          title: const Text('안내'),
           content: Text(message),
           actions: <Widget>[
             TextButton(
-              child: Text('확인'),
+              child: const Text('확인'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -236,12 +236,12 @@ class _SchoolTestTableState extends ConsumerState<SchoolTestTable> {
 
   Widget _buildEditButtons(int index) {
     if (editingRow != null && editingRow != index) {
-      return SizedBox();
+      return const SizedBox();
     }
 
     if (newRowAdded && index == widget.schoolTestScores.length - 1) {
       return IconButton(
-        icon: Icon(Icons.check),
+        icon: const Icon(Icons.check),
         onPressed: _saveNewRow,
       );
     }
@@ -251,11 +251,11 @@ class _SchoolTestTableState extends ConsumerState<SchoolTestTable> {
         mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
-            icon: Icon(Icons.check),
+            icon: const Icon(Icons.check),
             onPressed: _saveNewRow,
           ),
           IconButton(
-            icon: Icon(Icons.close),
+            icon: const Icon(Icons.close),
             onPressed: _cancelEditing,
           ),
         ],
@@ -265,11 +265,11 @@ class _SchoolTestTableState extends ConsumerState<SchoolTestTable> {
         mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
-            icon: Icon(Icons.edit),
+            icon: const Icon(Icons.edit),
             onPressed: () => _startEditing(index),
           ),
           IconButton(
-            icon: Icon(Icons.delete),
+            icon: const Icon(Icons.delete),
             onPressed: () => _deleteRow(index),
           ),
         ],
@@ -309,7 +309,7 @@ class _SchoolTestTableState extends ConsumerState<SchoolTestTable> {
                   isRowEditable || isRowEditing
                       ? TextField(
                           controller: score.subjectController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: '과목 입력',
                           ),
                           textAlign: TextAlign.center,
@@ -320,7 +320,7 @@ class _SchoolTestTableState extends ConsumerState<SchoolTestTable> {
                   isRowEditable || isRowEditing
                       ? TextField(
                           controller: score.classHoursController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: '수업시수 입력',
                           ),
                           textAlign: TextAlign.center,
@@ -337,7 +337,7 @@ class _SchoolTestTableState extends ConsumerState<SchoolTestTable> {
                   isRowEditable || isRowEditing
                       ? TextField(
                           controller: score.scoreController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: '원점수 입력',
                           ),
                           textAlign: TextAlign.center,
@@ -354,7 +354,7 @@ class _SchoolTestTableState extends ConsumerState<SchoolTestTable> {
                   isRowEditable || isRowEditing
                       ? TextField(
                           controller: score.rankController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: '등수 입력',
                           ),
                           textAlign: TextAlign.center,
@@ -371,7 +371,7 @@ class _SchoolTestTableState extends ConsumerState<SchoolTestTable> {
                   isRowEditable || isRowEditing
                       ? TextField(
                           controller: score.totalStudentController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: '전체인원 입력',
                           ),
                           textAlign: TextAlign.center,
