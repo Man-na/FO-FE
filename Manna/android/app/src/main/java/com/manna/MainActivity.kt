@@ -3,7 +3,6 @@ package com.manna
 import com.facebook.react.ReactActivity
 import android.os.Bundle
 import com.facebook.react.ReactActivityDelegate
-import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint
 import com.facebook.react.defaults.DefaultReactActivityDelegate
 
 class MainActivity : ReactActivity() {
@@ -14,7 +13,7 @@ class MainActivity : ReactActivity() {
       DefaultReactActivityDelegate(
           this,
           mainComponentName,
-          DefaultNewArchitectureEntryPoint.getFabricEnabled()
+          false
       )
       
   override fun onCreate(savedInstanceState: Bundle?) {
