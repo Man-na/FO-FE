@@ -1,6 +1,6 @@
 import React from 'react';
-import AuthStackNavigator from '../stack/AuthStackNavigator';
-import MainDrawerNavigator from '../drawer/MainDrawerNavigator';
+import AuthStackNavigator from '@/navigation/stack/AuthStackNavigator';
+import MainDrawerNavigator from '@/navigation/drawer/MainDrawerNavigator';
 
 function RootNavigator(): React.JSX.Element {
   const isLoggedIn = false;

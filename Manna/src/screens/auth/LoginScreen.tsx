@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
-import InputField from '../../components/InputField';
+import InputField from '@/components/InputField';
 
 function LoginScreen(): React.JSX.Element {
   const [values, setValues] = useState({
