@@ -1,27 +1,21 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import InputField from '@/components/InputField';
+import CustomButton from '@/components/CustomButton';
+import useForm from '@/hooks/useForm';
+import {FormValues, validateLogin} from '@/utils';
 
 function LoginScreen(): React.JSX.Element {
-  const [values, setValues] = useState({
-    email: '',
-    password: '',
-  });
+  const {values, errors, touched, getTextInputProps} = useForm<FormValues>(
+    {
+      email: '',
+      password: '',
+    },
+    validateLogin,
+  );
 
-  const [touched, setTouched] = useState({
-    email: false,
-    password: false,
-  });
-
-  const handleChangeText = (name: string, text: string) => {
-    setValues({...values, [name]: text});
-  };
-
-  const handleBlur = (name: string) => {
-    setTouched({
-      ...touched,
-      [name]: true,
-    });
+  const handleSubmit = () => {
+    console.log('values', values);
   };
 
   return (
@@ -29,25 +23,33 @@ function LoginScreen(): React.JSX.Element {
       <View style={styles.inputContainer}>
         <InputField
           placeholder="이메일"
-          error={touched.email && !values.email ? '이메일을 입력하세요.' : ''}
+          error={
+            touched.email && !values.email
+              ? '이메일을 입력해주세요.'
+              : errors.email
+          }
           touched={touched.email}
           inputMode="email"
-          value={values.email}
-          onChangeText={(text: string) => handleChangeText('email', text)}
-          onBlur={() => handleBlur('email')}
+          {...getTextInputProps('email')}
         />
         <InputField
           placeholder="비밀번호"
           error={
-            touched.password && !values.password ? '비밀번호를 입력하세요.' : ''
+            touched.password && !values.password
+              ? '비밀번호를 입력해주세요.'
+              : errors.password
           }
           touched={touched.password}
           secureTextEntry
-          value={values.password}
-          onChangeText={(text: string) => handleChangeText('password', text)}
-          onBlur={() => handleBlur('password')}
+          {...getTextInputProps('password')}
         />
       </View>
+      <CustomButton
+        label="로그인"
+        variant="filled"
+        size="large"
+        onPress={handleSubmit}
+      />
     </SafeAreaView>
   );
 }
@@ -59,6 +61,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     gap: 20,
+    marginBottom: 30,
   },
 });
 
