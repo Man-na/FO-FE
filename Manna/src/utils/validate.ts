@@ -1,9 +1,6 @@
-export interface FormValues {
-  email: string;
-  password: string;
-}
+import {LoginFormValues} from '@/screens/auth/LoginScreen';
 
-function validateLogin(values: FormValues) {
+function validateUser(values: LoginFormValues) {
   const errors = {
     email: '',
     password: '',
@@ -25,4 +22,19 @@ function validateLogin(values: FormValues) {
   return errors;
 }
 
-export {validateLogin};
+function validateLogin(values: LoginFormValues) {
+  return validateUser(values);
+}
+
+function validateSignup(values: LoginFormValues & {passwordConfirm: string}) {
+  const errors = validateUser(values);
+  const signupErrors = {...errors, passwordConfirm: ''};
+
+  if (values.password !== values.passwordConfirm) {
+    signupErrors.passwordConfirm = '비밀번호가 일치하지 않습니다.';
+  }
+
+  return signupErrors;
+}
+
+export {validateLogin, validateSignup};

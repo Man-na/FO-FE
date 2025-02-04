@@ -3,10 +3,15 @@ import {SafeAreaView, StyleSheet, View} from 'react-native';
 import InputField from '@/components/InputField';
 import CustomButton from '@/components/CustomButton';
 import useForm from '@/hooks/useForm';
-import {FormValues, validateLogin} from '@/utils';
+import {validateLogin} from '@/utils';
+
+export interface LoginFormValues {
+  email: string;
+  password: string;
+}
 
 function LoginScreen(): React.JSX.Element {
-  const {values, errors, touched, getTextInputProps} = useForm<FormValues>(
+  const {values, errors, touched, getTextInputProps} = useForm<LoginFormValues>(
     {
       email: '',
       password: '',
