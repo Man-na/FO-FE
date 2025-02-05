@@ -1,5 +1,5 @@
-import React from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import React, {useRef} from 'react';
+import {SafeAreaView, StyleSheet, TextInput, View} from 'react-native';
 import InputField from '@/components/InputField';
 import CustomButton from '@/components/CustomButton';
 import useForm from '@/hooks/useForm';
@@ -11,6 +11,8 @@ export interface LoginFormValues {
 }
 
 function LoginScreen(): React.JSX.Element {
+  const passwordRef = useRef<TextInput | null>(null);
+
   const {values, errors, touched, getTextInputProps} = useForm<LoginFormValues>(
     {
       email: '',
@@ -27,6 +29,7 @@ function LoginScreen(): React.JSX.Element {
     <SafeAreaView style={styles.container}>
       <View style={styles.inputContainer}>
         <InputField
+          autoFocus
           placeholder="이메일"
           error={
             touched.email && !values.email
@@ -35,9 +38,13 @@ function LoginScreen(): React.JSX.Element {
           }
           touched={touched.email}
           inputMode="email"
+          returnKeyType="next"
+          blurOnSubmit={false}
+          onSubmitEditing={() => passwordRef.current?.focus()}
           {...getTextInputProps('email')}
         />
         <InputField
+          ref={passwordRef}
           placeholder="비밀번호"
           error={
             touched.password && !values.password
@@ -46,6 +53,9 @@ function LoginScreen(): React.JSX.Element {
           }
           touched={touched.password}
           secureTextEntry
+          returnKeyType="join"
+          blurOnSubmit={false}
+          onSubmitEditing={handleSubmit}
           {...getTextInputProps('password')}
         />
       </View>

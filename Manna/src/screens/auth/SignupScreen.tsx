@@ -2,8 +2,8 @@ import CustomButton from '@/components/CustomButton';
 import InputField from '@/components/InputField';
 import useForm from '@/hooks/useForm';
 import {validateSignup} from '@/utils';
-import React from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import React, {useRef} from 'react';
+import {SafeAreaView, StyleSheet, TextInput, View} from 'react-native';
 
 export interface SignupFormValues {
   email: string;
@@ -12,6 +12,9 @@ export interface SignupFormValues {
 }
 
 function SignupScreen(): React.JSX.Element {
+  const passwordRef = useRef<TextInput | null>(null);
+  const passwordConfirmRef = useRef<TextInput | null>(null);
+
   const {values, errors, touched, getTextInputProps} =
     useForm<SignupFormValues>(
       {
@@ -22,10 +25,15 @@ function SignupScreen(): React.JSX.Element {
       validateSignup,
     );
 
+  const handleSubmit = () => {
+    console.log(values);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.inputContainer}>
         <InputField
+          autoFocus
           placeholder="이메일"
           error={
             touched.email && !values.email
@@ -34,10 +42,15 @@ function SignupScreen(): React.JSX.Element {
           }
           touched={touched.email}
           inputMode="email"
+          returnKeyType="next"
+          blurOnSubmit={false}
+          onSubmitEditing={() => passwordRef.current?.focus()}
           {...getTextInputProps('email')}
         />
         <InputField
+          ref={passwordRef}
           placeholder="비밀번호"
+          textContentType="oneTimeCode"
           error={
             touched.password && !values.password
               ? '비밀번호를 입력해주세요.'
@@ -45,9 +58,13 @@ function SignupScreen(): React.JSX.Element {
           }
           touched={touched.password}
           secureTextEntry
+          returnKeyType="next"
+          blurOnSubmit={false}
+          onSubmitEditing={() => passwordConfirmRef.current?.focus()}
           {...getTextInputProps('password')}
         />
         <InputField
+          ref={passwordConfirmRef}
           placeholder="비밀번호 확인"
           error={
             touched.passwordConfirm && !values.passwordConfirm
@@ -56,10 +73,11 @@ function SignupScreen(): React.JSX.Element {
           }
           touched={touched.passwordConfirm}
           secureTextEntry
+          onSubmitEditing={handleSubmit}
           {...getTextInputProps('passwordConfirm')}
         />
       </View>
-      <CustomButton label="회원가입" />
+      <CustomButton label="회원가입" onPress={handleSubmit} />
     </SafeAreaView>
   );
 }
