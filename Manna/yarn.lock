@@ -2959,6 +2959,7 @@ __metadata:
     prettier: "npm:2.8.8"
     react: "npm:18.2.0"
     react-native: "npm:0.73.11"
+    react-native-encrypted-storage: "npm:^4.0.3"
     react-native-gesture-handler: "npm:2.14.0"
     react-native-reanimated: "npm:^3.16.7"
     react-native-safe-area-context: "npm:^4.0.0"
@@ -8114,6 +8115,16 @@ __metadata:
     react-native-gesture-handler: ">= 2.0.0"
     react-native-reanimated: ">= 2.0.0"
   checksum: 10c0/5c3c083cf5a8c6716ed355f96bf605537f7a41592d3264574720f9a3aeb2aefcbdd0e745b7a4a4754b661ac61161cf7f80810630024dfb90473266b88b036378
+  languageName: node
+  linkType: hard
+
+"react-native-encrypted-storage@npm:^4.0.3":
+  version: 4.0.3
+  resolution: "react-native-encrypted-storage@npm:4.0.3"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/98de9250a406c5ce21607233a63dcffa727b00d69992825c9b81cb1978c884d0c3fc688811cb515a5628ecf67c5804c1c00047599f34b2591b89447263c4d7cc
   languageName: node
   linkType: hard
 
