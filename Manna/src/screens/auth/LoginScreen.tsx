@@ -4,6 +4,7 @@ import InputField from '@/components/InputField';
 import CustomButton from '@/components/CustomButton';
 import useForm from '@/hooks/useForm';
 import {validateLogin} from '@/utils';
+import useAuth from '@/service/auth/queries/useAuth';
 
 export interface LoginFormValues {
   email: string;
@@ -12,7 +13,7 @@ export interface LoginFormValues {
 
 function LoginScreen(): React.JSX.Element {
   const passwordRef = useRef<TextInput | null>(null);
-
+  const {loginMutation} = useAuth();
   const {values, errors, touched, getTextInputProps} = useForm<LoginFormValues>(
     {
       email: '',
@@ -23,6 +24,7 @@ function LoginScreen(): React.JSX.Element {
 
   const handleSubmit = () => {
     console.log('values', values);
+    loginMutation.mutate(values);
   };
 
   return (

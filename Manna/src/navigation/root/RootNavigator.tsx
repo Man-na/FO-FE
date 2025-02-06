@@ -1,11 +1,12 @@
 import React from 'react';
 import AuthStackNavigator from '@/navigation/stack/AuthStackNavigator';
 import MainDrawerNavigator from '@/navigation/drawer/MainDrawerNavigator';
+import useAuth from '@/service/auth/queries/useAuth';
 
 function RootNavigator(): React.JSX.Element {
-  const isLoggedIn = false;
+  const {isLogin} = useAuth();
 
-  return <>{isLoggedIn ? <MainDrawerNavigator /> : <AuthStackNavigator />}</>;
+  return <>{isLogin ? <MainDrawerNavigator /> : <AuthStackNavigator />}</>;
 }
 
 export default RootNavigator;

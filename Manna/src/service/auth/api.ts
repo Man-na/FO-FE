@@ -7,11 +7,10 @@ type RequestUser = {
 };
 
 const postSignup = async ({email, password}: RequestUser): Promise<void> => {
-  const {data} = await axiosInstance.post('localhost:9000/api/v1/user/signup', {
+  const {data} = await axiosInstance.post('/user/signup', {
     email,
     password,
   });
-
   return data;
 };
 
@@ -24,31 +23,28 @@ const postLogin = async ({
   email,
   password,
 }: RequestUser): Promise<ResponseToken> => {
-  const {data} = await axiosInstance.post('localhost:9000/api/v1/user/login', {
+  const {data} = await axiosInstance.post('/user/login', {
     email,
     password,
   });
-
   return data;
 };
 
 type ResponseProfile = Profile & Category;
 
 const getProfile = async (): Promise<ResponseProfile> => {
-  const {data} = await axiosInstance.get('localhost:9000/api/v1/user/me');
-
+  const {data} = await axiosInstance.get('/user/me');
   return data;
 };
 
 const getAccessToken = async (): Promise<ResponseToken> => {
   const refreshToken = await getEncryptStorage('refreshToken');
 
-  const {data} = await axiosInstance.get('localhost:9000/api/v1/user/refresh', {
+  const {data} = await axiosInstance.get('/user/refresh', {
     headers: {
       Authorization: `Bearer ${refreshToken}`,
     },
   });
-
   return data;
 };
 
