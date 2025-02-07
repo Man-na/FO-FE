@@ -11,7 +11,8 @@ const postSignup = async ({email, password}: RequestUser): Promise<void> => {
     email,
     password,
   });
-  return data;
+
+  return data.data;
 };
 
 type ResponseToken = {
@@ -27,14 +28,16 @@ const postLogin = async ({
     email,
     password,
   });
-  return data;
+
+  return data.data;
 };
 
 type ResponseProfile = Profile & Category;
 
 const getProfile = async (): Promise<ResponseProfile> => {
   const {data} = await axiosInstance.get('/user/me');
-  return data;
+
+  return data.data;
 };
 
 const getAccessToken = async (): Promise<ResponseToken> => {
@@ -45,7 +48,8 @@ const getAccessToken = async (): Promise<ResponseToken> => {
       Authorization: `Bearer ${refreshToken}`,
     },
   });
-  return data;
+
+  return data.data;
 };
 
 const logout = async () => {

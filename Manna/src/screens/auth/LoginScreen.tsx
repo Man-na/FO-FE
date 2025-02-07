@@ -23,7 +23,6 @@ function LoginScreen(): React.JSX.Element {
   );
 
   const handleSubmit = () => {
-    console.log('values', values);
     loginMutation.mutate(values);
   };
 
