@@ -3001,6 +3001,7 @@ __metadata:
     react-native-encrypted-storage: "npm:^4.0.3"
     react-native-gesture-handler: "npm:2.14.0"
     react-native-maps: "npm:1.8.3"
+    react-native-permissions: "npm:^5.2.5"
     react-native-reanimated: "npm:^3.16.7"
     react-native-safe-area-context: "npm:^4.0.0"
     react-native-screens: "npm:^3.27.0"
@@ -8271,6 +8272,20 @@ __metadata:
     react-native-web:
       optional: true
   checksum: 10c0/406ac135ddc661ebe50e5e1e44f9b4a2d2112c36b5dc51dd1947135331c707510b1ee79d439e8fbc70a888c8bd32fd90ac272793ff6866291045c5e6c07a2b2b
+  languageName: node
+  linkType: hard
+
+"react-native-permissions@npm:^5.2.5":
+  version: 5.2.5
+  resolution: "react-native-permissions@npm:5.2.5"
+  peerDependencies:
+    react: ">=18.1.0"
+    react-native: ">=0.70.0"
+    react-native-windows: ">=0.70.0"
+  peerDependenciesMeta:
+    react-native-windows:
+      optional: true
+  checksum: 10c0/ef7c78d39884e285cd568d7c0edc4aa3cf59b9ff31722f3fcfc80d0852552700d71660c159b2137e296472834e3dd109a38ca43554fdf59c82d80433287cffb4
   languageName: node
   linkType: hard
 

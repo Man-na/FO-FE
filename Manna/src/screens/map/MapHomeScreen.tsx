@@ -1,4 +1,5 @@
 import {colors} from '@/constants';
+import {usePermission} from '@/hooks/usePermission';
 import {useUserLocation} from '@/hooks/useUserLocation';
 import {MainDrawerParamList} from '@/navigation/drawer/MainDrawerNavigator';
 import {MapStackParamList} from '@/navigation/stack/MapStackNavigator';
@@ -16,11 +17,11 @@ type Navigation = CompositeNavigationProp<
 >;
 
 function MapHomeScreen(): React.JSX.Element {
+  const mapRef = useRef<MapView | null>(null);
   const inset = useSafeAreaInsets();
   const navigation = useNavigation<Navigation>();
   const {userLocation, isUserLocationError} = useUserLocation();
-
-  const mapRef = useRef<MapView | null>(null);
+  usePermission('LOCATION');
 
   const handlePressUserLocation = () => {
     if (isUserLocationError) {
