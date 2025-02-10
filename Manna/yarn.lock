@@ -2225,6 +2225,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-community/cli-tools@npm:^15.1.2":
+  version: 15.1.3
+  resolution: "@react-native-community/cli-tools@npm:15.1.3"
+  dependencies:
+    appdirsjs: "npm:^1.2.4"
+    chalk: "npm:^4.1.2"
+    execa: "npm:^5.0.0"
+    find-up: "npm:^5.0.0"
+    mime: "npm:^2.4.1"
+    open: "npm:^6.2.0"
+    ora: "npm:^5.4.1"
+    prompts: "npm:^2.4.2"
+    semver: "npm:^7.5.2"
+    shell-quote: "npm:^1.7.3"
+    sudo-prompt: "npm:^9.0.0"
+  checksum: 10c0/e458f3a5e97456b6fa8741cd8c04ca384b7657df9f53111daaf132911b00b6b5bf08fad2206c8461d0974b71548296b9da669af76dddf7f3261ac5d527df6bcc
+  languageName: node
+  linkType: hard
+
 "@react-native-community/cli-types@npm:12.3.7":
   version: 12.3.7
   resolution: "@react-native-community/cli-types@npm:12.3.7"
@@ -2279,6 +2298,46 @@ __metadata:
     react: ">=16"
     react-native: ">=0.57"
   checksum: 10c0/4ec84b7af2ded49dc21f17cc723a0ef341076cbe40cf758dd2daff8734bea63ba83e2fee7e63958984385314b8915b6804135997e07697abdd4141217c847fe9
+  languageName: node
+  linkType: hard
+
+"@react-native-vector-icons/common@npm:^11.0.0":
+  version: 11.0.0
+  resolution: "@react-native-vector-icons/common@npm:11.0.0"
+  dependencies:
+    "@react-native-community/cli-tools": "npm:^15.1.2"
+    picocolors: "npm:^1.1.1"
+    plist: "npm:^3.1.0"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  bin:
+    rnvi-update-plist: lib/commonjs/scripts/updatePlist.js
+  checksum: 10c0/4463ee8abfaa3560afe7ff8d395217590ab484295831bf16e32615c3741a8c6a017f73b3162d819c3181a4d7007e57915be0328256943c8388b128055f1dd8c7
+  languageName: node
+  linkType: hard
+
+"@react-native-vector-icons/ionicons@npm:^7.4.0":
+  version: 7.4.0
+  resolution: "@react-native-vector-icons/ionicons@npm:7.4.0"
+  dependencies:
+    "@react-native-vector-icons/common": "npm:^11.0.0"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/7b5854164eff787fdcadfbda7bb51c6c11b62a30e47cfa34ea0ca3ca193515a3cd9b9e2dfc113ab7cb4847fe73cf94094b94b60b25cf8983085dd0417fa39131
+  languageName: node
+  linkType: hard
+
+"@react-native-vector-icons/material-icons@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "@react-native-vector-icons/material-icons@npm:0.0.1"
+  dependencies:
+    "@react-native-vector-icons/common": "npm:^11.0.0"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/0b36ab48ae70976fa5418bce89c9c4436159504fe707f7771051d0ec40ed9dc0791b35554a3b7d75b7d3b339f1f6551019f3fb358da48f1ec0a7ce3d54a517d4
   languageName: node
   linkType: hard
 
@@ -2970,6 +3029,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@xmldom/xmldom@npm:^0.8.8":
+  version: 0.8.10
+  resolution: "@xmldom/xmldom@npm:0.8.10"
+  checksum: 10c0/c7647c442502720182b0d65b17d45d2d95317c1c8c497626fe524bda79b4fb768a9aa4fae2da919f308e7abcff7d67c058b102a9d641097e9a57f0b80187851f
+  languageName: node
+  linkType: hard
+
 "Manna@workspace:.":
   version: 0.0.0-use.local
   resolution: "Manna@workspace:."
@@ -2979,6 +3045,9 @@ __metadata:
     "@babel/runtime": "npm:^7.20.0"
     "@react-native-community/geolocation": "npm:^3.4.0"
     "@react-native-masked-view/masked-view": "npm:^0.3.2"
+    "@react-native-vector-icons/common": "npm:^11.0.0"
+    "@react-native-vector-icons/ionicons": "npm:^7.4.0"
+    "@react-native-vector-icons/material-icons": "npm:^0.0.1"
     "@react-native/babel-preset": "npm:0.73.21"
     "@react-native/eslint-config": "npm:0.73.2"
     "@react-native/metro-config": "npm:0.73.5"
@@ -8002,6 +8071,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"plist@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "plist@npm:3.1.0"
+  dependencies:
+    "@xmldom/xmldom": "npm:^0.8.8"
+    base64-js: "npm:^1.5.1"
+    xmlbuilder: "npm:^15.1.1"
+  checksum: 10c0/db19ba50faafc4103df8e79bcd6b08004a56db2a9dd30b3e5c8b0ef30398ef44344a674e594d012c8fc39e539a2b72cb58c60a76b4b4401cbbc7c8f6b028d93d
+  languageName: node
+  linkType: hard
+
 "possible-typed-array-names@npm:^1.0.0":
   version: 1.0.0
   resolution: "possible-typed-array-names@npm:1.0.0"
@@ -10058,6 +10138,13 @@ __metadata:
     utf-8-validate:
       optional: true
   checksum: 10c0/bd7d5f4aaf04fae7960c23dcb6c6375d525e00f795dd20b9385902bd008c40a94d3db3ce97d878acc7573df852056ca546328b27b39f47609f80fb22a0a9b61d
+  languageName: node
+  linkType: hard
+
+"xmlbuilder@npm:^15.1.1":
+  version: 15.1.1
+  resolution: "xmlbuilder@npm:15.1.1"
+  checksum: 10c0/665266a8916498ff8d82b3d46d3993913477a254b98149ff7cff060d9b7cc0db7cf5a3dae99aed92355254a808c0e2e3ec74ad1b04aa1061bdb8dfbea26c18b8
   languageName: node
   linkType: hard
 

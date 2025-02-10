@@ -57,6 +57,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Ionicons.ttf</string>
+		<string>MaterialIcons.ttf</string>
+	</array>
 	<key>GOOGLE_MAPS_API_KEY</key>
 	<string>${GOOGLE_MAPS_API_KEY}</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
