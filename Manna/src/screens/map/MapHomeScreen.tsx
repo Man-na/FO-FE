@@ -3,15 +3,15 @@ import {usePermission} from '@/hooks/usePermission';
 import {useUserLocation} from '@/hooks/useUserLocation';
 import {MainDrawerParamList} from '@/navigation/drawer/MainDrawerNavigator';
 import {MapStackParamList} from '@/navigation/stack/MapStackNavigator';
+import Ionicons from '@react-native-vector-icons/ionicons';
+import MaterialIcons from '@react-native-vector-icons/material-icons';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
 import {CompositeNavigationProp, useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import React, {useRef} from 'react';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, View} from 'react-native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import Ionicons from '@react-native-vector-icons/ionicons';
-import MaterialIcons from '@react-native-vector-icons/material-icons';
 
 type Navigation = CompositeNavigationProp<
   StackNavigationProp<MapStackParamList>,

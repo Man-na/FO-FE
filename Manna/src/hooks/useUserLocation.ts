@@ -29,6 +29,6 @@ export const useUserLocation = () => {
       {enableHighAccuracy: true},
     );
   }, [isComeback]);
-  console.log(isComeback);
+
   return {userLocation, isUserLocationError};
 };

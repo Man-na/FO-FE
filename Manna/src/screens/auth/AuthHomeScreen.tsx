@@ -17,7 +17,7 @@ function AuthHomeScreen({navigation}: AuthHomeScreenProps): React.JSX.Element {
         <Image
           resizeMode="contain"
           style={styles.image}
-          source={require('../../assets/manna.png')}
+          source={require('@/assets/manna.png')}
         />
       </View>
       <View style={styles.buttonContainer}>
