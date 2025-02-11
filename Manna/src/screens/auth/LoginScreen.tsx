@@ -4,7 +4,7 @@ import InputField from '@/components/InputField';
 import CustomButton from '@/components/CustomButton';
 import useForm from '@/hooks/useForm';
 import {validateLogin} from '@/utils';
-import useAuth from '@/service/auth/queries/useAuth';
+import useAuth from '@/services/auth/queries/useAuth';
 
 export interface LoginFormValues {
   email: string;

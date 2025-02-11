@@ -4,6 +4,7 @@ import {usePermission} from '@/hooks/usePermission';
 import {useUserLocation} from '@/hooks/useUserLocation';
 import {MainDrawerParamList} from '@/navigation/drawer/MainDrawerNavigator';
 import {MapStackParamList} from '@/navigation/stack/MapStackNavigator';
+import {useGetMarkers} from '@/services/post';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import MaterialIcons from '@react-native-vector-icons/material-icons';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
@@ -30,6 +31,7 @@ function MapHomeScreen(): React.JSX.Element {
   const navigation = useNavigation<Navigation>();
   const {userLocation, isUserLocationError} = useUserLocation();
   const [selectLocation, setSelectLocation] = useState<LatLng | null>();
+  const {data: markers = []} = useGetMarkers();
   usePermission('LOCATION');
 
   const handlePressAddPost = () => {
@@ -87,13 +89,14 @@ function MapHomeScreen(): React.JSX.Element {
         followsUserLocation
         showsMyLocationButton={false}
         onLongPress={handleLongPressMapView}>
-        <CustomMarker
-          color="RED"
-          coordinate={{
-            latitude: 37.5516032365118,
-            longitude: 126.98989626020192,
-          }}
-        />
+        {markers.map(({id, color, score, ...coordinate}) => (
+          <CustomMarker
+            key={id}
+            color={color}
+            score={score}
+            coordinate={coordinate}
+          />
+        ))}
         {selectLocation && (
           <Callout>
             <CustomMarker color="BLUE" coordinate={selectLocation} />

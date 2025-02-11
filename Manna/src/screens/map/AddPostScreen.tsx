@@ -1,6 +1,6 @@
 import Octicons from '@react-native-vector-icons/octicons';
 import {StackScreenProps} from '@react-navigation/stack';
-import React, {useRef} from 'react';
+import React, {useEffect, useRef, useCallback, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -15,6 +15,9 @@ import {colors, mapNavigations} from '@/constants';
 import useForm from '@/hooks/useForm';
 import {MapStackParamList} from '@/navigation/stack/MapStackNavigator';
 import {validateAddPost} from '@/utils';
+import {AddPostHeaderRight} from '@/components/AddPostHeaderRight';
+import {useMutateCreatePost} from '@/services/post/queries/useMutateCreatePost';
+import {MarkerColor} from '@/types';
 
 interface AddPostFormValues {
   title: string;
@@ -28,7 +31,9 @@ type AddPostScreenProps = StackScreenProps<
 
 export const AddPostScreen = ({
   route,
+  navigation,
 }: AddPostScreenProps): React.JSX.Element => {
+  const {location} = route.params;
   const descriptionRef = useRef<TextInput | null>(null);
   const {values, errors, touched, getTextInputProps} =
     useForm<AddPostFormValues>(
@@ -38,7 +43,42 @@ export const AddPostScreen = ({
       },
       validateAddPost,
     );
-  const {location} = route.params;
+  const createPost = useMutateCreatePost();
+  const [markerColor, setMarkerColor] = useState<MarkerColor>('RED');
+  const [score, setScore] = useState(5);
+  const [address, setAddress] = useState('');
+
+  const handleSubmit = useCallback(() => {
+    const body = {
+      date: new Date(),
+      title: values.title,
+      description: values.description,
+      color: markerColor,
+      score,
+      imageUris: [],
+    };
+    createPost.mutate(
+      {address, ...location, ...body},
+      {onSuccess: () => navigation.goBack()},
+    );
+  }, [
+    values.title,
+    values.description,
+    markerColor,
+    score,
+    createPost,
+    address,
+    location,
+    navigation,
+  ]);
+
+  useEffect(() => {
+    navigation.setOptions({
+      // eslint-disable-next-line react/no-unstable-nested-components
+      headerRight: () => <AddPostHeaderRight onSubmit={handleSubmit} />,
+    });
+  }, [navigation, handleSubmit]);
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.contentContainer}>

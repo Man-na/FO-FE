@@ -1,11 +1,11 @@
-import React from 'react';
 import {colors} from '@/constants';
-import useAuth from '@/service/auth/queries/useAuth';
+import useAuth from '@/services/auth/queries/useAuth';
 import {
   DrawerContentComponentProps,
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
+import React from 'react';
 import {
   Image,
   Pressable,
