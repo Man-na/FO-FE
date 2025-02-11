@@ -71,8 +71,8 @@ const useGetRefreshToken = () => {
 
 const useGetProfile = (queryOptions?: UseQueryCustomOptions) => {
   return useQuery({
-    queryKey: [queryKeys.AUTH, queryKeys.GET_PROFILE],
     queryFn: getProfile,
+    queryKey: [queryKeys.AUTH, queryKeys.GET_PROFILE],
     ...queryOptions,
   });
 };
@@ -83,9 +83,7 @@ const useLogout = (mutationOptions?: UseMutationCustomOptions) => {
     onSuccess: () => {
       removeHeader('Authorization');
       removeEncryptStorage(storageKeys.REFRESH_TOKEN);
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries({queryKey: [queryKeys.AUTH]});
+      queryClient.resetQueries({queryKey: [queryKeys.AUTH]});
     },
     ...mutationOptions,
   });

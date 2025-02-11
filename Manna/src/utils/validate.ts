@@ -1,6 +1,6 @@
 import {LoginFormValues} from '@/screens/auth/LoginScreen';
 
-function validateUser(values: LoginFormValues) {
+const validateUser = (values: LoginFormValues) => {
   const errors = {
     email: '',
     password: '',
@@ -20,13 +20,15 @@ function validateUser(values: LoginFormValues) {
   }
 
   return errors;
-}
+};
 
-function validateLogin(values: LoginFormValues) {
+const validateLogin = (values: LoginFormValues) => {
   return validateUser(values);
-}
+};
 
-function validateSignup(values: LoginFormValues & {passwordConfirm: string}) {
+const validateSignup = (
+  values: LoginFormValues & {passwordConfirm: string},
+) => {
   const errors = validateUser(values);
   const signupErrors = {...errors, passwordConfirm: ''};
 
@@ -35,6 +37,19 @@ function validateSignup(values: LoginFormValues & {passwordConfirm: string}) {
   }
 
   return signupErrors;
-}
+};
 
-export {validateLogin, validateSignup};
+const validateAddPost = (values: {title: string}) => {
+  const errors = {
+    title: '',
+    description: '',
+  };
+
+  if (values.title.trim() === '') {
+    errors.title = '제목은 1~30자 이내로 입력해주세요.';
+  }
+
+  return errors;
+};
+
+export {validateLogin, validateSignup, validateAddPost};

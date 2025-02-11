@@ -61,6 +61,7 @@
 	<array>
 		<string>Ionicons.ttf</string>
 		<string>MaterialIcons.ttf</string>
+		<string>Octicons.ttf</string>
 	</array>
 	<key>GOOGLE_MAPS_API_KEY</key>
 	<string>${GOOGLE_MAPS_API_KEY}</string>

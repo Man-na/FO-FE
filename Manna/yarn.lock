@@ -2341,6 +2341,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-vector-icons/octicons@npm:^19.12.0":
+  version: 19.12.0
+  resolution: "@react-native-vector-icons/octicons@npm:19.12.0"
+  dependencies:
+    "@react-native-vector-icons/common": "npm:^11.0.0"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/9aeb055cb05e7c3dc758567957feb932c8885f3ce535649661f08b1569cfc9788a02becff0d85d0310b23910b353e7cb728c9d477c710cd3e74d423f52146d12
+  languageName: node
+  linkType: hard
+
 "@react-native/assets-registry@npm:0.73.1":
   version: 0.73.1
   resolution: "@react-native/assets-registry@npm:0.73.1"
@@ -3048,6 +3060,7 @@ __metadata:
     "@react-native-vector-icons/common": "npm:^11.0.0"
     "@react-native-vector-icons/ionicons": "npm:^7.4.0"
     "@react-native-vector-icons/material-icons": "npm:^0.0.1"
+    "@react-native-vector-icons/octicons": "npm:^19.12.0"
     "@react-native/babel-preset": "npm:0.73.21"
     "@react-native/eslint-config": "npm:0.73.2"
     "@react-native/metro-config": "npm:0.73.5"
