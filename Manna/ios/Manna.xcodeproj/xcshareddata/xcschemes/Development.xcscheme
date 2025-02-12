@@ -11,7 +11,16 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "# Type a script or drag a script file from your workspace to insert its path.&#10;cp &quot;${PROJECT_DIR}/../env/.env.development&quot; &quot;${PROJECT_DIR}/../.env&quot;&#10;&#10;&quot;${SRCROOT}/../node_modules/react-native-config/ios/ReactNativeConfig/BuildXCConfig.rb&quot; &quot;${SRCROOT}/..&quot; &quot;${SRCROOT}/tmp.xcconfig&quot;&#10;&#xcd9c;&#xcc98;: https://k-taeyang.tistory.com/92 [&#xc36c;&#xc774;&#xc758; IT&#xc138;&#xc0c1;:&#xd2f0;&#xc2a4;&#xd1a0;&#xb9ac;]&#10;">
+               scriptText = "&quot;${SRCROOT}/../node_modules/react-native-config/ios/ReactNativeConfig/BuildXCConfig.rb&quot; &quot;${SRCROOT}/..&quot; &quot;${SRCROOT}/tmp.xcconfig&quot;&#10;">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
+                     BuildableName = "Manna.app"
+                     BlueprintName = "Manna"
+                     ReferencedContainer = "container:Manna.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
             </ActionContent>
          </ExecutionAction>
       </PreActions>

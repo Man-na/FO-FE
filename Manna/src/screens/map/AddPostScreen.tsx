@@ -18,6 +18,7 @@ import {validateAddPost} from '@/utils';
 import {AddPostHeaderRight} from '@/components/AddPostHeaderRight';
 import {useMutateCreatePost} from '@/services/post/queries/useMutateCreatePost';
 import {MarkerColor} from '@/types';
+import {useGetAddress} from '@/hooks/useGetAddress';
 
 interface AddPostFormValues {
   title: string;
@@ -46,7 +47,7 @@ export const AddPostScreen = ({
   const createPost = useMutateCreatePost();
   const [markerColor, setMarkerColor] = useState<MarkerColor>('RED');
   const [score, setScore] = useState(5);
-  const [address, setAddress] = useState('');
+  const address = useGetAddress(location);
 
   const handleSubmit = useCallback(() => {
     const body = {
@@ -84,7 +85,7 @@ export const AddPostScreen = ({
       <ScrollView style={styles.contentContainer}>
         <View style={styles.inputContainer}>
           <InputField
-            value=""
+            value={address}
             disabled
             icon={
               <Octicons name="location" size={16} color={colors.GRAY_500} />
