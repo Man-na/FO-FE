@@ -1,6 +1,6 @@
 import Octicons from '@react-native-vector-icons/octicons';
 import {StackScreenProps} from '@react-navigation/stack';
-import React, {useEffect, useRef, useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -9,16 +9,17 @@ import {
   View,
 } from 'react-native';
 
+import {AddPostHeaderRight} from '@/components/AddPostHeaderRight';
 import CustomButton from '@/components/CustomButton';
 import InputField from '@/components/InputField';
+import {MarkerSelector} from '@/components/MarkerSelector';
 import {colors, mapNavigations} from '@/constants';
 import useForm from '@/hooks/useForm';
+import {useGetAddress} from '@/hooks/useGetAddress';
 import {MapStackParamList} from '@/navigation/stack/MapStackNavigator';
-import {validateAddPost} from '@/utils';
-import {AddPostHeaderRight} from '@/components/AddPostHeaderRight';
 import {useMutateCreatePost} from '@/services/post/queries/useMutateCreatePost';
 import {MarkerColor} from '@/types';
-import {useGetAddress} from '@/hooks/useGetAddress';
+import {validateAddPost} from '@/utils';
 
 interface AddPostFormValues {
   title: string;
@@ -73,6 +74,10 @@ export const AddPostScreen = ({
     navigation,
   ]);
 
+  const handleSelectMarker = (name: MarkerColor) => {
+    setMarkerColor(name);
+  };
+
   useEffect(() => {
     navigation.setOptions({
       // eslint-disable-next-line react/no-unstable-nested-components
@@ -109,6 +114,10 @@ export const AddPostScreen = ({
             multiline
             returnKeyType="next"
             {...getTextInputProps('description')}
+          />
+          <MarkerSelector
+            markerColor={markerColor}
+            onPressMarker={handleSelectMarker}
           />
         </View>
       </ScrollView>
