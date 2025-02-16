@@ -7,6 +7,7 @@ import {MarkerColor} from '@/types';
 interface MarkerSelectorProps {
   markerColor: MarkerColor;
   onPressMarker: (color: MarkerColor) => void;
+  score: number;
 }
 
 const categoryList: MarkerColor[] = [
@@ -20,6 +21,7 @@ const categoryList: MarkerColor[] = [
 export const MarkerSelector = ({
   markerColor,
   onPressMarker,
+  score = 5,
 }: MarkerSelectorProps): React.JSX.Element => {
   return (
     <View style={styles.container}>
@@ -34,7 +36,7 @@ export const MarkerSelector = ({
                   markerColor === color && styles.pressedMarker,
                 ]}
                 onPress={() => onPressMarker(color)}>
-                <CustomMarker color={color} />
+                <CustomMarker color={color} score={score} />
               </Pressable>
             );
           })}

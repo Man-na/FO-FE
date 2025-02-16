@@ -20,6 +20,7 @@ import {MapStackParamList} from '@/navigation/stack/MapStackNavigator';
 import {useMutateCreatePost} from '@/services/post/queries/useMutateCreatePost';
 import {MarkerColor} from '@/types';
 import {validateAddPost} from '@/utils';
+import {ScoreInput} from '@/components/ScoreInput';
 
 interface AddPostFormValues {
   title: string;
@@ -78,6 +79,10 @@ export const AddPostScreen = ({
     setMarkerColor(name);
   };
 
+  const handleChangeScore = (value: number) => {
+    setScore(value);
+  };
+
   useEffect(() => {
     navigation.setOptions({
       // eslint-disable-next-line react/no-unstable-nested-components
@@ -116,9 +121,11 @@ export const AddPostScreen = ({
             {...getTextInputProps('description')}
           />
           <MarkerSelector
+            score={score}
             markerColor={markerColor}
             onPressMarker={handleSelectMarker}
           />
+          <ScoreInput score={score} onChangeScore={handleChangeScore} />
         </View>
       </ScrollView>
     </SafeAreaView>
