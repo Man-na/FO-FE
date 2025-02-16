@@ -1171,6 +1171,15 @@ PODS:
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
+  - RNImageCropPicker (0.42.0):
+    - React-Core
+    - React-RCTImage
+    - RNImageCropPicker/QBImagePickerController (= 0.42.0)
+    - TOCropViewController (~> 2.7.4)
+  - RNImageCropPicker/QBImagePickerController (0.42.0):
+    - React-Core
+    - React-RCTImage
+    - TOCropViewController (~> 2.7.4)
   - RNPermissions (5.2.5):
     - React-Core
   - RNReanimated (3.16.7):
@@ -1202,6 +1211,7 @@ PODS:
     - React-Core
     - React-RCTImage
   - SocketRocket (0.6.1)
+  - TOCropViewController (2.7.4)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -1289,6 +1299,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCMaskedView (from `../node_modules/@react-native-masked-view/masked-view`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -1311,6 +1322,7 @@ SPEC REPOS:
     - libevent
     - OpenSSL-Universal
     - SocketRocket
+    - TOCropViewController
 
 EXTERNAL SOURCES:
   boost:
@@ -1430,6 +1442,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-masked-view/masked-view"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNImageCropPicker:
+    :path: "../node_modules/react-native-image-crop-picker"
   RNPermissions:
     :path: "../node_modules/react-native-permissions"
   RNReanimated:
@@ -1512,10 +1526,12 @@ SPEC CHECKSUMS:
   ReactCommon: 1a93f1ef5c6e33bf14b9563cdb8e7621a893aa37
   RNCMaskedView: c8e1f01fc0f41ddf4e16246aef1143b3311588ca
   RNGestureHandler: a4c4561307e67f2942f5a4fe1526ff78cf3f5280
+  RNImageCropPicker: 64b6bec9ec185ee59b71a93d7058816bd0e1916e
   RNPermissions: 944b65a8b831f75a8f330a8b5005a138427e7dca
   RNReanimated: c076386897b52fb541afa8fffe08ded731d50211
   RNScreens: 69850d4519d95b9359cec15a67bb5f9d0bd75262
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
+  TOCropViewController: 80b8985ad794298fb69d3341de183f33d1853654
   Yoga: 1f93d5925ea12fb0880b21efe3566677337cf2ed
 
 PODFILE CHECKSUM: 22fbb5c18b47459b2f82e57b31f1f7c8cbbb5425

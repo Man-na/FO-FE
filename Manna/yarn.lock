@@ -3091,6 +3091,7 @@ __metadata:
     react-native-date-picker: "npm:^4.3.5"
     react-native-encrypted-storage: "npm:^4.0.3"
     react-native-gesture-handler: "npm:2.14.0"
+    react-native-image-crop-picker: "npm:^0.42.0"
     react-native-maps: "npm:1.8.3"
     react-native-permissions: "npm:^5.2.5"
     react-native-reanimated: "npm:^3.16.7"
@@ -8368,6 +8369,15 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 10c0/d567c26756aefc85fb6056efc6be4cdf0c1e7fd45a9d92f4bf0dc0fd94d3e099207398978bac8bdf3fa731f1020d41a7576566b552c525dc71bf7bc270bad25f
+  languageName: node
+  linkType: hard
+
+"react-native-image-crop-picker@npm:^0.42.0":
+  version: 0.42.0
+  resolution: "react-native-image-crop-picker@npm:0.42.0"
+  peerDependencies:
+    react-native: ">=0.40.0"
+  checksum: 10c0/8ebae127cf1701c07df6ad3a4304654da7088704628a475f1c2de4a1b99e0fcc7cefa3c34c19a76542c9311f6eaed04a9e402d34af86bdc4d1099c30c197bb8f
   languageName: node
   linkType: hard
 

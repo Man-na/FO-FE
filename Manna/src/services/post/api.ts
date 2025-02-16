@@ -17,3 +17,13 @@ export const getMarkers = async (): Promise<Marker[]> => {
 
   return data.data;
 };
+
+export const uploadImages = async (body: FormData): Promise<string[]> => {
+  const data = await axiosInstance.post('/images', body, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+
+  return data.data;
+};

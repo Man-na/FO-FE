@@ -1,3 +1,21 @@
+import {AddPostHeaderRight} from '@/components/AddPostHeaderRight';
+import CustomButton from '@/components/CustomButton';
+import {DatePickerOption} from '@/components/DatePickerOption';
+import {ImageInput} from '@/components/ImageInput';
+import InputField from '@/components/InputField';
+import {MarkerSelector} from '@/components/MarkerSelector';
+import {PreviewImageList} from '@/components/PreviewImageList';
+import {ScoreInput} from '@/components/ScoreInput';
+import {colors, mapNavigations} from '@/constants';
+import useForm from '@/hooks/useForm';
+import {useGetAddress} from '@/hooks/useGetAddress';
+import {useImagePicker} from '@/hooks/useImagePicker';
+import {useModal} from '@/hooks/useModal';
+import {usePermission} from '@/hooks/usePermission';
+import {MapStackParamList} from '@/navigation/stack/MapStackNavigator';
+import {useMutateCreatePost} from '@/services/post/queries/useMutateCreatePost';
+import {MarkerColor} from '@/types';
+import {getDateWithSeparator, validateAddPost} from '@/utils';
 import Octicons from '@react-native-vector-icons/octicons';
 import {StackScreenProps} from '@react-navigation/stack';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
@@ -8,21 +26,6 @@ import {
   TextInput,
   View,
 } from 'react-native';
-
-import {AddPostHeaderRight} from '@/components/AddPostHeaderRight';
-import CustomButton from '@/components/CustomButton';
-import {DatePickerOption} from '@/components/DatePickerOption';
-import InputField from '@/components/InputField';
-import {MarkerSelector} from '@/components/MarkerSelector';
-import {ScoreInput} from '@/components/ScoreInput';
-import {colors, mapNavigations} from '@/constants';
-import useForm from '@/hooks/useForm';
-import {useGetAddress} from '@/hooks/useGetAddress';
-import {useModal} from '@/hooks/useModal';
-import {MapStackParamList} from '@/navigation/stack/MapStackNavigator';
-import {useMutateCreatePost} from '@/services/post/queries/useMutateCreatePost';
-import {MarkerColor} from '@/types';
-import {getDateWithSeparator, validateAddPost} from '@/utils';
 
 interface AddPostFormValues {
   title: string;
@@ -55,6 +58,8 @@ export const AddPostScreen = ({
   const [score, setScore] = useState(5);
   const [date, setDate] = useState(new Date());
   const [isPicked, setIsPicked] = useState(false);
+  const imagePicker = useImagePicker({initialImages: []});
+  usePermission('PHOTO');
 
   const handleSubmit = useCallback(() => {
     const body = {
@@ -146,7 +151,10 @@ export const AddPostScreen = ({
             onPressMarker={handleSelectMarker}
           />
           <ScoreInput score={score} onChangeScore={handleChangeScore} />
-
+          <View style={styles.imagesViewer}>
+            <ImageInput onChange={imagePicker.handleChange} />
+            <PreviewImageList imageUris={imagePicker.imageUris} />
+          </View>
           <DatePickerOption
             date={date}
             isVisible={isVisible}
@@ -171,5 +179,8 @@ const styles = StyleSheet.create({
   inputContainer: {
     gap: 20,
     marginBottom: 20,
+  },
+  imagesViewer: {
+    flexDirection: 'row',
   },
 });
