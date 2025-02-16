@@ -13,6 +13,7 @@ const colors = {
   GRAY_700: '#575757',
   BLACK: '#000',
   BLUE_400: '#B4E0FF',
+  BLUE_500: '#0D8AFF',
   GREEN_400: '#CCE6BA',
   YELLOW_400: '#FFE594',
   PURPLE_400: '#C4C4E7',

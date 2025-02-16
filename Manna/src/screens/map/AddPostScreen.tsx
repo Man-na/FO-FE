@@ -11,16 +11,18 @@ import {
 
 import {AddPostHeaderRight} from '@/components/AddPostHeaderRight';
 import CustomButton from '@/components/CustomButton';
+import {DatePickerOption} from '@/components/DatePickerOption';
 import InputField from '@/components/InputField';
 import {MarkerSelector} from '@/components/MarkerSelector';
+import {ScoreInput} from '@/components/ScoreInput';
 import {colors, mapNavigations} from '@/constants';
 import useForm from '@/hooks/useForm';
 import {useGetAddress} from '@/hooks/useGetAddress';
+import {useModal} from '@/hooks/useModal';
 import {MapStackParamList} from '@/navigation/stack/MapStackNavigator';
 import {useMutateCreatePost} from '@/services/post/queries/useMutateCreatePost';
 import {MarkerColor} from '@/types';
-import {validateAddPost} from '@/utils';
-import {ScoreInput} from '@/components/ScoreInput';
+import {getDateWithSeparator, validateAddPost} from '@/utils';
 
 interface AddPostFormValues {
   title: string;
@@ -47,13 +49,16 @@ export const AddPostScreen = ({
       validateAddPost,
     );
   const createPost = useMutateCreatePost();
+  const address = useGetAddress(location);
+  const {isVisible, show, hide} = useModal();
   const [markerColor, setMarkerColor] = useState<MarkerColor>('RED');
   const [score, setScore] = useState(5);
-  const address = useGetAddress(location);
+  const [date, setDate] = useState(new Date());
+  const [isPicked, setIsPicked] = useState(false);
 
   const handleSubmit = useCallback(() => {
     const body = {
-      date: new Date(),
+      date,
       title: values.title,
       description: values.description,
       color: markerColor,
@@ -65,6 +70,7 @@ export const AddPostScreen = ({
       {onSuccess: () => navigation.goBack()},
     );
   }, [
+    date,
     values.title,
     values.description,
     markerColor,
@@ -81,6 +87,15 @@ export const AddPostScreen = ({
 
   const handleChangeScore = (value: number) => {
     setScore(value);
+  };
+
+  const handleChangeDate = (pickedDate: Date) => {
+    setDate(pickedDate);
+  };
+
+  const handleConfirmDate = () => {
+    setIsPicked(true);
+    hide();
   };
 
   useEffect(() => {
@@ -101,7 +116,12 @@ export const AddPostScreen = ({
               <Octicons name="location" size={16} color={colors.GRAY_500} />
             }
           />
-          <CustomButton variant="outlined" size="large" label="날짜 선택" />
+          <CustomButton
+            variant="outlined"
+            size="large"
+            label={isPicked ? getDateWithSeparator(date, '.') : '날짜 선택'}
+            onPress={show}
+          />
           <InputField
             placeholder="제목을 입력하세요."
             error={errors.title}
@@ -126,6 +146,13 @@ export const AddPostScreen = ({
             onPressMarker={handleSelectMarker}
           />
           <ScoreInput score={score} onChangeScore={handleChangeScore} />
+
+          <DatePickerOption
+            date={date}
+            isVisible={isVisible}
+            onChangeDate={handleChangeDate}
+            onConfirmDate={handleConfirmDate}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
