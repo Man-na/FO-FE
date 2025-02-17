@@ -18,51 +18,48 @@ export const PreviewImageList = ({
   return (
     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
       <View style={styles.container}>
-        {imageUris.map(({uri}, index) => {
-          return (
-            <Pressable style={styles.imageContainer}>
-              <Image
-                key={index}
-                resizeMode="cover"
-                source={{
-                  uri: `http://localhost:9000/${uri}`,
-                }}
-                style={styles.image}
-              />
-              <Pressable
-                style={[styles.imageButton, styles.deleteButton]}
-                onPress={() => onDelete && onDelete(uri)}>
-                <Ionicons name="close" size={16} color={colors.WHITE} />
-              </Pressable>
-              {index > 0 && (
-                <Pressable
-                  style={[styles.imageButton, styles.moveLeftButton]}
-                  onPress={() =>
-                    onChangeOrder && onChangeOrder(index, index - 1)
-                  }>
-                  <Ionicons
-                    name="arrow-back-outline"
-                    size={16}
-                    color={colors.WHITE}
-                  />
-                </Pressable>
-              )}
-              {index < imageUris.length - 1 && (
-                <Pressable
-                  style={[styles.imageButton, styles.moveRightButton]}
-                  onPress={() =>
-                    onChangeOrder && onChangeOrder(index, index + 1)
-                  }>
-                  <Ionicons
-                    name="arrow-forward-outline"
-                    size={16}
-                    color={colors.WHITE}
-                  />
-                </Pressable>
-              )}
+        {imageUris.map(({uri}, index) => (
+          <Pressable key={uri} style={styles.imageContainer}>
+            <Image
+              resizeMode="cover"
+              source={{
+                uri: `${uri}`,
+              }}
+              style={styles.image}
+            />
+            <Pressable
+              style={[styles.imageButton, styles.deleteButton]}
+              onPress={() => onDelete && onDelete(uri)}>
+              <Ionicons name="close" size={16} color={colors.WHITE} />
             </Pressable>
-          );
-        })}
+            {index > 0 && (
+              <Pressable
+                style={[styles.imageButton, styles.moveLeftButton]}
+                onPress={() =>
+                  onChangeOrder && onChangeOrder(index, index - 1)
+                }>
+                <Ionicons
+                  name="arrow-back-outline"
+                  size={16}
+                  color={colors.WHITE}
+                />
+              </Pressable>
+            )}
+            {index < imageUris.length - 1 && (
+              <Pressable
+                style={[styles.imageButton, styles.moveRightButton]}
+                onPress={() =>
+                  onChangeOrder && onChangeOrder(index, index + 1)
+                }>
+                <Ionicons
+                  name="arrow-forward-outline"
+                  size={16}
+                  color={colors.WHITE}
+                />
+              </Pressable>
+            )}
+          </Pressable>
+        ))}
       </View>
     </ScrollView>
   );

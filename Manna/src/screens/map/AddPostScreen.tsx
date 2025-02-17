@@ -68,7 +68,7 @@ export const AddPostScreen = ({
       description: values.description,
       color: markerColor,
       score,
-      imageUris: [],
+      imageUris: imagePicker.imageUris,
     };
     createPost.mutate(
       {address, ...location, ...body},
@@ -84,6 +84,7 @@ export const AddPostScreen = ({
     address,
     location,
     navigation,
+    imagePicker.imageUris,
   ]);
 
   const handleSelectMarker = (name: MarkerColor) => {

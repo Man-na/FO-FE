@@ -23,7 +23,6 @@ export const CustomDrawerContent = (
   const {logoutMutation} = useAuth();
 
   const handleLogout = () => {
-    console.log(1);
     logoutMutation.mutate(null);
   };
 

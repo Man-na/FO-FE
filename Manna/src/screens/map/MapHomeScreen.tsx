@@ -1,5 +1,7 @@
 import {CustomMarker} from '@/components/CustomMarker';
+import {MarkerModal} from '@/components/MarkerModal';
 import {alerts, colors, mapNavigations} from '@/constants';
+import {useModal} from '@/hooks/useModal';
 import {usePermission} from '@/hooks/usePermission';
 import {useUserLocation} from '@/hooks/useUserLocation';
 import {MainDrawerParamList} from '@/navigation/drawer/MainDrawerNavigator';
@@ -31,8 +33,18 @@ function MapHomeScreen(): React.JSX.Element {
   const navigation = useNavigation<Navigation>();
   const {userLocation, isUserLocationError} = useUserLocation();
   const [selectLocation, setSelectLocation] = useState<LatLng | null>();
+  const [markerId, setMarkerId] = useState<number | null>(null);
+  const markerModal = useModal();
   const {data: markers = []} = useGetMarkers();
   usePermission('LOCATION');
+
+  const moveMapView = (coordinate: LatLng) => {
+    mapRef.current?.animateToRegion({
+      ...coordinate,
+      latitudeDelta: 0.0922,
+      longitudeDelta: 0.0421,
+    });
+  };
 
   const handlePressAddPost = () => {
     if (!selectLocation) {
@@ -45,6 +57,8 @@ function MapHomeScreen(): React.JSX.Element {
     navigation.navigate(mapNavigations.ADD_POST, {
       location: selectLocation,
     });
+
+    setSelectLocation(null);
   };
 
   const handlePressUserLocation = () => {
@@ -52,12 +66,7 @@ function MapHomeScreen(): React.JSX.Element {
       return;
     }
 
-    mapRef.current?.animateToRegion({
-      latitude: userLocation.latitude,
-      longitude: userLocation.longitude,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421,
-    });
+    moveMapView(userLocation);
 
     if (!selectLocation) {
       return;
@@ -73,6 +82,11 @@ function MapHomeScreen(): React.JSX.Element {
     setSelectLocation(nativeEvent.coordinate);
   };
 
+  const handlePressMarker = (id: number, coordinate: LatLng) => {
+    moveMapView(coordinate);
+    setMarkerId(id);
+    markerModal.show();
+  };
   return (
     <View style={styles.container}>
       <MapView
@@ -100,6 +114,7 @@ function MapHomeScreen(): React.JSX.Element {
             color={color}
             score={score}
             coordinate={coordinate}
+            onPress={() => handlePressMarker(id, coordinate)}
           />
         ))}
         {selectLocation && (
@@ -121,6 +136,12 @@ function MapHomeScreen(): React.JSX.Element {
           <MaterialIcons name="my-location" color={colors.WHITE} size={25} />
         </Pressable>
       </View>
+
+      <MarkerModal
+        markerId={markerId}
+        isVisible={markerModal.isVisible}
+        hide={markerModal.hide}
+      />
     </View>
   );
 }
