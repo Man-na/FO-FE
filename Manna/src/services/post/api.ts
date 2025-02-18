@@ -7,7 +7,7 @@ export type ResponsePost = Post & {images: ImageUri[]};
 export const getPosts = async (page = 1): Promise<ResponsePost[]> => {
   const {data} = await axiosInstance.get(`/post/posts/my?page=${page}`);
 
-  return data.data;
+  return data.data.content;
 };
 
 export const createPost = async (
