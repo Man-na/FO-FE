@@ -6,6 +6,7 @@ export const queryKeys = {
   GET_MARKERS: 'getMarker',
   POST: 'post',
   GET_POST: 'getPost',
+  GET_POSTS: 'getPosts',
 };
 
 export const storageKeys = {

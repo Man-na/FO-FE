@@ -4,6 +4,12 @@ import {axiosInstance} from '@/utils';
 export type RequestCreatePost = Omit<Post, 'id'> & {imageUris: ImageUri[]};
 export type ResponsePost = Post & {images: ImageUri[]};
 
+export const getPosts = async (page = 1): Promise<ResponsePost[]> => {
+  const {data} = await axiosInstance.get(`/post/posts/my?page=${page}`);
+
+  return data.data;
+};
+
 export const createPost = async (
   body: RequestCreatePost,
 ): Promise<ResponsePost> => {
