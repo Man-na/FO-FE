@@ -1,5 +1,5 @@
-import CustomButton from '@/components/CustomButton';
-import InputField from '@/components/InputField';
+import CustomButton from '@/components/common/CustomButton';
+import InputField from '@/components/common/InputField';
 import useForm from '@/hooks/useForm';
 import useAuth from '@/services/auth/queries/useAuth';
 import {validateSignup} from '@/utils';

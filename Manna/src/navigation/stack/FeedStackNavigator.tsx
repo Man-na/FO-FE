@@ -1,4 +1,4 @@
-import {FeedHomeHeaderLeft} from '@/components/FeedHomeHeaderLeft';
+import {FeedHomeHeaderLeft} from '@/components/feed/FeedHomeHeaderLeft';
 import {colors, feedNavigations} from '@/constants';
 import FeedHomeScreen from '@/screens/feed/FeedHomeScreen';
 import {createStackNavigator} from '@react-navigation/stack';

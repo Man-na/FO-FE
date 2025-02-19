@@ -1,4 +1,4 @@
-import {CustomMarker} from '@/components/CustomMarker';
+import {CustomMarker} from '@/components/common/CustomMarker';
 import {MarkerModal} from '@/components/MarkerModal';
 import {alerts, colors, mapNavigations} from '@/constants';
 import {useModal} from '@/hooks/useModal';
