@@ -2,6 +2,7 @@ export const mainNavigations = {
   HOME: 'Home',
   FEED: 'Feed',
   CALENDAR: 'Calendar',
+  PROFILE: 'Profile',
 } as const;
 
 export const authNavigations = {

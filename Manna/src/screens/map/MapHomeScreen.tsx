@@ -1,13 +1,12 @@
 import {CustomMarker} from '@/components/common/CustomMarker';
-import {MarkerModal} from '@/components/MarkerModal';
+import {MarkerModal} from '@/components/map/MarkerModal';
 import {alerts, colors, mapNavigations} from '@/constants';
 import {useModal} from '@/hooks/useModal';
 import {usePermission} from '@/hooks/usePermission';
 import {useUserLocation} from '@/hooks/useUserLocation';
-import {MainDrawerParamList} from '@/navigation/drawer/MainDrawerNavigator';
 import {MapStackParamList} from '@/navigation/stack/MapStackNavigator';
+import {MainTabParamList} from '@/navigation/tab/MainTabNavigator';
 import {useGetMarkers} from '@/services/post';
-import Ionicons from '@react-native-vector-icons/ionicons';
 import MaterialIcons from '@react-native-vector-icons/material-icons';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
 import {CompositeNavigationProp, useNavigation} from '@react-navigation/native';
@@ -24,7 +23,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 type Navigation = CompositeNavigationProp<
   StackNavigationProp<MapStackParamList>,
-  DrawerNavigationProp<MainDrawerParamList>
+  DrawerNavigationProp<MainTabParamList>
 >;
 
 function MapHomeScreen(): React.JSX.Element {
@@ -123,11 +122,6 @@ function MapHomeScreen(): React.JSX.Element {
           </Callout>
         )}
       </MapView>
-      <Pressable
-        style={[styles.drawerButton, {top: inset.top || 20}]}
-        onPress={() => navigation.openDrawer()}>
-        <Ionicons name="menu" color={colors.WHITE} size={25} />
-      </Pressable>
       <View style={styles.buttonList}>
         <Pressable style={styles.mapButton} onPress={handlePressAddPost}>
           <MaterialIcons name="add" color={colors.WHITE} size={25} />

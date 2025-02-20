@@ -1,5 +1,9 @@
+import {CustomMarker} from '@/components/common/CustomMarker';
 import {colors} from '@/constants';
 import {useGetPost} from '@/services/post/queries/useGetPost';
+import {getDateWithSeparator} from '@/utils';
+import MaterialIcons from '@react-native-vector-icons/material-icons';
+import Octicons from '@react-native-vector-icons/octicons';
 import React from 'react';
 import {
   Dimensions,
@@ -11,10 +15,6 @@ import {
   Text,
   View,
 } from 'react-native';
-import {CustomMarker} from './common/CustomMarker';
-import Octicons from '@react-native-vector-icons/octicons';
-import {getDateWithSeparator} from '@/utils';
-import MaterialIcons from '@react-native-vector-icons/material-icons';
 
 interface MarkerModalProps {
   markerId: number | null;

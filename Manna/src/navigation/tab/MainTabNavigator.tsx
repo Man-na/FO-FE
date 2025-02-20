@@ -1,28 +1,30 @@
 import {colors, mainNavigations} from '@/constants';
 import CalendarHomeScreen from '@/screens/calendar/CalendarHomeScreen';
+import ProfileHomeScreen from '@/screens/profile/ProfileHomeScreen';
 import MaterialIcons from '@react-native-vector-icons/material-icons';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigatorScreenParams, RouteProp} from '@react-navigation/native';
 import React from 'react';
-import {Dimensions} from 'react-native';
-import FeedStackNavigator from '../stack/FeedStackNavigator';
+import FeedStackNavigator, {
+  FeedStackParamList,
+} from '../stack/FeedStackNavigator';
 import MapStackNavigator, {MapStackParamList} from '../stack/MapStackNavigator';
-import {CustomDrawerContent} from './CustomDrawerContent';
 
-export type MainDrawerParamList = {
+export type MainTabParamList = {
   [mainNavigations.HOME]: NavigatorScreenParams<MapStackParamList>;
-  [mainNavigations.FEED]: undefined;
+  [mainNavigations.FEED]: NavigatorScreenParams<FeedStackParamList>;
   [mainNavigations.CALENDAR]: undefined;
+  [mainNavigations.PROFILE]: undefined;
 };
 
-const Drawer = createDrawerNavigator<MainDrawerParamList>();
+const Tab = createBottomTabNavigator<MainTabParamList>();
 
-const DrawerIcons = ({
+const TabBarIcons = ({
   route,
   focused,
   size,
 }: {
-  route: RouteProp<MainDrawerParamList>;
+  route: RouteProp<MainTabParamList>;
   focused: boolean;
   size: number;
 }) => {
@@ -31,14 +33,17 @@ const DrawerIcons = ({
   switch (route.name) {
     case mainNavigations.HOME: {
       iconName = 'location-on';
+      size = 16;
       break;
     }
     case mainNavigations.FEED: {
       iconName = 'book';
+      size = 16;
       break;
     }
     case mainNavigations.CALENDAR: {
       iconName = 'event-note';
+      size = 16;
       break;
     }
   }
@@ -52,43 +57,48 @@ const DrawerIcons = ({
   );
 };
 
-function MainDrawerNavigator(): React.JSX.Element {
+function MainTabNavigator(): React.JSX.Element {
   return (
-    <Drawer.Navigator
-      drawerContent={CustomDrawerContent}
+    <Tab.Navigator
       screenOptions={({route}) => ({
         headerShown: false,
-        drawerType: 'front',
-        drawerStyle: {
-          width: Dimensions.get('screen').width * 0.6,
-          backgroundColor: colors.WHITE,
+        tabBarActiveTintColor: colors.BLACK,
+        tabBarInactiveTintColor: colors.GRAY_500,
+        tabBarActiveBackgroundColor: colors.PINK_200,
+        tabBarInactiveBackgroundColor: colors.WHITE,
+        tabBarStyle: {
+          height: 60,
+          paddingBottom: 1,
         },
-        drawerActiveTintColor: colors.BLACK,
-        drawerInactiveTintColor: colors.GRAY_500,
-        drawerActiveBackgroundColor: colors.PINK_200,
-        drawerInactiveBackgroundColor: colors.GRAY_100,
-        drawerLabelStyle: {
+        tabBarLabelStyle: {
+          fontSize: 12,
           fontWeight: '600',
+          marginBottom: 5,
         },
-        drawerIcon: ({size, focused}) => DrawerIcons({route, size, focused}),
+        tabBarIcon: ({size, focused}) => TabBarIcons({route, size, focused}),
       })}>
-      <Drawer.Screen
+      <Tab.Screen
         name={mainNavigations.HOME}
         component={MapStackNavigator}
-        options={{title: '홈', swipeEnabled: false}}
+        options={{title: '홈'}}
       />
-      <Drawer.Screen
+      <Tab.Screen
         name={mainNavigations.FEED}
         component={FeedStackNavigator}
         options={{title: '피드'}}
       />
-      <Drawer.Screen
+      <Tab.Screen
         name={mainNavigations.CALENDAR}
         component={CalendarHomeScreen}
         options={{title: '캘린더'}}
       />
-    </Drawer.Navigator>
+      <Tab.Screen
+        name={mainNavigations.PROFILE}
+        component={ProfileHomeScreen}
+        options={{title: '프로필'}}
+      />
+    </Tab.Navigator>
   );
 }
 
-export default MainDrawerNavigator;
+export default MainTabNavigator;
