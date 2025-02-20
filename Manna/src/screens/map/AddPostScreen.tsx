@@ -1,10 +1,10 @@
-import {AddPostHeaderRight} from '@/components/post/AddPostHeaderRight';
 import CustomButton from '@/components/common/CustomButton';
+import InputField from '@/components/common/InputField';
+import {PreviewImageList} from '@/components/common/PreviewImageList';
+import {AddPostHeaderRight} from '@/components/post/AddPostHeaderRight';
 import {DatePickerOption} from '@/components/post/DatePickerOption';
 import {ImageInput} from '@/components/post/ImageInput';
-import InputField from '@/components/common/InputField';
 import {MarkerSelector} from '@/components/post/MarkerSelector';
-import {PreviewImageList} from '@/components/common/PreviewImageList';
 import {ScoreInput} from '@/components/post/ScoreInput';
 import {colors, mapNavigations} from '@/constants';
 import useForm from '@/hooks/useForm';
@@ -158,6 +158,7 @@ export const AddPostScreen = ({
               imageUris={imagePicker.imageUris}
               onDelete={imagePicker.delete}
               onChangeOrder={imagePicker.changeOrder}
+              showOption
             />
           </View>
           <DatePickerOption

@@ -19,7 +19,6 @@ import MapView, {
   LongPressEvent,
   PROVIDER_GOOGLE,
 } from 'react-native-maps';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 type Navigation = CompositeNavigationProp<
   StackNavigationProp<MapStackParamList>,
@@ -28,7 +27,6 @@ type Navigation = CompositeNavigationProp<
 
 function MapHomeScreen(): React.JSX.Element {
   const mapRef = useRef<MapView | null>(null);
-  const inset = useSafeAreaInsets();
   const navigation = useNavigation<Navigation>();
   const {userLocation, isUserLocationError} = useUserLocation();
   const [selectLocation, setSelectLocation] = useState<LatLng | null>();
