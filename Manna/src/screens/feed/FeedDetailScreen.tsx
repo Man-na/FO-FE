@@ -1,3 +1,4 @@
+import CustomButton from '@/components/common/CustomButton';
 import {PreviewImageList} from '@/components/common/PreviewImageList';
 import {colorHex, colors, feedNavigations} from '@/constants';
 import {useModal} from '@/hooks/useModal';
@@ -11,12 +12,14 @@ import React from 'react';
 import {
   Dimensions,
   Image,
+  Pressable,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 type FeedDetailScreenProps = StackScreenProps<
   FeedStackParamList,
@@ -30,56 +33,66 @@ export const FeedDetailScreen = ({
   const {id} = route.params;
   const {data: post, isPending, isError} = useGetPost(id);
   const detailOption = useModal();
+  const insets = useSafeAreaInsets();
 
   if (isPending || isError) {
     return <></>;
   }
 
   return (
-    <ScrollView style={styles.container}>
-      <SafeAreaView style={styles.headerContainer}>
-        <View style={styles.header}>
-          <Octicons
-            name="arrow-left"
-            size={30}
-            color={colors.WHITE}
-            onPress={() => navigation.goBack()}
-          />
-          <Ionicons
-            name="ellipsis-vertical"
-            size={30}
-            color={colors.WHITE}
-            onPress={detailOption.show}
-          />
-        </View>
-      </SafeAreaView>
-      <View style={styles.imageContainer}>
-        {post.images.length > 0 && (
-          <Image
-            style={styles.image}
-            source={{
-              uri: post?.images[0].uri,
-            }}
-            resizeMode="cover"
-          />
-        )}
-
-        {post.images.length === 0 && (
-          <View>
-            <Text>No Image</Text>
+    <>
+      <ScrollView
+        scrollIndicatorInsets={{right: 1}}
+        style={
+          insets.bottom
+            ? [styles.container, {marginBottom: insets.bottom + 50}]
+            : [styles.container, styles.scrollNoInsets]
+        }>
+        <SafeAreaView style={styles.headerContainer}>
+          <View style={styles.header}>
+            <Octicons
+              name="arrow-left"
+              size={30}
+              color={colors.WHITE}
+              onPress={() => navigation.goBack()}
+            />
+            <Ionicons
+              name="ellipsis-vertical"
+              size={30}
+              color={colors.WHITE}
+              onPress={detailOption.show}
+            />
           </View>
-        )}
-      </View>
-      <View style={styles.contentsContainer}>
-        <View style={styles.addressContainer}>
-          <Octicons name="location" size={10} color={colors.GRAY_500} />
-          <Text
-            style={styles.addressText}
-            ellipsizeMode="tail"
-            numberOfLines={1}>
-            {post.address}
-          </Text>
-          <Text style={styles.titleText}> {post.title}</Text>
+        </SafeAreaView>
+
+        <View style={styles.imageContainer}>
+          {post.images.length > 0 && (
+            <Image
+              style={styles.image}
+              source={{
+                uri: post.images[0].uri,
+              }}
+              resizeMode="cover"
+            />
+          )}
+          {post.images.length === 0 && (
+            <View style={styles.emptyImageContainer}>
+              <Text>No Image</Text>
+            </View>
+          )}
+        </View>
+
+        <View style={styles.contentsContainer}>
+          <View style={styles.addressContainer}>
+            <Octicons name="location" size={10} color={colors.GRAY_500} />
+            <Text
+              style={styles.addressText}
+              ellipsizeMode="tail"
+              numberOfLines={1}>
+              {post.address}
+            </Text>
+          </View>
+          <Text style={styles.titleText}>{post.title}</Text>
           <View style={styles.infoContainer}>
             <View style={styles.infoRow}>
               <View style={styles.infoColumn}>
@@ -105,15 +118,39 @@ export const FeedDetailScreen = ({
               </View>
             </View>
           </View>
+          <Text style={styles.descriptionText}>{post.description}</Text>
         </View>
-        <Text style={styles.descriptionText}>{post.description}</Text>
+
+        {post.images.length > 0 && (
+          <View style={styles.imageContentsContainer}>
+            <PreviewImageList imageUris={post.images} />
+          </View>
+        )}
+      </ScrollView>
+
+      <View style={[styles.bottomContainer, {paddingBottom: insets.bottom}]}>
+        <View
+          style={[
+            styles.tabContainer,
+            insets.bottom === 0 && styles.tabContainerNoInsets,
+          ]}>
+          <Pressable
+            style={({pressed}) => [
+              pressed && styles.bookmarkPressedContainer,
+              styles.bookmarkContainer,
+            ]}
+            onPress={() => {}}>
+            <Octicons name="star-fill" size={30} color={colors.GRAY_100} />
+          </Pressable>
+          <CustomButton
+            label="위치보기"
+            size="medium"
+            variant="filled"
+            onPress={() => {}}
+          />
+        </View>
       </View>
-      {post.images.length > 0 && (
-        <View style={styles.imageContainer}>
-          <PreviewImageList imageUris={post.images} />
-        </View>
-      )}
-    </ScrollView>
+    </>
   );
 };
 

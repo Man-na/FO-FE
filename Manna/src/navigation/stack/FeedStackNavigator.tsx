@@ -1,4 +1,5 @@
 import {colors, feedNavigations} from '@/constants';
+import {FeedDetailScreen} from '@/screens/feed/FeedDetailScreen';
 import FeedHomeScreen from '@/screens/feed/FeedHomeScreen';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
@@ -36,9 +37,9 @@ function FeedStackNavigator() {
           headerTitle: '피드',
         })}
       />
-      {/* <Stack.Screen
-        name={feedNavigations.FEED_HOME}
-        component={FeedHomeScreen}
+      <Stack.Screen
+        name={feedNavigations.FEED_DETAIL}
+        component={FeedDetailScreen}
         options={{
           headerShown: false,
           headerTitle: ' ',
@@ -46,7 +47,7 @@ function FeedStackNavigator() {
             backgroundColor: colors.GRAY_100,
           },
         }}
-      /> */}
+      />
     </Stack.Navigator>
   );
 }
