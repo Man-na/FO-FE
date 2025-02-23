@@ -1,12 +1,21 @@
 import CustomButton from '@/components/common/CustomButton';
 import {PreviewImageList} from '@/components/common/PreviewImageList';
-import {colorHex, colors, feedNavigations} from '@/constants';
+import {
+  colorHex,
+  colors,
+  feedNavigations,
+  mainNavigations,
+  mapNavigations,
+} from '@/constants';
 import {useModal} from '@/hooks/useModal';
 import {FeedStackParamList} from '@/navigation/stack/FeedStackNavigator';
+import {MainTabParamList} from '@/navigation/tab/MainTabNavigator';
 import {useGetPost} from '@/services/post';
+import {useLocationStore} from '@/store/useLocationStore';
 import {getDateLocaleFormat} from '@/utils';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import Octicons from '@react-native-vector-icons/octicons';
+import {CompositeScreenProps} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import React from 'react';
 import {
@@ -21,9 +30,9 @@ import {
 } from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-type FeedDetailScreenProps = StackScreenProps<
-  FeedStackParamList,
-  typeof feedNavigations.FEED_DETAIL
+type FeedDetailScreenProps = CompositeScreenProps<
+  StackScreenProps<FeedStackParamList, typeof feedNavigations.FEED_DETAIL>,
+  StackScreenProps<MainTabParamList>
 >;
 
 export const FeedDetailScreen = ({
@@ -34,10 +43,19 @@ export const FeedDetailScreen = ({
   const {data: post, isPending, isError} = useGetPost(id);
   const detailOption = useModal();
   const insets = useSafeAreaInsets();
+  const {setMoveLocation} = useLocationStore();
 
   if (isPending || isError) {
     return <></>;
   }
+
+  const handlePressLocation = () => {
+    const {latitude, longitude} = post;
+    setMoveLocation({latitude, longitude});
+    navigation.navigate(mainNavigations.HOME, {
+      screen: mapNavigations.MAP_HOME,
+    });
+  };
 
   return (
     <>
@@ -146,7 +164,7 @@ export const FeedDetailScreen = ({
             label="위치보기"
             size="medium"
             variant="filled"
-            onPress={() => {}}
+            onPress={handlePressLocation}
           />
         </View>
       </View>

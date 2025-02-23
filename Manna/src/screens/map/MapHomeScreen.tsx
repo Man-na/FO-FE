@@ -1,7 +1,8 @@
 import {CustomMarker} from '@/components/common/CustomMarker';
 import {MarkerModal} from '@/components/map/MarkerModal';
-import {alerts, colors, mapNavigations} from '@/constants';
+import {alerts, colors, mapNavigations, numbers} from '@/constants';
 import {useModal} from '@/hooks/useModal';
+import {useMoveMapView} from '@/hooks/useMoveMapView';
 import {usePermission} from '@/hooks/usePermission';
 import {useUserLocation} from '@/hooks/useUserLocation';
 import {MapStackParamList} from '@/navigation/stack/MapStackNavigator';
@@ -11,7 +12,7 @@ import MaterialIcons from '@react-native-vector-icons/material-icons';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
 import {CompositeNavigationProp, useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import {Alert, Pressable, StyleSheet, View} from 'react-native';
 import MapView, {
   Callout,
@@ -26,22 +27,15 @@ type Navigation = CompositeNavigationProp<
 >;
 
 function MapHomeScreen(): React.JSX.Element {
-  const mapRef = useRef<MapView | null>(null);
   const navigation = useNavigation<Navigation>();
   const {userLocation, isUserLocationError} = useUserLocation();
   const [selectLocation, setSelectLocation] = useState<LatLng | null>();
   const [markerId, setMarkerId] = useState<number | null>(null);
   const markerModal = useModal();
+  const {mapRef, moveMapView, handleChangeDelta} = useMoveMapView();
   const {data: markers = []} = useGetMarkers();
-  usePermission('LOCATION');
 
-  const moveMapView = (coordinate: LatLng) => {
-    mapRef.current?.animateToRegion({
-      ...coordinate,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421,
-    });
-  };
+  usePermission('LOCATION');
 
   const handlePressAddPost = () => {
     if (!selectLocation) {
@@ -93,17 +87,16 @@ function MapHomeScreen(): React.JSX.Element {
         initialRegion={{
           latitude: userLocation.latitude,
           longitude: userLocation.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
+          ...numbers.INITIAL_DELTA,
         }}
         showsUserLocation
         followsUserLocation
         showsMyLocationButton={false}
         onLongPress={handleLongPressMapView}
+        onRegionChangeComplete={handleChangeDelta}
         region={{
           ...userLocation,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
+          ...numbers.INITIAL_DELTA,
         }}>
         {markers.map(({id, color, score, ...coordinate}) => (
           <CustomMarker
