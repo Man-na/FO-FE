@@ -83,7 +83,8 @@ const useLogout = (mutationOptions?: UseMutationCustomOptions) => {
     onSuccess: () => {
       removeHeader('Authorization');
       removeEncryptStorage(storageKeys.REFRESH_TOKEN);
-      queryClient.resetQueries({queryKey: [queryKeys.AUTH]});
+      queryClient.removeQueries({queryKey: [queryKeys.AUTH]});
+      queryClient.invalidateQueries({queryKey: [queryKeys.AUTH]});
     },
     ...mutationOptions,
   });

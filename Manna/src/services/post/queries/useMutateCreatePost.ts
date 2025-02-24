@@ -4,7 +4,9 @@ import {queryClient} from '@/utils';
 import {useMutation} from '@tanstack/react-query';
 import {createPost} from '../api';
 
-function useMutateCreatePost(mutationOptions?: UseMutationCustomOptions) {
+export const useMutateCreatePost = (
+  mutationOptions?: UseMutationCustomOptions,
+) => {
   return useMutation({
     mutationFn: createPost,
     onSuccess: newPost => {
@@ -31,6 +33,4 @@ function useMutateCreatePost(mutationOptions?: UseMutationCustomOptions) {
     },
     ...mutationOptions,
   });
-}
-
-export default useMutateCreatePost;
+};

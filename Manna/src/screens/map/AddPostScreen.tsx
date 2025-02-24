@@ -13,7 +13,7 @@ import {useImagePicker} from '@/hooks/useImagePicker';
 import {useModal} from '@/hooks/useModal';
 import {usePermission} from '@/hooks/usePermission';
 import {MapStackParamList} from '@/navigation/stack/MapStackNavigator';
-import {useMutateCreatePost} from '@/services/post/queries/useMutateCreatePost';
+import {useMutateCreatePost} from '@/services/post';
 import {MarkerColor} from '@/types';
 import {getDateWithSeparator, validateAddPost} from '@/utils';
 import Octicons from '@react-native-vector-icons/octicons';

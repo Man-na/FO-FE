@@ -39,7 +39,7 @@ function CalendarHomeScreen({}: CalendarHomeScreenProps): React.JSX.Element {
     setSelectedDate(0);
     setMonthYear(prev => getNewMonthYear(prev, increment));
   };
-  console.log(posts);
+
   return (
     <SafeAreaView style={styles.container}>
       <Calendar

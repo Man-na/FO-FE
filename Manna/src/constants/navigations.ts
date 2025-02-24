@@ -2,7 +2,7 @@ export const mainNavigations = {
   HOME: 'Home',
   FEED: 'Feed',
   CALENDAR: 'Calendar',
-  PROFILE: 'Profile',
+  SETTING: 'Setting',
 } as const;
 
 export const authNavigations = {
@@ -21,4 +21,11 @@ export const feedNavigations = {
   FEED_DETAIL: 'FeedDetail',
   EDIT_POST: 'EditPost',
   IMAGE_ZOOM: 'ImageZoom',
+} as const;
+
+export const settingNavigations = {
+  SETTING_HOME: 'SettingHome',
+  EDIT_PROFILE: 'EditProfile',
+  DELETE_ACCOUNT: 'DeleteAccount',
+  EDIT_CATEGORY: 'EditCategory',
 } as const;

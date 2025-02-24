@@ -1,20 +1,24 @@
 import {colors, mainNavigations} from '@/constants';
+import FeedStackNavigator, {
+  FeedStackParamList,
+} from '@/navigation/stack/FeedStackNavigator';
+import MapStackNavigator, {
+  MapStackParamList,
+} from '@/navigation/stack/MapStackNavigator';
+import SettingStackNavigator, {
+  SettingStackParamList,
+} from '@/navigation/stack/SettingStackNavigator';
 import CalendarHomeScreen from '@/screens/calendar/CalendarHomeScreen';
-import ProfileHomeScreen from '@/screens/profile/ProfileHomeScreen';
 import MaterialIcons from '@react-native-vector-icons/material-icons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigatorScreenParams, RouteProp} from '@react-navigation/native';
 import React from 'react';
-import FeedStackNavigator, {
-  FeedStackParamList,
-} from '../stack/FeedStackNavigator';
-import MapStackNavigator, {MapStackParamList} from '../stack/MapStackNavigator';
 
 export type MainTabParamList = {
   [mainNavigations.HOME]: NavigatorScreenParams<MapStackParamList>;
   [mainNavigations.FEED]: NavigatorScreenParams<FeedStackParamList>;
   [mainNavigations.CALENDAR]: undefined;
-  [mainNavigations.PROFILE]: undefined;
+  [mainNavigations.SETTING]: NavigatorScreenParams<SettingStackParamList>;
 };
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
@@ -43,6 +47,11 @@ const TabBarIcons = ({
     }
     case mainNavigations.CALENDAR: {
       iconName = 'event-note';
+      size = 16;
+      break;
+    }
+    case mainNavigations.SETTING: {
+      iconName = 'settings';
       size = 16;
       break;
     }
@@ -93,9 +102,9 @@ function MainTabNavigator(): React.JSX.Element {
         options={{title: '캘린더', headerShown: true}}
       />
       <Tab.Screen
-        name={mainNavigations.PROFILE}
-        component={ProfileHomeScreen}
-        options={{title: '프로필'}}
+        name={mainNavigations.SETTING}
+        component={SettingStackNavigator}
+        options={{title: '설정'}}
       />
     </Tab.Navigator>
   );

@@ -53,7 +53,7 @@ const getAccessToken = async (): Promise<ResponseToken> => {
 };
 
 const logout = async () => {
-  await axiosInstance.post('/auth/logout');
+  await axiosInstance.post('/user/logout');
 };
 
 export {getAccessToken, getProfile, logout, postLogin, postSignup};
