@@ -7,7 +7,6 @@ import {getDateWithSeparator} from '@/utils';
 import MaterialIcons from '@react-native-vector-icons/material-icons';
 import Octicons from '@react-native-vector-icons/octicons';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
-import {DrawerNavigationProp} from '@react-navigation/drawer';
 import {CompositeNavigationProp, useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import React from 'react';

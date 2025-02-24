@@ -1,5 +1,6 @@
 import CustomButton from '@/components/common/CustomButton';
 import {PreviewImageList} from '@/components/common/PreviewImageList';
+import {FeedDetailOption} from '@/components/feed/FeedDetailOption';
 import {
   colorHex,
   colors,
@@ -168,6 +169,11 @@ export const FeedDetailScreen = ({
           />
         </View>
       </View>
+
+      <FeedDetailOption
+        isVisible={detailOption.isVisible}
+        hideOption={detailOption.hide}
+      />
     </>
   );
 };

@@ -1,6 +1,6 @@
 import {colors} from '@/constants';
-import {MainDrawerParamList} from '@/navigation/drawer/MainDrawerNavigator';
 import {FeedStackParamList} from '@/navigation/stack/FeedStackNavigator';
+import {MainTabParamList} from '@/navigation/tab/MainTabNavigator';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
 import {CompositeNavigationProp} from '@react-navigation/native';
@@ -10,7 +10,7 @@ import {HeaderButton} from '../common/HeaderButton';
 
 type FeedHomeHeaderLeftProps = CompositeNavigationProp<
   StackNavigationProp<FeedStackParamList>,
-  DrawerNavigationProp<MainDrawerParamList>
+  DrawerNavigationProp<MainTabParamList>
 >;
 
 export const FeedHomeHeaderLeft = (navigation: FeedHomeHeaderLeftProps) => {
