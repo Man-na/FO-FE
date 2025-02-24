@@ -90,7 +90,7 @@ function MainTabNavigator(): React.JSX.Element {
       <Tab.Screen
         name={mainNavigations.CALENDAR}
         component={CalendarHomeScreen}
-        options={{title: '캘린더'}}
+        options={{title: '캘린더', headerShown: true}}
       />
       <Tab.Screen
         name={mainNavigations.PROFILE}
