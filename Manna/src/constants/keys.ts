@@ -8,6 +8,8 @@ export const queryKeys = {
   GET_POST: 'getPost',
   GET_POSTS: 'getPosts',
   GET_CALENDAR_POSTS: 'getCalendarPosts',
+  AVATAR: 'avatar',
+  GET_AVATAR_LIST: 'getAvatarList',
 };
 
 export const storageKeys = {

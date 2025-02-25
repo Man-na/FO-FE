@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {ProfileCustomButton} from '@/components/common/ProfileCustomButton';
 import {colors, mainNavigations, profileNavigations} from '@/constants';
 import {ProfileStackParamList} from '@/navigation/stack/ProfileStackNavigator';
