@@ -14,6 +14,7 @@ import {
   logout,
   postLogin,
   postSignup,
+  ResponseProfile,
 } from '../api';
 import {numbers, queryKeys, storageKeys} from '@/constants';
 
@@ -69,7 +70,9 @@ const useGetRefreshToken = () => {
   return {isSuccess, isError};
 };
 
-const useGetProfile = (queryOptions?: UseQueryCustomOptions) => {
+const useGetProfile = (
+  queryOptions?: UseQueryCustomOptions<ResponseProfile>,
+) => {
   return useQuery({
     queryFn: getProfile,
     queryKey: [queryKeys.AUTH, queryKeys.GET_PROFILE],

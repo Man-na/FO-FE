@@ -33,4 +33,5 @@ export const settingNavigations = {
 export const profileNavigations = {
   PROFILE_HOME: 'ProfileHome',
   EDIT_PROFILE: 'EditProfile',
+  EDIT_AVATAR: 'EditAvatar',
 } as const;

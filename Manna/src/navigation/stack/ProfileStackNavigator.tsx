@@ -1,4 +1,5 @@
 import {colors, profileNavigations} from '@/constants';
+import EditAvatarScreen from '@/screens/profile/EditAvatarScreen';
 import EditProfileScreen from '@/screens/profile/EditProfileScreen';
 import ProfileHomeScreen from '@/screens/profile/ProfileHomeScreen';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -7,6 +8,7 @@ import React from 'react';
 export type ProfileStackParamList = {
   [profileNavigations.PROFILE_HOME]: undefined;
   [profileNavigations.EDIT_PROFILE]: undefined;
+  [profileNavigations.EDIT_AVATAR]: undefined;
 };
 
 const Stack = createStackNavigator<ProfileStackParamList>();
@@ -41,6 +43,14 @@ function ProfileStackNavigator() {
         options={{
           headerShown: false,
           headerTitle: '프로필 편집',
+        }}
+      />
+      <Stack.Screen
+        name={profileNavigations.EDIT_AVATAR}
+        component={EditAvatarScreen}
+        options={{
+          headerShown: false,
+          headerTitle: '아바타 편집',
         }}
       />
     </Stack.Navigator>

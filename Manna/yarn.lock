@@ -3103,6 +3103,7 @@ __metadata:
     jest: "npm:^29.6.3"
     prettier: "npm:2.8.8"
     react: "npm:18.2.0"
+    react-hook-form: "npm:^7.54.2"
     react-native: "npm:0.73.11"
     react-native-config: "npm:^1.5.1"
     react-native-date-picker: "npm:^4.3.5"
@@ -8304,6 +8305,15 @@ __metadata:
   peerDependencies:
     react: ">=17.0.0"
   checksum: 10c0/8f51257c261bfefff86f618e958683536248f708019632d309ee5ebdd52f25d3c130660d06fb6f0f4fdef79f00f8ec7177233a872c2321f7d46b7e77ccc522a1
+  languageName: node
+  linkType: hard
+
+"react-hook-form@npm:^7.54.2":
+  version: 7.54.2
+  resolution: "react-hook-form@npm:7.54.2"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18 || ^19
+  checksum: 10c0/6eebead2900e3d369a989e7a20429f390dc75b3897142aa3107f1f6dabb9ae64fed201ea98cdcd8676e40466c97748aeb0c0d83264f5bd3a84dbc0b8e4863415
   languageName: node
   linkType: hard
 

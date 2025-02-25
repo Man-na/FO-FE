@@ -18,19 +18,24 @@ interface ProfileHomeScreenProps {}
 
 function ProfileHomeScreen({}: ProfileHomeScreenProps): React.JSX.Element {
   const {getProfileQuery} = useAuth();
-  const {email, nickname, imageUri} = getProfileQuery.data;
   const navigation = useNavigation<Navigation>();
+
+  if (getProfileQuery.isPending || getProfileQuery.isError) {
+    return <></>;
+  }
+  const {nickname, imageUri} = getProfileQuery.data;
 
   return (
     <>
       <View style={styles.header}>
-        {!imageUri && (
+        {imageUri ? (
+          <Image source={{uri: imageUri}} style={styles.avatar} />
+        ) : (
           <Image
             source={require('@/assets/default-avatar.png')}
             style={styles.avatar}
           />
         )}
-        {!imageUri && <Image source={{uri: imageUri}} style={styles.avatar} />}
         <ProfileCustomButton
           size="medium"
           variant="outlined"
