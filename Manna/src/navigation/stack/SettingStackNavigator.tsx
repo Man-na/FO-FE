@@ -1,12 +1,10 @@
 import {colors, settingNavigations} from '@/constants';
-import EditProfileScreen from '@/screens/setting/EditProfileScreen';
 import SettingHomeScreen from '@/screens/setting/SettingHomeScreen';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 
 export type SettingStackParamList = {
   [settingNavigations.SETTING_HOME]: undefined;
-  [settingNavigations.EDIT_PROFILE]: undefined;
   [settingNavigations.DELETE_ACCOUNT]: undefined;
   [settingNavigations.EDIT_CATEGORY]: undefined;
 };
@@ -34,16 +32,6 @@ function SettingStackNavigator() {
         component={SettingHomeScreen}
         options={{
           headerTitle: '설정',
-        }}
-      />
-      <Stack.Screen
-        name={settingNavigations.EDIT_PROFILE}
-        component={EditProfileScreen}
-        options={{
-          headerTitle: '프로필 수정',
-          cardStyle: {
-            backgroundColor: colors.WHITE,
-          },
         }}
       />
     </Stack.Navigator>

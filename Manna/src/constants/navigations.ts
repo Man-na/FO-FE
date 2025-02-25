@@ -2,6 +2,7 @@ export const mainNavigations = {
   HOME: 'Home',
   FEED: 'Feed',
   CALENDAR: 'Calendar',
+  PROFILE: 'Profile',
   SETTING: 'Setting',
 } as const;
 
@@ -25,7 +26,11 @@ export const feedNavigations = {
 
 export const settingNavigations = {
   SETTING_HOME: 'SettingHome',
-  EDIT_PROFILE: 'EditProfile',
   DELETE_ACCOUNT: 'DeleteAccount',
   EDIT_CATEGORY: 'EditCategory',
+} as const;
+
+export const profileNavigations = {
+  PROFILE_HOME: 'ProfileHome',
+  EDIT_PROFILE: 'EditProfile',
 } as const;
