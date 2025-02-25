@@ -174,8 +174,9 @@ const styles = StyleSheet.create({
     position: 'relative',
     backgroundColor: colors.PINK_200,
     width: '100%',
-    height: 115,
+    height: 147,
     marginBottom: 115,
+    paddingVertical: 16,
   },
   avatarContainer: {
     width: 229,

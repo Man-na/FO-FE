@@ -53,7 +53,7 @@ function EditProfileScreen({}: EditProfileScreenProps): React.JSX.Element {
               size="medium"
               variant="outlined"
               label="아바타 변경"
-              style={{position: 'absolute', right: 0, bottom: 0}}
+              style={{marginTop: 16}}
               onPress={() =>
                 navigation.navigate(profileNavigations.EDIT_AVATAR)
               }
@@ -73,7 +73,6 @@ const styles = StyleSheet.create({
   avatarContainer: {
     alignItems: 'center',
     marginTop: 16,
-    position: 'relative',
   },
   avatar: {
     width: 154,
