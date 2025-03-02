@@ -46,9 +46,9 @@ export const AddFeedScreen = ({}: AddFeedScreenProps): React.JSX.Element => {
 
   const handleSubmit = useCallback(
     (formValues: AddFeedFormValues) => {
-      createFeed.mutate(formValues);
+      createFeed.mutate(formValues, {onSuccess: () => navigation.goBack()});
     },
-    [createFeed],
+    [createFeed, navigation],
   );
 
   useEffect(() => {

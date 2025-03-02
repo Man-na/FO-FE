@@ -1,23 +1,20 @@
 import {colors} from '@/constants';
-import {FeedStackParamList} from '@/navigation/stack/FeedStackNavigator';
 import {useAuth} from '@/services/auth';
 import {ResponseFeed} from '@/services/feed';
 import Ionicons from '@react-native-vector-icons/ionicons';
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
 import React from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
-import ActionSheet from 'react-native-action-sheet'; // ActionSheet 라이브러리 추가
+import ActionSheet from 'react-native-action-sheet';
 import {Profile} from './Profile';
 interface FeedListProps {
   feed: ResponseFeed;
 }
 
 export const FeedItem = ({feed}: FeedListProps): React.JSX.Element => {
-  const navigation = useNavigation<StackNavigationProp<FeedStackParamList>>();
   const {getProfileQuery} = useAuth();
-  const isLiked = true;
-  console.log(' ', getProfileQuery.data.id);
+  const likeUsers = feed.likes?.map(like => Number(like.userId));
+  const isLiked = likeUsers.includes(getProfileQuery.data?.id ?? -1);
+
   const handlePressOption = () => {
     const options = ['삭제', '수정', '취소'];
     const destructiveButtonIndex = 0;
@@ -80,7 +77,7 @@ export const FeedItem = ({feed}: FeedListProps): React.JSX.Element => {
             color={isLiked ? colors.PINK_700 : colors.BLACK}
           />
           <Text style={isLiked ? styles.activeMenuText : styles.menuText}>
-            1
+            {feed.likes.length || '좋아요'}
           </Text>
         </Pressable>
         <Pressable style={styles.menu}>
@@ -89,11 +86,13 @@ export const FeedItem = ({feed}: FeedListProps): React.JSX.Element => {
             size={16}
             color={colors.BLACK}
           />
-          <Text style={styles.menuText}>2</Text>
+          <Text style={styles.menuText}>
+            {(feed.comments && feed.comments.length) || '댓글'}
+          </Text>
         </Pressable>
         <Pressable style={styles.menu}>
           <Ionicons name="eye-outline" size={16} color={colors.BLACK} />
-          <Text style={styles.menuText}>3</Text>
+          <Text style={styles.menuText}>{feed.viewCount}</Text>
         </Pressable>
       </View>
     </View>
