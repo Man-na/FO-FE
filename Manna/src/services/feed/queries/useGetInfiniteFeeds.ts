@@ -5,26 +5,26 @@ import {
   useInfiniteQuery,
   UseInfiniteQueryOptions,
 } from '@tanstack/react-query';
-import {getPosts, ResponsePost} from '../api';
+import {getFeedsWithPagination, ResponseFeed} from '../api';
 import {ResponseError} from '@/types';
 
-export const useGetInfinitePosts = (
+export const useGetInfiniteFeeds = (
   queryOptions?: UseInfiniteQueryOptions<
-    ResponsePost[],
+    ResponseFeed[],
     ResponseError,
-    InfiniteData<ResponsePost[], number>,
-    ResponsePost[],
+    InfiniteData<ResponseFeed[], number>,
+    ResponseFeed[],
     QueryKey,
     number
   >,
 ) => {
   return useInfiniteQuery({
-    queryFn: ({pageParam}) => getPosts(pageParam),
-    queryKey: [queryKeys.POST, queryKeys.GET_POSTS],
+    queryFn: ({pageParam}) => getFeedsWithPagination(pageParam),
+    queryKey: [queryKeys.FEED, queryKeys.GET_FEEDS],
     initialPageParam: 1,
     getNextPageParam: (lastPage, allpages) => {
-      const lastPost = lastPage[lastPage.length - 1];
-      return lastPost ? allpages.length + 1 : undefined;
+      const lastFeed = lastPage[lastPage.length - 1];
+      return lastFeed ? allpages.length + 1 : undefined;
     },
     ...queryOptions,
   });

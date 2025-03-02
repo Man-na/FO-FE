@@ -3,13 +3,14 @@ export const queryKeys = {
   GET_ACCESS_TOKEN: 'getAccessToken',
   GET_PROFILE: 'getProfile',
   MARKER: 'marker',
-  GET_MARKERS: 'getMarker',
-  POST: 'post',
-  GET_POST: 'getPost',
-  GET_POSTS: 'getPosts',
-  GET_CALENDAR_POSTS: 'getCalendarPosts',
+  GET_MARKERS: 'getMarkers',
+  GET_MARKER: 'getMarker',
+  GET_CALENDAR_MARKERS: 'getCalendarMarkers',
   AVATAR: 'avatar',
   GET_AVATAR_LIST: 'getAvatarList',
+  FEED: 'feed',
+  GET_FEEDS: 'getFeeds',
+  GET_FEED: 'getFeed',
 };
 
 export const storageKeys = {

@@ -1,27 +1,75 @@
 import {colors} from '@/constants';
 import {FeedStackParamList} from '@/navigation/stack/FeedStackNavigator';
-import {ResponsePost} from '@/services/post';
+import {useAuth} from '@/services/auth';
+import {ResponseFeed} from '@/services/feed';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import React from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
-
+import ActionSheet from 'react-native-action-sheet'; // ActionSheet 라이브러리 추가
+import {Profile} from './Profile';
 interface FeedListProps {
-  post: ResponsePost;
+  feed: ResponseFeed;
 }
 
-export const FeedItem = ({post}: FeedListProps): React.JSX.Element => {
+export const FeedItem = ({feed}: FeedListProps): React.JSX.Element => {
   const navigation = useNavigation<StackNavigationProp<FeedStackParamList>>();
-
+  const {getProfileQuery} = useAuth();
   const isLiked = true;
+  console.log(' ', getProfileQuery.data.id);
+  const handlePressOption = () => {
+    const options = ['삭제', '수정', '취소'];
+    const destructiveButtonIndex = 0;
+    const cancelButtonIndex = 2;
+
+    ActionSheet.showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex,
+        destructiveButtonIndex,
+      },
+      buttonIndex => {
+        switch (buttonIndex) {
+          case destructiveButtonIndex:
+            // 삭제 로직 (예: deleteFeed.mutate 호출)
+            console.log('게시물 삭제');
+            break;
+          case 1:
+            // 수정 로직 (예: 페이지 이동)
+            break;
+          case cancelButtonIndex:
+            // 취소 시 아무 동작 없음
+            break;
+          default:
+            break;
+        }
+      },
+    );
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
-        <Text style={styles.title}>{post.title}</Text>
+        <Profile
+          imageUri={feed.author?.imageUri}
+          nickname={feed.author?.nickname}
+          createdAt={feed?.createdAt}
+          onPress={() => {}}
+          option={
+            getProfileQuery.data?.id === feed.author?.id && (
+              <Ionicons
+                name="ellipsis-vertical"
+                size={24}
+                color={colors.BLACK}
+                onPress={handlePressOption}
+              />
+            )
+          }
+        />
+        <Text style={styles.title}>{feed.title}</Text>
         <Text style={styles.description} numberOfLines={3}>
-          {post.description}
+          {feed.description}
         </Text>
       </View>
       <View style={styles.menuContainer}>

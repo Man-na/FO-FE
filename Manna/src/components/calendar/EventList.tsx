@@ -1,7 +1,7 @@
 import {colors, feedNavigations, mainNavigations} from '@/constants';
 import {FeedStackParamList} from '@/navigation/stack/FeedStackNavigator';
 import {MainTabParamList} from '@/navigation/tab/MainTabNavigator';
-import {CalendarPost} from '@/services/calendar';
+import {CalendarMarker} from '@/services/calendar';
 import type {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import {CompositeNavigationProp, useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -10,7 +10,7 @@ import {Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 interface EventListProps {
-  posts: CalendarPost[];
+  markers: CalendarMarker[];
 }
 
 type Navigation = CompositeNavigationProp<
@@ -18,7 +18,7 @@ type Navigation = CompositeNavigationProp<
   StackNavigationProp<FeedStackParamList>
 >;
 
-export const EventList = ({posts}: EventListProps) => {
+export const EventList = ({markers}: EventListProps) => {
   const navigation = useNavigation<Navigation>();
   const insets = useSafeAreaInsets();
 
@@ -32,20 +32,20 @@ export const EventList = ({posts}: EventListProps) => {
   return (
     <ScrollView style={styles.container} scrollIndicatorInsets={{right: 1}}>
       <View style={[styles.innerContainer, {marginBottom: insets.bottom + 30}]}>
-        {posts?.map(post => (
+        {markers?.map(marker => (
           <Pressable
-            key={post.id}
+            key={marker.id}
             style={styles.itemContainer}
-            onPress={() => handlePressItem(post.id)}>
+            onPress={() => handlePressItem(marker.id)}>
             <View style={styles.itemHeader} />
             <View style={styles.infoContainer}>
               <Text
                 style={styles.addressText}
                 numberOfLines={1}
                 ellipsizeMode="tail">
-                {post.address}
+                {marker.address}
               </Text>
-              <Text style={styles.titleText}>{post.title}</Text>
+              <Text style={styles.titleText}>{marker.title}</Text>
             </View>
           </Pressable>
         ))}

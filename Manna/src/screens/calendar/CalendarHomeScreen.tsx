@@ -1,7 +1,7 @@
 import {Calendar} from '@/components/calendar/Calendar';
 import {EventList} from '@/components/calendar/EventList';
 import {colors} from '@/constants';
-import useGetCalendarPosts from '@/services/calendar/queries/useGetCalendarPosts';
+import {useGetCalendarMarkers} from '@/services/calendar/queries/useGetCalendarMarkers';
 import {getMonthYearDetails, getNewMonthYear} from '@/utils';
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
@@ -13,10 +13,10 @@ function CalendarHomeScreen({}: CalendarHomeScreenProps): React.JSX.Element {
   const [monthYear, setMonthYear] = useState(currentMonthYear);
   const [selectedDate, setSelectedDate] = useState(0);
   const {
-    data: posts,
+    data: markers,
     isPending,
     isError,
-  } = useGetCalendarPosts(monthYear.year, monthYear.month);
+  } = useGetCalendarMarkers(monthYear.year, monthYear.month);
 
   const moveToToday = () => {
     setSelectedDate(new Date().getDate());
@@ -44,13 +44,13 @@ function CalendarHomeScreen({}: CalendarHomeScreenProps): React.JSX.Element {
     <SafeAreaView style={styles.container}>
       <Calendar
         monthYear={monthYear}
-        schedules={posts}
+        schedules={markers}
         selectedDate={selectedDate}
         onPressDate={handlePressDate}
         onChangeMonth={handleUpdateMonth}
         moveToToday={moveToToday}
       />
-      <EventList posts={posts[selectedDate]} />
+      <EventList markers={markers[selectedDate]} />
     </SafeAreaView>
   );
 }

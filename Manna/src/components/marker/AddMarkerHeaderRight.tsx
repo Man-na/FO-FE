@@ -1,12 +1,12 @@
 import React from 'react';
 import {HeaderButton} from '../common/HeaderButton';
 
-interface AddPostHeaderRightProps {
+interface AddMarkerHeaderRightProps {
   onSubmit: () => void;
 }
 
-export const AddPostHeaderRight = ({
+export const AddMarkerHeaderRight = ({
   onSubmit,
-}: AddPostHeaderRightProps): React.JSX.Element => {
+}: AddMarkerHeaderRightProps): React.JSX.Element => {
   return <HeaderButton labelText="등록" onPress={onSubmit} />;
 };

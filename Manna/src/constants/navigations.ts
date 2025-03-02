@@ -14,13 +14,13 @@ export const authNavigations = {
 
 export const mapNavigations = {
   MAP_HOME: 'MapHome',
-  ADD_POST: 'AddPost',
+  ADD_MARKER: 'AddMarker',
 } as const;
 
 export const feedNavigations = {
   FEED_HOME: 'FeedHome',
   FEED_DETAIL: 'FeedDetail',
-  EDIT_POST: 'EditPost',
+  EDIT_FEED: 'EditFeed',
   IMAGE_ZOOM: 'ImageZoom',
 } as const;
 

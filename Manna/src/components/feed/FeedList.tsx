@@ -1,5 +1,5 @@
 import {colors} from '@/constants';
-import {useGetInfinitePosts} from '@/services/post';
+import {useGetInfiniteFeeds} from '@/services/feed';
 import {useScrollToTop} from '@react-navigation/native';
 import React, {useRef, useState} from 'react';
 import {FlatList, StyleSheet} from 'react-native';
@@ -13,12 +13,12 @@ export const FeedList = ({}: FeedListProps): React.JSX.Element => {
   useScrollToTop(ref);
 
   const {
-    data: posts,
+    data: feeds,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
     refetch,
-  } = useGetInfinitePosts();
+  } = useGetInfiniteFeeds();
 
   const handleEndReached = () => {
     if (hasNextPage && !isFetchingNextPage) {
@@ -34,8 +34,8 @@ export const FeedList = ({}: FeedListProps): React.JSX.Element => {
   return (
     <FlatList
       ref={ref}
-      data={posts?.pages.flat()}
-      renderItem={({item}) => <FeedItem post={item} />}
+      data={feeds?.pages.flat()}
+      renderItem={({item}) => <FeedItem feed={item} />}
       keyExtractor={item => String(item.id)}
       contentContainerStyle={styles.contentContainer}
       onEndReached={handleEndReached}

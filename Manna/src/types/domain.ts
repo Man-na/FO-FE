@@ -8,26 +8,30 @@ interface ImageUri {
   id?: number;
   uri: string;
 }
+interface Marker {
+  id: number;
+  title: string;
+  description: string;
+  address: string;
+  latitude: number;
+  longitude: number;
+  date: Date | string;
+  color: MarkerColor;
+  score: number;
+}
+
 interface VoteOption {
   id?: number;
   displayPriority: number;
   content: string;
 }
 
-interface Marker {
-  id: number;
-  latitude: number;
-  longitude: number;
-  color: MarkerColor;
-  score: number;
-}
+type FeedVoteOption = VoteOption & {userVotes: {userId: number}[]};
 
-type PostVoteOption = VoteOption & {userVotes: {userId: number}[]};
-
-interface PostVote {
+interface FeedVote {
   id: number;
   title: string;
-  options: PostVoteOption[];
+  options: FeedVoteOption[];
 }
 interface Comment {
   id: number;
@@ -37,17 +41,15 @@ interface Comment {
   isDeleted: boolean;
 }
 
-interface PostComment extends Comment {
+interface feedComment extends Comment {
   replies: Comment[];
 }
 
-interface Post extends Marker {
+interface Feed {
   id: number;
   userId: number;
   title: string;
   description: string;
-  address: string;
-  date: Date | string;
   createdAt: string;
   author: User;
   imageUris: ImageUri[];
@@ -56,8 +58,8 @@ interface Post extends Marker {
   voteCount: number;
   commentCount: number;
   viewCount: number;
-  votes?: PostVote[];
-  comments?: PostComment[];
+  votes?: FeedVote[];
+  comments?: feedComment[];
 }
 
 interface User {
@@ -77,4 +79,4 @@ interface Profile extends User {
   background: string;
 }
 
-export type {MarkerColor, Category, ImageUri, Marker, Post, Profile};
+export type {MarkerColor, Category, ImageUri, Marker, Feed, Profile};

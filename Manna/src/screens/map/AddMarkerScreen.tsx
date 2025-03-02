@@ -1,11 +1,11 @@
 import CustomButton from '@/components/common/CustomButton';
 import InputField from '@/components/common/InputField';
 import {PreviewImageList} from '@/components/common/PreviewImageList';
-import {AddPostHeaderRight} from '@/components/post/AddPostHeaderRight';
-import {DatePickerOption} from '@/components/post/DatePickerOption';
-import {ImageInput} from '@/components/post/ImageInput';
-import {MarkerSelector} from '@/components/post/MarkerSelector';
-import {ScoreInput} from '@/components/post/ScoreInput';
+import {AddMarkerHeaderRight} from '@/components/marker/AddMarkerHeaderRight';
+import {DatePickerOption} from '@/components/marker/DatePickerOption';
+import {ImageInput} from '@/components/marker/ImageInput';
+import {MarkerSelector} from '@/components/marker/MarkerSelector';
+import {ScoreInput} from '@/components/marker/ScoreInput';
 import {colors, mapNavigations} from '@/constants';
 import useForm from '@/hooks/useForm';
 import {useGetAddress} from '@/hooks/useGetAddress';
@@ -13,9 +13,9 @@ import {useImagePicker} from '@/hooks/useImagePicker';
 import {useModal} from '@/hooks/useModal';
 import {usePermission} from '@/hooks/usePermission';
 import {MapStackParamList} from '@/navigation/stack/MapStackNavigator';
-import {useMutateCreatePost} from '@/services/post';
+import {useMutateCreateMarker} from '@/services/marker';
 import {MarkerColor} from '@/types';
-import {getDateWithSeparator, validateAddPost} from '@/utils';
+import {getDateWithSeparator, validateAddMarker} from '@/utils';
 import Octicons from '@react-native-vector-icons/octicons';
 import {StackScreenProps} from '@react-navigation/stack';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
@@ -27,31 +27,31 @@ import {
   View,
 } from 'react-native';
 
-interface AddPostFormValues {
+interface AddMarkerFormValues {
   title: string;
   description: string;
 }
 
-type AddPostScreenProps = StackScreenProps<
+type AddMarkerScreenProps = StackScreenProps<
   MapStackParamList,
-  typeof mapNavigations.ADD_POST
+  typeof mapNavigations.ADD_MARKER
 >;
 
-export const AddPostScreen = ({
+export const AddMarkerScreen = ({
   route,
   navigation,
-}: AddPostScreenProps): React.JSX.Element => {
+}: AddMarkerScreenProps): React.JSX.Element => {
   const {location} = route.params;
   const descriptionRef = useRef<TextInput | null>(null);
   const {values, errors, touched, getTextInputProps} =
-    useForm<AddPostFormValues>(
+    useForm<AddMarkerFormValues>(
       {
         title: '',
         description: '',
       },
-      validateAddPost,
+      validateAddMarker,
     );
-  const createPost = useMutateCreatePost();
+  const createMarker = useMutateCreateMarker();
   const address = useGetAddress(location);
   const {isVisible, show, hide} = useModal();
   const [markerColor, setMarkerColor] = useState<MarkerColor>('RED');
@@ -70,7 +70,7 @@ export const AddPostScreen = ({
       score,
       imageUris: imagePicker.imageUris,
     };
-    createPost.mutate(
+    createMarker.mutate(
       {address, ...location, ...body},
       {onSuccess: () => navigation.goBack()},
     );
@@ -80,7 +80,7 @@ export const AddPostScreen = ({
     values.description,
     markerColor,
     score,
-    createPost,
+    createMarker,
     address,
     location,
     navigation,
@@ -107,7 +107,7 @@ export const AddPostScreen = ({
   useEffect(() => {
     navigation.setOptions({
       // eslint-disable-next-line react/no-unstable-nested-components
-      headerRight: () => <AddPostHeaderRight onSubmit={handleSubmit} />,
+      headerRight: () => <AddMarkerHeaderRight onSubmit={handleSubmit} />,
     });
   }, [navigation, handleSubmit]);
 

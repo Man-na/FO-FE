@@ -1,19 +1,19 @@
 import {axiosInstance} from '@/utils';
 
-export type CalendarPost = {
+export type CalendarMarker = {
   id: number;
   title: string;
   address: string;
 };
 
-export type ResponseCalendarPost = Record<number, CalendarPost[]>;
+export type ResponseCalendarMarker = Record<number, CalendarMarker[]>;
 
-export const getCalendarPosts = async (
+export const getCalendarMarkers = async (
   year: number,
   month: number,
-): Promise<ResponseCalendarPost> => {
+): Promise<ResponseCalendarMarker> => {
   const {data} = await axiosInstance.get(
-    `/post/calendar?year=${year}&month=${month}`,
+    `/marker/calendar?year=${year}&month=${month}`,
   );
 
   return data.data;

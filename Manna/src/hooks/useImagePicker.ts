@@ -1,4 +1,4 @@
-import {useMutateImages} from '@/services/post';
+import {useMutateImages} from '@/services/marker';
 import type {ImageUri} from '@/types';
 import {getFormDataImages} from '@/utils';
 import {useState} from 'react';

@@ -11,7 +11,7 @@ import {
 import {useModal} from '@/hooks/useModal';
 import {FeedStackParamList} from '@/navigation/stack/FeedStackNavigator';
 import {MainTabParamList} from '@/navigation/tab/MainTabNavigator';
-import {useGetPost} from '@/services/post';
+import {useGetMarker} from '@/services/marker';
 import {useLocationStore} from '@/store/useLocationStore';
 import {getDateLocaleFormat} from '@/utils';
 import Ionicons from '@react-native-vector-icons/ionicons';
@@ -41,7 +41,7 @@ export const FeedDetailScreen = ({
   navigation,
 }: FeedDetailScreenProps): React.JSX.Element => {
   const {id} = route.params;
-  const {data: post, isPending, isError} = useGetPost(id);
+  const {data: marker, isPending, isError} = useGetMarker(id);
   const detailOption = useModal();
   const insets = useSafeAreaInsets();
   const {setMoveLocation} = useLocationStore();
@@ -51,7 +51,7 @@ export const FeedDetailScreen = ({
   }
 
   const handlePressLocation = () => {
-    const {latitude, longitude} = post;
+    const {latitude, longitude} = marker;
     setMoveLocation({latitude, longitude});
     navigation.navigate(mainNavigations.HOME, {
       screen: mapNavigations.MAP_HOME,
@@ -85,16 +85,16 @@ export const FeedDetailScreen = ({
         </SafeAreaView>
 
         <View style={styles.imageContainer}>
-          {post.images.length > 0 && (
+          {marker.images.length > 0 && (
             <Image
               style={styles.image}
               source={{
-                uri: post.images[0].uri,
+                uri: marker.images[0].uri,
               }}
               resizeMode="cover"
             />
           )}
-          {post.images.length === 0 && (
+          {marker.images.length === 0 && (
             <View style={styles.emptyImageContainer}>
               <Text>No Image</Text>
             </View>
@@ -108,21 +108,21 @@ export const FeedDetailScreen = ({
               style={styles.addressText}
               ellipsizeMode="tail"
               numberOfLines={1}>
-              {post.address}
+              {marker.address}
             </Text>
           </View>
-          <Text style={styles.titleText}>{post.title}</Text>
+          <Text style={styles.titleText}>{marker.title}</Text>
           <View style={styles.infoContainer}>
             <View style={styles.infoRow}>
               <View style={styles.infoColumn}>
                 <Text style={styles.infoColumnKeyText}>방문날짜</Text>
                 <Text style={styles.infoColumnValueText}>
-                  {getDateLocaleFormat(post.date)}
+                  {getDateLocaleFormat(marker.date)}
                 </Text>
               </View>
               <View style={styles.infoColumn}>
                 <Text style={styles.infoColumnKeyText}>평점</Text>
-                <Text style={styles.infoColumnValueText}>{post.score}점</Text>
+                <Text style={styles.infoColumnValueText}>{marker.score}점</Text>
               </View>
             </View>
             <View style={styles.infoRow}>
@@ -131,18 +131,18 @@ export const FeedDetailScreen = ({
                 <View
                   style={[
                     styles.markerColor,
-                    {backgroundColor: colorHex[post.color]},
+                    {backgroundColor: colorHex[marker.color]},
                   ]}
                 />
               </View>
             </View>
           </View>
-          <Text style={styles.descriptionText}>{post.description}</Text>
+          <Text style={styles.descriptionText}>{marker.description}</Text>
         </View>
 
-        {post.images.length > 0 && (
+        {marker.images.length > 0 && (
           <View style={styles.imageContentsContainer}>
-            <PreviewImageList imageUris={post.images} />
+            <PreviewImageList imageUris={marker.images} />
           </View>
         )}
       </ScrollView>

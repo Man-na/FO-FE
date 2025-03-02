@@ -1,1 +1,1 @@
-export * from './useGetCalendarPosts';
+export * from './useGetCalendarMarkers';

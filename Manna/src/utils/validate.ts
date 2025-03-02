@@ -39,7 +39,7 @@ const validateSignup = (
   return signupErrors;
 };
 
-const validateAddPost = (values: {title: string}) => {
+const validateAddMarker = (values: {title: string}) => {
   const errors = {
     title: '',
     description: '',
@@ -52,4 +52,4 @@ const validateAddPost = (values: {title: string}) => {
   return errors;
 };
 
-export {validateLogin, validateSignup, validateAddPost};
+export {validateLogin, validateSignup, validateAddMarker};

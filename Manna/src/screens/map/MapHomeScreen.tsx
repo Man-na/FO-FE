@@ -7,7 +7,7 @@ import {usePermission} from '@/hooks/usePermission';
 import {useUserLocation} from '@/hooks/useUserLocation';
 import {MapStackParamList} from '@/navigation/stack/MapStackNavigator';
 import {MainTabParamList} from '@/navigation/tab/MainTabNavigator';
-import {useGetMarkers} from '@/services/post';
+import {useGetMarkers} from '@/services/marker';
 import MaterialIcons from '@react-native-vector-icons/material-icons';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
 import {CompositeNavigationProp, useNavigation} from '@react-navigation/native';
@@ -37,7 +37,7 @@ function MapHomeScreen(): React.JSX.Element {
 
   usePermission('LOCATION');
 
-  const handlePressAddPost = () => {
+  const handlePressAddMarker = () => {
     if (!selectLocation) {
       return Alert.alert(
         alerts.NOT_SELECTED_LOCATION.TITLE,
@@ -45,7 +45,7 @@ function MapHomeScreen(): React.JSX.Element {
       );
     }
 
-    navigation.navigate(mapNavigations.ADD_POST, {
+    navigation.navigate(mapNavigations.ADD_MARKER, {
       location: selectLocation,
     });
 
@@ -63,7 +63,7 @@ function MapHomeScreen(): React.JSX.Element {
       return;
     }
 
-    navigation.navigate(mapNavigations.ADD_POST, {
+    navigation.navigate(mapNavigations.ADD_MARKER, {
       location: selectLocation,
     });
 
@@ -114,7 +114,7 @@ function MapHomeScreen(): React.JSX.Element {
         )}
       </MapView>
       <View style={styles.buttonList}>
-        <Pressable style={styles.mapButton} onPress={handlePressAddPost}>
+        <Pressable style={styles.mapButton} onPress={handlePressAddMarker}>
           <MaterialIcons name="add" color={colors.WHITE} size={25} />
         </Pressable>
         <Pressable style={styles.mapButton} onPress={handlePressUserLocation}>

@@ -2,7 +2,7 @@ import {CustomMarker} from '@/components/common/CustomMarker';
 import {colors, feedNavigations, mainNavigations} from '@/constants';
 import {FeedStackParamList} from '@/navigation/stack/FeedStackNavigator';
 import {MainTabParamList} from '@/navigation/tab/MainTabNavigator';
-import {useGetPost} from '@/services/post/queries/useGetPost';
+import {useGetMarker} from '@/services/marker';
 import {getDateWithSeparator} from '@/utils';
 import MaterialIcons from '@react-native-vector-icons/material-icons';
 import Octicons from '@react-native-vector-icons/octicons';
@@ -38,7 +38,7 @@ export const MarkerModal = ({
   hide,
 }: MarkerModalProps): React.JSX.Element => {
   const navigation = useNavigation<Navigation>();
-  const {data: post, isPending, isError} = useGetPost(markerId);
+  const {data: marker, isPending, isError} = useGetMarker(markerId);
 
   if (isPending || isError) {
     return <></>;
@@ -48,7 +48,7 @@ export const MarkerModal = ({
     navigation.navigate(mainNavigations.FEED, {
       screen: feedNavigations.FEED_DETAIL,
       params: {
-        id: post.id,
+        id: marker.id,
       },
       initial: false,
     });
@@ -60,19 +60,19 @@ export const MarkerModal = ({
         <Pressable style={styles.cardContainer} onPress={handlePressModal}>
           <View style={styles.cardInner}>
             <View style={styles.cardAlign}>
-              {post.images.length > 0 && (
+              {marker.images.length > 0 && (
                 <View style={styles.imageContainer}>
                   <Image
                     style={styles.image}
-                    source={{uri: post.images[0]?.uri}}
+                    source={{uri: marker.images[0]?.uri}}
                     resizeMode="cover"
                   />
                 </View>
               )}
-              {post.images.length === 0 && (
+              {marker.images.length === 0 && (
                 <View
                   style={[styles.imageContainer, styles.emptyImageContainer]}>
-                  <CustomMarker color={post.color} score={post.score} />
+                  <CustomMarker color={marker.color} score={marker.score} />
                 </View>
               )}
               <View style={styles.infoContainer}>
@@ -82,12 +82,12 @@ export const MarkerModal = ({
                     numberOfLines={1}
                     ellipsizeMode="tail"
                     style={styles.addressText}>
-                    {post.address}
+                    {marker.address}
                   </Text>
                 </View>
-                <Text style={styles.titleText}>{post.title}</Text>
+                <Text style={styles.titleText}>{marker.title}</Text>
                 <Text style={styles.dateText}>
-                  {getDateWithSeparator(post.date, '.')}
+                  {getDateWithSeparator(marker.date, '.')}
                 </Text>
               </View>
             </View>
