@@ -3,15 +3,17 @@ import {AvatarItem} from '@/components/common/AvatarItem';
 import FixedBottomCTA from '@/components/common/FixedBottomCTA';
 import {Tab} from '@/components/common/Tab';
 import {colors} from '@/constants';
-import useAuth from '@/services/auth/queries/useAuth';
+import {useAuth} from '@/services/auth';
 import {useGetAvatarList} from '@/services/avatar';
 import {s3BaseUrl} from '@/utils';
+import {useNavigation} from '@react-navigation/native';
 import React, {useRef, useState} from 'react';
 import {FlatList, SafeAreaView, StyleSheet, View} from 'react-native';
 import PagerView from 'react-native-pager-view';
 import {SvgUri} from 'react-native-svg';
 
 function EditAvatarScreen(): React.JSX.Element {
+  const navigation = useNavigation();
   const {getProfileQuery, profileMutation} = useAuth();
   const pagerRef = useRef<PagerView | null>(null);
   const [currentTab, setCurrentTab] = useState(0);
@@ -46,7 +48,6 @@ function EditAvatarScreen(): React.JSX.Element {
     const newId = getImageId(item);
     setAvatarItem(prev => {
       const updated = {...prev, [name]: newId};
-      console.log('Updated avatarItem:', updated);
       return updated;
     });
   };
@@ -57,7 +58,11 @@ function EditAvatarScreen(): React.JSX.Element {
   };
 
   const handleSaveAvatar = () => {
-    profileMutation.mutate(avatarItem);
+    profileMutation.mutate(avatarItem, {
+      onSuccess: () => {
+        navigation.goBack();
+      },
+    });
   };
 
   const getAvatarItemUrl = (category: string, id?: string) => {

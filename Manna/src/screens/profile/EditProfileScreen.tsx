@@ -3,7 +3,7 @@ import {ProfileCustomButton} from '@/components/common/ProfileCustomButton';
 import {colors, mainNavigations, profileNavigations} from '@/constants';
 import {ProfileStackParamList} from '@/navigation/stack/ProfileStackNavigator';
 import {MainTabParamList} from '@/navigation/tab/MainTabNavigator';
-import useAuth from '@/services/auth/queries/useAuth';
+import {useAuth} from '@/services/auth';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import {CompositeNavigationProp, useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';

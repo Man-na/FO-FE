@@ -106,7 +106,7 @@ const useUpdateProfile = () => {
   });
 };
 
-const useAuth = () => {
+export const useAuth = () => {
   const signupMutation = useSignup();
   const refreshTokenQuery = useGetRefreshToken();
   const getProfileQuery = useGetProfile({
@@ -126,5 +126,3 @@ const useAuth = () => {
     profileMutation,
   };
 };
-
-export default useAuth;

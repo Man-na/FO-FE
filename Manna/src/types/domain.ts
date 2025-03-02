@@ -8,6 +8,11 @@ interface ImageUri {
   id?: number;
   uri: string;
 }
+interface VoteOption {
+  id?: number;
+  displayPriority: number;
+  content: string;
+}
 
 interface Marker {
   id: number;
@@ -17,11 +22,42 @@ interface Marker {
   score: number;
 }
 
-interface Post extends Marker {
+type PostVoteOption = VoteOption & {userVotes: {userId: number}[]};
+
+interface PostVote {
+  id: number;
   title: string;
+  options: PostVoteOption[];
+}
+interface Comment {
+  id: number;
+  content: string;
+  createdAt: string;
+  user: User;
+  isDeleted: boolean;
+}
+
+interface PostComment extends Comment {
+  replies: Comment[];
+}
+
+interface Post extends Marker {
+  id: number;
+  userId: number;
+  title: string;
+  description: string;
   address: string;
   date: Date | string;
-  description: string;
+  createdAt: string;
+  author: User;
+  imageUris: ImageUri[];
+  likes: {userId: number}[];
+  hasVote: boolean;
+  voteCount: number;
+  commentCount: number;
+  viewCount: number;
+  votes?: PostVote[];
+  comments?: PostComment[];
 }
 
 interface User {

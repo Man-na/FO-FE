@@ -1,10 +1,10 @@
+import CustomButton from '@/components/common/CustomButton';
+import InputField from '@/components/common/InputField';
+import useForm from '@/hooks/useForm';
+import {useAuth} from '@/services/auth';
+import {validateLogin} from '@/utils';
 import React, {useRef} from 'react';
 import {SafeAreaView, StyleSheet, TextInput, View} from 'react-native';
-import InputField from '@/components/common/InputField';
-import CustomButton from '@/components/common/CustomButton';
-import useForm from '@/hooks/useForm';
-import {validateLogin} from '@/utils';
-import useAuth from '@/services/auth/queries/useAuth';
 
 export interface LoginFormValues {
   email: string;
