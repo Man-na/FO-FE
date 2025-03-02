@@ -1,11 +1,11 @@
 import {queryKeys} from '@/constants';
 import {Feed, UseQueryCustomOptions} from '@/types';
 import {useQuery} from '@tanstack/react-query';
-import {getFeeds} from '../api';
+import {getMyFeeds} from '../api';
 
-export const useGetFeeds = (queryOptions?: UseQueryCustomOptions<Feed[]>) => {
+export const useGetMyFeeds = (queryOptions?: UseQueryCustomOptions<Feed[]>) => {
   return useQuery({
-    queryFn: getFeeds,
+    queryFn: getMyFeeds,
     queryKey: [queryKeys.FEED, queryKeys.GET_FEEDS],
     ...queryOptions,
   });

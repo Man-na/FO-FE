@@ -79,4 +79,12 @@ interface Profile extends User {
   background: string;
 }
 
-export type {MarkerColor, Category, ImageUri, Marker, Feed, Profile};
+export type {
+  MarkerColor,
+  Category,
+  ImageUri,
+  Marker,
+  Feed,
+  VoteOption,
+  Profile,
+};

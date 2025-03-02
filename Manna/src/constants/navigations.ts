@@ -20,6 +20,7 @@ export const mapNavigations = {
 export const feedNavigations = {
   FEED_HOME: 'FeedHome',
   FEED_DETAIL: 'FeedDetail',
+  ADD_FEED: 'AddFeed',
   EDIT_FEED: 'EditFeed',
   IMAGE_ZOOM: 'ImageZoom',
 } as const;
