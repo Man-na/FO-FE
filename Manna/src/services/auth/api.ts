@@ -56,5 +56,11 @@ const logout = async () => {
   await axiosInstance.post('/user/logout');
 };
 
-export {getAccessToken, getProfile, logout, postLogin, postSignup};
+const editProfile = async (body: Partial<Profile>): Promise<Profile> => {
+  const {data} = await axiosInstance.patch('/user/me', body);
+
+  return data.data;
+};
+
+export {getAccessToken, getProfile, logout, postLogin, postSignup, editProfile};
 export type {RequestUser, ResponseToken, ResponseProfile};

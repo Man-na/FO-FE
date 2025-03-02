@@ -1,7 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import {AvatarItem} from '@/components/common/AvatarItem';
+import FixedBottomCTA from '@/components/common/FixedBottomCTA';
 import {Tab} from '@/components/common/Tab';
 import {colors} from '@/constants';
+import useAuth from '@/services/auth/queries/useAuth';
 import {useGetAvatarList} from '@/services/avatar';
 import {s3BaseUrl} from '@/utils';
 import React, {useRef, useState} from 'react';
@@ -10,6 +12,7 @@ import PagerView from 'react-native-pager-view';
 import {SvgUri} from 'react-native-svg';
 
 function EditAvatarScreen(): React.JSX.Element {
+  const {getProfileQuery, profileMutation} = useAuth();
   const pagerRef = useRef<PagerView | null>(null);
   const [currentTab, setCurrentTab] = useState(0);
   const {
@@ -21,12 +24,12 @@ function EditAvatarScreen(): React.JSX.Element {
     skins = [],
   } = useGetAvatarList();
   const [avatarItem, setAvatarItem] = useState({
-    hatId: '',
-    faceId: '',
-    topId: '',
-    bottomId: '',
-    handId: '',
-    skinId: '01',
+    hatId: getProfileQuery.data?.hatId ?? '',
+    faceId: getProfileQuery.data?.faceId ?? '',
+    topId: getProfileQuery.data?.topId ?? '',
+    bottomId: getProfileQuery.data?.bottomId ?? '',
+    handId: getProfileQuery.data?.handId ?? '',
+    skinId: getProfileQuery.data?.skinId ?? '01',
   });
 
   const getImageId = (url: string) => {
@@ -53,8 +56,11 @@ function EditAvatarScreen(): React.JSX.Element {
     setCurrentTab(index);
   };
 
+  const handleSaveAvatar = () => {
+    profileMutation.mutate(avatarItem);
+  };
+
   const getAvatarItemUrl = (category: string, id?: string) => {
-    console.log(category, id);
     if (category === 'default' || !id) {
       return `${s3BaseUrl}/default/frame.svg`;
     }
@@ -158,6 +164,8 @@ function EditAvatarScreen(): React.JSX.Element {
           ))}
         </PagerView>
       </View>
+
+      <FixedBottomCTA label="저장" onPress={handleSaveAvatar} />
     </SafeAreaView>
   );
 }

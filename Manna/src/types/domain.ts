@@ -24,13 +24,21 @@ interface Post extends Marker {
   description: string;
 }
 
-interface Profile {
+interface User {
   id: number;
+  nickname: string;
+  imageUri?: string;
+}
+
+interface Profile extends User {
   email: string;
-  nickname: string | null;
-  imageUri: string | null;
-  kakaoImageUri: string | null;
-  loginType: 'email' | 'kakao' | 'apple';
+  hatId: string;
+  handId: string;
+  skinId: string;
+  topId: string;
+  faceId: string;
+  bottomId: string;
+  background: string;
 }
 
 export type {MarkerColor, Category, ImageUri, Marker, Post, Profile};
