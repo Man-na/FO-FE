@@ -27,7 +27,7 @@ export const getMarker = async (id: number): Promise<ResponseSingleMarker> => {
 };
 
 export const getMarkers = async (): Promise<Marker[]> => {
-  const {data} = await axiosInstance.get('/marker/markers/my');
+  const {data} = await axiosInstance.get('/marker/markers/all');
   return data.data;
 };
 

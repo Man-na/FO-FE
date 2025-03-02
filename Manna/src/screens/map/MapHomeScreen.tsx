@@ -33,9 +33,13 @@ function MapHomeScreen(): React.JSX.Element {
   const [markerId, setMarkerId] = useState<number | null>(null);
   const markerModal = useModal();
   const {mapRef, moveMapView, handleChangeDelta} = useMoveMapView();
-  const {data: markers = []} = useGetMarkers();
+  const {data: markers = [], isPending, isError} = useGetMarkers();
 
   usePermission('LOCATION');
+
+  if (isPending || isError) {
+    return <></>;
+  }
 
   const handlePressAddMarker = () => {
     if (!selectLocation) {
@@ -78,6 +82,7 @@ function MapHomeScreen(): React.JSX.Element {
     setMarkerId(id);
     markerModal.show();
   };
+
   return (
     <View style={styles.container}>
       <MapView
