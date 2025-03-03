@@ -1,10 +1,5 @@
 import {CustomMarker} from '@/components/common/CustomMarker';
-import {
-  colors,
-  feedNavigations,
-  mainNavigations,
-  mapNavigations,
-} from '@/constants';
+import {colors, mainNavigations, mapNavigations} from '@/constants';
 import {MapStackParamList} from '@/navigation/stack/MapStackNavigator';
 import {MainTabParamList} from '@/navigation/tab/MainTabNavigator';
 import {useGetMarker} from '@/services/marker';
