@@ -1,35 +1,25 @@
-import CustomButton from '@/components/common/CustomButton';
-import {PreviewImageList} from '@/components/common/PreviewImageList';
-import {FeedDetailOption} from '@/components/feed/FeedDetailOption';
-import {
-  colorHex,
-  colors,
-  feedNavigations,
-  mainNavigations,
-  mapNavigations,
-} from '@/constants';
-import {useModal} from '@/hooks/useModal';
+import CommentItem from '@/components/feed/CommentItem';
+import {FeedItem} from '@/components/feed/FeedItem';
+import InputField from '@/components/feed/InputField';
+import {colors, feedNavigations} from '@/constants';
 import {FeedStackParamList} from '@/navigation/stack/FeedStackNavigator';
 import {MainTabParamList} from '@/navigation/tab/MainTabNavigator';
-import {useGetMarker} from '@/services/marker';
-import {useLocationStore} from '@/store/useLocationStore';
-import {getDateLocaleFormat} from '@/utils';
-import Ionicons from '@react-native-vector-icons/ionicons';
-import Octicons from '@react-native-vector-icons/octicons';
+import {useCreateComment} from '@/services/comment';
+import {useGetFeed} from '@/services/feed';
 import {CompositeScreenProps} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
-import React from 'react';
+import React, {Fragment, useRef, useState} from 'react';
 import {
-  Dimensions,
-  Image,
+  Keyboard,
   Pressable,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   View,
 } from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 type FeedDetailScreenProps = CompositeScreenProps<
   StackScreenProps<FeedStackParamList, typeof feedNavigations.FEED_DETAIL>,
@@ -38,270 +28,148 @@ type FeedDetailScreenProps = CompositeScreenProps<
 
 export const FeedDetailScreen = ({
   route,
-  navigation,
 }: FeedDetailScreenProps): React.JSX.Element => {
   const {id} = route.params;
-  const {data: marker, isPending, isError} = useGetMarker(id);
-  const detailOption = useModal();
-  const insets = useSafeAreaInsets();
-  const {setMoveLocation} = useLocationStore();
+  const {data: feed, isPending, isError} = useGetFeed(id);
+  const createComment = useCreateComment();
+  const [content, setContent] = useState('');
+  const scrollRef = useRef<ScrollView | null>(null);
+  const inputRef = useRef<TextInput | null>(null);
+  const [parentCommentId, setParentCommentId] = useState<number | null>(null);
 
   if (isPending || isError) {
     return <></>;
   }
 
-  const handlePressLocation = () => {
-    const {latitude, longitude} = marker;
-    setMoveLocation({latitude, longitude});
-    navigation.navigate(mainNavigations.HOME, {
-      screen: mapNavigations.MAP_HOME,
-    });
+  const handleReply = (commentId: number) => {
+    setParentCommentId(commentId);
+    inputRef.current?.focus();
+  };
+
+  const handleCancelReply = () => {
+    setParentCommentId(null);
+    Keyboard.dismiss();
+  };
+
+  const handleSubmitComment = () => {
+    const commentData = {
+      feedId: feed.id,
+      content: content,
+    };
+    if (parentCommentId) {
+      createComment.mutate({...commentData, parentCommentId});
+      setContent('');
+      handleCancelReply();
+      return;
+    }
+
+    if (parentCommentId) {
+      createComment.mutate({...commentData, parentCommentId});
+      setContent('');
+      handleCancelReply();
+      return;
+    }
+
+    createComment.mutate(commentData);
+    setContent('');
+    setTimeout(() => {
+      scrollRef.current?.scrollToEnd();
+    }, 500);
   };
 
   return (
     <>
-      <ScrollView
-        scrollIndicatorInsets={{right: 1}}
-        style={
-          insets.bottom
-            ? [styles.container, {marginBottom: insets.bottom + 50}]
-            : [styles.container, styles.scrollNoInsets]
-        }>
-        <SafeAreaView style={styles.headerContainer}>
-          <View style={styles.header}>
-            <Octicons
-              name="arrow-left"
-              size={30}
-              color={colors.WHITE}
-              onPress={() => navigation.goBack()}
-            />
-            <Ionicons
-              name="ellipsis-vertical"
-              size={30}
-              color={colors.WHITE}
-              onPress={detailOption.show}
-            />
-          </View>
-        </SafeAreaView>
-
-        <View style={styles.imageContainer}>
-          {marker.images.length > 0 && (
-            <Image
-              style={styles.image}
-              source={{
-                uri: marker.images[0].uri,
-              }}
-              resizeMode="cover"
-            />
-          )}
-          {marker.images.length === 0 && (
-            <View style={styles.emptyImageContainer}>
-              <Text>No Image</Text>
+      <SafeAreaView style={styles.container}>
+        <KeyboardAwareScrollView
+          contentContainerStyle={styles.awareScrollViewContainer}>
+          <ScrollView
+            ref={scrollRef}
+            style={{marginBottom: 75}}
+            contentContainerStyle={styles.scrollViewContainer}>
+            <View style={{marginTop: 12}}>
+              <FeedItem feed={feed} isDetail />
+              <Text style={styles.commentCount}>
+                댓글 {feed.commentCount}개
+              </Text>
             </View>
-          )}
-        </View>
 
-        <View style={styles.contentsContainer}>
-          <View style={styles.addressContainer}>
-            <Octicons name="location" size={10} color={colors.GRAY_500} />
-            <Text
-              style={styles.addressText}
-              ellipsizeMode="tail"
-              numberOfLines={1}>
-              {marker.address}
-            </Text>
-          </View>
-          <Text style={styles.titleText}>{marker.title}</Text>
-          <View style={styles.infoContainer}>
-            <View style={styles.infoRow}>
-              <View style={styles.infoColumn}>
-                <Text style={styles.infoColumnKeyText}>방문날짜</Text>
-                <Text style={styles.infoColumnValueText}>
-                  {getDateLocaleFormat(marker.date)}
-                </Text>
-              </View>
-              <View style={styles.infoColumn}>
-                <Text style={styles.infoColumnKeyText}>평점</Text>
-                <Text style={styles.infoColumnValueText}>{marker.score}점</Text>
-              </View>
-            </View>
-            <View style={styles.infoRow}>
-              <View style={styles.infoColumn}>
-                <Text style={styles.infoColumnKeyText}>마커색상</Text>
-                <View
-                  style={[
-                    styles.markerColor,
-                    {backgroundColor: colorHex[marker.color]},
-                  ]}
+            {feed.comments?.map(comment => (
+              <Fragment key={comment.id}>
+                <CommentItem
+                  parentCommentId={parentCommentId}
+                  onReply={() => handleReply(comment.id)}
+                  onCancelReply={handleCancelReply}
+                  comment={comment}
                 />
-              </View>
-            </View>
+                {comment.replies.map(reply => (
+                  <CommentItem key={reply.id} comment={reply} isReply />
+                ))}
+              </Fragment>
+            ))}
+          </ScrollView>
+
+          <View style={styles.commentInputContainer}>
+            <InputField
+              ref={inputRef}
+              value={content}
+              returnKeyType="send"
+              onSubmitEditing={handleSubmitComment}
+              onChangeText={text => setContent(text)}
+              placeholder={
+                parentCommentId ? '답글 남기는중...' : '댓글을 남겨보세요.'
+              }
+              rightChild={
+                <Pressable
+                  disabled={!content}
+                  style={styles.inputButtonContainer}
+                  onPress={handleSubmitComment}>
+                  <Text style={styles.inputButtonText}>등록</Text>
+                </Pressable>
+              }
+            />
           </View>
-          <Text style={styles.descriptionText}>{marker.description}</Text>
-        </View>
-
-        {marker.images.length > 0 && (
-          <View style={styles.imageContentsContainer}>
-            <PreviewImageList imageUris={marker.images} />
-          </View>
-        )}
-      </ScrollView>
-
-      <View style={[styles.bottomContainer, {paddingBottom: insets.bottom}]}>
-        <View
-          style={[
-            styles.tabContainer,
-            insets.bottom === 0 && styles.tabContainerNoInsets,
-          ]}>
-          <Pressable
-            style={({pressed}) => [
-              pressed && styles.bookmarkPressedContainer,
-              styles.bookmarkContainer,
-            ]}
-            onPress={() => {}}>
-            <Octicons name="star-fill" size={30} color={colors.GRAY_100} />
-          </Pressable>
-          <CustomButton
-            label="위치보기"
-            size="medium"
-            variant="filled"
-            onPress={handlePressLocation}
-          />
-        </View>
-      </View>
-
-      <FeedDetailOption
-        isVisible={detailOption.isVisible}
-        hideOption={detailOption.hide}
-      />
+        </KeyboardAwareScrollView>
+      </SafeAreaView>
     </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    position: 'relative',
-  },
-  scrollNoInsets: {
-    marginBottom: 65,
-  },
-  headerContainer: {
-    position: 'absolute',
-    top: 0,
-    zIndex: 1,
-    width: '100%',
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-  },
-  imageContainer: {
-    width: Dimensions.get('screen').width,
-    height: Dimensions.get('screen').width,
-  },
-  image: {
-    width: '100%',
-    height: '100%',
-  },
-  emptyImageContainer: {
-    height: Dimensions.get('screen').width,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colors.GRAY_200,
-    borderColor: colors.GRAY_200,
-    borderWidth: 1,
-  },
-  contentsContainer: {
-    paddingVertical: 20,
-    paddingHorizontal: 20,
-    backgroundColor: colors.WHITE,
-    marginBottom: 10,
-  },
-  titleText: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: colors.BLACK,
-  },
-  infoContainer: {
-    marginVertical: 20,
-    gap: 8,
-  },
-  infoRow: {
-    flexDirection: 'row',
-  },
-  infoColumn: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 5,
+    backgroundColor: colors.WHITE,
   },
-  infoColumnKeyText: {
-    color: colors.BLACK,
+  awareScrollViewContainer: {
+    flex: 1,
+    backgroundColor: colors.GRAY_200,
   },
-  infoColumnValueText: {
-    color: colors.PINK_700,
+  scrollViewContainer: {
+    backgroundColor: colors.GRAY_200,
   },
-  markerColor: {
-    width: 10,
-    height: 10,
-    borderRadius: 10,
-  },
-  emptyCategoryContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: colors.GRAY_300,
-    padding: 2,
-    borderRadius: 2,
-  },
-  addressContainer: {
-    gap: 5,
-    marginVertical: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  addressText: {
-    color: colors.GRAY_500,
-    fontSize: 12,
-  },
-  descriptionText: {
-    color: colors.BLACK,
-    lineHeight: 25,
+  commentCount: {
+    marginTop: 12,
+    backgroundColor: colors.WHITE,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
     fontSize: 16,
+    fontWeight: 'bold',
   },
-  imageContentsContainer: {
-    paddingVertical: 15,
-    backgroundColor: colors.WHITE,
-    marginBottom: 10,
-  },
-  bottomContainer: {
-    position: 'absolute',
-    bottom: 0,
+  commentInputContainer: {
     width: '100%',
-    alignItems: 'flex-end',
-    paddingTop: 10,
-    paddingHorizontal: 10,
-    backgroundColor: colors.WHITE,
+    borderTopColor: colors.GRAY_200,
     borderTopWidth: StyleSheet.hairlineWidth,
-    borderColor: colors.GRAY_200,
+    backgroundColor: colors.WHITE,
+    padding: 16,
+    bottom: 0,
+    position: 'absolute',
   },
-  tabContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
+  inputButtonContainer: {
+    backgroundColor: colors.PINK_500,
+    padding: 8,
+    borderRadius: 5,
   },
-  tabContainerNoInsets: {
-    marginBottom: 10,
-  },
-  bookmarkContainer: {
-    backgroundColor: colors.PINK_700,
-    height: '100%',
-    paddingHorizontal: 5,
-    justifyContent: 'center',
-    borderRadius: 3,
-  },
-  bookmarkPressedContainer: {
-    opacity: 0.5,
+  inputButtonText: {
+    color: colors.WHITE,
+    fontWeight: 'bold',
   },
 });

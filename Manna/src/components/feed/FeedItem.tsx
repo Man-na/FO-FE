@@ -1,19 +1,30 @@
-import {colors} from '@/constants';
+import {colors, feedNavigations} from '@/constants';
+import {FeedStackParamList} from '@/navigation/stack/FeedStackNavigator';
 import {useAuth} from '@/services/auth';
 import {ResponseFeed} from '@/services/feed';
+import {useDeleteFeed} from '@/services/feed/queries/useDeleteFeed';
 import Ionicons from '@react-native-vector-icons/ionicons';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 import React from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import ActionSheet from 'react-native-action-sheet';
 import {Profile} from './Profile';
 interface FeedListProps {
   feed: ResponseFeed;
+  isDetail?: boolean;
 }
 
-export const FeedItem = ({feed}: FeedListProps): React.JSX.Element => {
+export const FeedItem = ({
+  feed,
+  isDetail = false,
+}: FeedListProps): React.JSX.Element => {
+  const navigation = useNavigation<StackNavigationProp<FeedStackParamList>>();
+
   const {getProfileQuery} = useAuth();
   const likeUsers = feed.likes?.map(like => Number(like.userId));
   const isLiked = likeUsers.includes(getProfileQuery.data?.id ?? -1);
+  const deleteFeed = useDeleteFeed();
 
   const handlePressOption = () => {
     const options = ['삭제', '수정', '취소'];
@@ -29,14 +40,14 @@ export const FeedItem = ({feed}: FeedListProps): React.JSX.Element => {
       buttonIndex => {
         switch (buttonIndex) {
           case destructiveButtonIndex:
-            // 삭제 로직 (예: deleteFeed.mutate 호출)
-            console.log('게시물 삭제');
+            deleteFeed.mutate(feed.id, {
+              onSuccess: () => isDetail && navigation.goBack(),
+            });
             break;
           case 1:
-            // 수정 로직 (예: 페이지 이동)
+            // 수정 페이지로 이동
             break;
           case cancelButtonIndex:
-            // 취소 시 아무 동작 없음
             break;
           default:
             break;
@@ -45,8 +56,16 @@ export const FeedItem = ({feed}: FeedListProps): React.JSX.Element => {
     );
   };
 
+  const handlePressFeed = () => {
+    if (!isDetail) {
+      navigation.navigate(feedNavigations.FEED_DETAIL, {id: feed.id});
+    }
+  };
+
+  const ContainerComponent = isDetail ? View : Pressable;
+
   return (
-    <View style={styles.container}>
+    <ContainerComponent style={styles.container} onPress={handlePressFeed}>
       <View style={styles.contentContainer}>
         <Profile
           imageUri={feed.author?.imageUri}
@@ -95,7 +114,7 @@ export const FeedItem = ({feed}: FeedListProps): React.JSX.Element => {
           <Text style={styles.menuText}>{feed.viewCount}</Text>
         </Pressable>
       </View>
-    </View>
+    </ContainerComponent>
   );
 };
 

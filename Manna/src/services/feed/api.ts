@@ -36,3 +36,8 @@ export const getMyFeeds = async (): Promise<Feed[]> => {
   const {data} = await axiosInstance.get('/feed/my');
   return data.data;
 };
+
+export const deleteFeed = async (id: number): Promise<number> => {
+  const {data} = await axiosInstance.delete(`/feed/${id}`);
+  return data.data;
+};

@@ -1,6 +1,11 @@
 import {CustomMarker} from '@/components/common/CustomMarker';
-import {colors, feedNavigations, mainNavigations} from '@/constants';
-import {FeedStackParamList} from '@/navigation/stack/FeedStackNavigator';
+import {
+  colors,
+  feedNavigations,
+  mainNavigations,
+  mapNavigations,
+} from '@/constants';
+import {MapStackParamList} from '@/navigation/stack/MapStackNavigator';
 import {MainTabParamList} from '@/navigation/tab/MainTabNavigator';
 import {useGetMarker} from '@/services/marker';
 import {getDateWithSeparator} from '@/utils';
@@ -29,7 +34,7 @@ interface MarkerModalProps {
 
 type Navigation = CompositeNavigationProp<
   BottomTabNavigationProp<MainTabParamList>,
-  StackNavigationProp<FeedStackParamList>
+  StackNavigationProp<MapStackParamList>
 >;
 
 export const MarkerModal = ({
@@ -45,8 +50,8 @@ export const MarkerModal = ({
   }
 
   const handlePressModal = () => {
-    navigation.navigate(mainNavigations.FEED, {
-      screen: feedNavigations.FEED_DETAIL,
+    navigation.navigate(mainNavigations.HOME, {
+      screen: mapNavigations.MARKER_DETAIL,
       params: {
         id: marker.id,
       },

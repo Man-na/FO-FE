@@ -15,6 +15,7 @@ export const authNavigations = {
 export const mapNavigations = {
   MAP_HOME: 'MapHome',
   ADD_MARKER: 'AddMarker',
+  MARKER_DETAIL: 'MarkerDetail',
 } as const;
 
 export const feedNavigations = {

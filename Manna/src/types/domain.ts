@@ -15,6 +15,7 @@ interface Marker {
   address: string;
   latitude: number;
   longitude: number;
+  images: ImageUri[];
   date: Date | string;
   color: MarkerColor;
   score: number;
@@ -87,4 +88,5 @@ export type {
   Feed,
   VoteOption,
   Profile,
+  Comment,
 };
