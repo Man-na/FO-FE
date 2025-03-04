@@ -1,4 +1,4 @@
-import {useMutateImages} from '@/services/marker';
+import {useUploadImages} from '@/services/marker';
 import type {ImageUri} from '@/types';
 import {getFormDataImages} from '@/utils';
 import {useState} from 'react';
@@ -17,7 +17,7 @@ export const useImagePicker = ({
   onSettled,
 }: UseImagePickerProps) => {
   const [imageUris, setImageUris] = useState(initialImages);
-  const uploadImages = useMutateImages();
+  const uploadImages = useUploadImages();
 
   const addImageUris = (uris: string[]) => {
     if (imageUris.length + uris.length > 5) {

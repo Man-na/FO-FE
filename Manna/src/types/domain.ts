@@ -15,7 +15,7 @@ interface Marker {
   address: string;
   latitude: number;
   longitude: number;
-  images: ImageUri[];
+  images?: ImageUri[];
   date: Date | string;
   color: MarkerColor;
   score: number;

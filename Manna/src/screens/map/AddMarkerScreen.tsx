@@ -13,7 +13,7 @@ import {useImagePicker} from '@/hooks/useImagePicker';
 import {useModal} from '@/hooks/useModal';
 import {usePermission} from '@/hooks/usePermission';
 import {MapStackParamList} from '@/navigation/stack/MapStackNavigator';
-import {useMutateCreateMarker} from '@/services/marker';
+import {useCreateMarker} from '@/services/marker';
 import {MarkerColor} from '@/types';
 import {getDateWithSeparator, validateAddMarker} from '@/utils';
 import Octicons from '@react-native-vector-icons/octicons';
@@ -51,7 +51,7 @@ export const AddMarkerScreen = ({
       },
       validateAddMarker,
     );
-  const createMarker = useMutateCreateMarker();
+  const createMarker = useCreateMarker();
   const address = useGetAddress(location);
   const {isVisible, show, hide} = useModal();
   const [markerColor, setMarkerColor] = useState<MarkerColor>('RED');

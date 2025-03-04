@@ -2,16 +2,14 @@ import {queryKeys} from '@/constants';
 import {UseMutationCustomOptions} from '@/types';
 import {queryClient} from '@/utils';
 import {useMutation} from '@tanstack/react-query';
-import {createMarker} from '../api';
+import {createFeed} from '../api';
 
-export const useMutateCreateMarker = (
-  mutationOptions?: UseMutationCustomOptions,
-) => {
+export const useCreateFeed = (mutationOptions?: UseMutationCustomOptions) => {
   return useMutation({
-    mutationFn: createMarker,
+    mutationFn: createFeed,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [queryKeys.MARKER, queryKeys.GET_MARKERS],
+        queryKey: [queryKeys.FEED, queryKeys.GET_FEEDS],
       });
     },
     ...mutationOptions,

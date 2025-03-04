@@ -1,12 +1,11 @@
+import {BackButton} from '@/components/common/BackButton';
 import {colors, feedNavigations} from '@/constants';
 import {AddFeedScreen} from '@/screens/feed/AddFeedScreen';
 import {FeedDetailScreen} from '@/screens/feed/FeedDetailScreen';
 import FeedHomeScreen from '@/screens/feed/FeedHomeScreen';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {Pressable} from 'react-native';
 import {LatLng} from 'react-native-maps';
-import MaterialIcons from '@react-native-vector-icons/material-icons';
 
 export type FeedStackParamList = {
   [feedNavigations.FEED_HOME]: undefined;
@@ -44,25 +43,22 @@ function FeedStackNavigator() {
       <Stack.Screen
         name={feedNavigations.FEED_DETAIL}
         component={FeedDetailScreen}
-        options={{
-          headerShown: false,
-          headerTitle: ' ',
+        options={() => ({
+          headerShown: true,
+          headerTitle: '피드 상세',
           cardStyle: {
             backgroundColor: colors.GRAY_100,
           },
-        }}
+          headerLeft: () => <BackButton />,
+        })}
       />
       <Stack.Screen
         name={feedNavigations.ADD_FEED}
         component={AddFeedScreen}
-        options={({navigation}) => ({
+        options={() => ({
           headerShown: true,
-          headerTitle: '피드 작성',
-          headerLeft: () => (
-            <Pressable onPress={() => navigation.goBack()}>
-              <MaterialIcons name="arrow-back" size={28} color="black" />
-            </Pressable>
-          ),
+          headerTitle: '글쓰기',
+          headerLeft: () => <BackButton />,
         })}
       />
     </Stack.Navigator>

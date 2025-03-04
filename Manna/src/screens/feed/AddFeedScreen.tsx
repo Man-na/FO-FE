@@ -1,13 +1,13 @@
 import {PreviewImageList} from '@/components/common/PreviewImageList';
 import {DescriptionInput} from '@/components/feed/DescriptionInput';
-import {PostWriteFooter} from '@/components/feed/PostWriteFooter';
+import {PostWriteFooter} from '@/components/feed/FeedWriteFooter';
 import {TitleInput} from '@/components/feed/TitleInput';
 import {VoteAttached} from '@/components/feed/VoteAttached';
 import VoteModal from '@/components/feed/VoteModal';
 import {AddMarkerHeaderRight} from '@/components/marker/AddMarkerHeaderRight';
 import {feedNavigations} from '@/constants';
 import {FeedStackParamList} from '@/navigation/stack/FeedStackNavigator';
-import {useMutateCreateFeed} from '@/services/feed';
+import {useCreateFeed} from '@/services/feed';
 import {ImageUri, VoteOption} from '@/types';
 import {useNavigation} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
@@ -32,7 +32,7 @@ type AddFeedScreenProps = StackScreenProps<
 
 export const AddFeedScreen = ({}: AddFeedScreenProps): React.JSX.Element => {
   const navigation = useNavigation();
-  const createFeed = useMutateCreateFeed();
+  const createFeed = useCreateFeed();
   const postForm = useForm<AddFeedFormValues>({
     defaultValues: {
       title: '',
