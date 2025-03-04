@@ -15,7 +15,7 @@ import {
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {VoteInput} from './VoteInput';
 
-function VoteModal() {
+export const VoteModal = () => {
   const {control, setValue} = useFormContext();
   const [voteOptions, isVoteOpen] = useWatch({
     control,
@@ -75,7 +75,7 @@ function VoteModal() {
       </SafeAreaView>
     </Modal>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -110,5 +110,3 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-
-export default VoteModal;

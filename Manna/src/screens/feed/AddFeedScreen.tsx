@@ -3,7 +3,7 @@ import {PostWriteFooter} from '@/components/feed/FeedWriteFooter';
 import {PreviewImageList} from '@/components/feed/PreviewImageList';
 import {TitleInput} from '@/components/feed/TitleInput';
 import {VoteAttached} from '@/components/feed/VoteAttached';
-import VoteModal from '@/components/feed/VoteModal';
+import {VoteModal} from '@/components/feed/VoteModal';
 import {AddMarkerHeaderRight} from '@/components/marker/AddMarkerHeaderRight';
 import {feedNavigations} from '@/constants';
 import {FeedStackParamList} from '@/navigation/stack/FeedStackNavigator';
