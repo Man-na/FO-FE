@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import {AvatarItem} from '@/components/common/AvatarItem';
 import FixedBottomCTA from '@/components/common/FixedBottomCTA';
 import {Tab} from '@/components/common/Tab';
