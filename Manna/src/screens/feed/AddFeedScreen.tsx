@@ -1,6 +1,6 @@
-import {PreviewImageList} from '@/components/common/PreviewImageList';
 import {DescriptionInput} from '@/components/feed/DescriptionInput';
 import {PostWriteFooter} from '@/components/feed/FeedWriteFooter';
+import {PreviewImageList} from '@/components/feed/PreviewImageList';
 import {TitleInput} from '@/components/feed/TitleInput';
 import {VoteAttached} from '@/components/feed/VoteAttached';
 import VoteModal from '@/components/feed/VoteModal';
