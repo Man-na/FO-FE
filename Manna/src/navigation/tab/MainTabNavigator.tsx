@@ -13,6 +13,7 @@ import MaterialIcons from '@react-native-vector-icons/material-icons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigatorScreenParams, RouteProp} from '@react-navigation/native';
 import React from 'react';
+import {TouchableOpacity} from 'react-native';
 import ProfileStackNavigator from '../stack/ProfileStackNavigator';
 
 export type MainTabParamList = {
@@ -76,8 +77,17 @@ const TabBarIcons = ({
 function MainTabNavigator(): React.JSX.Element {
   return (
     <Tab.Navigator
-      screenOptions={({route}) => ({
-        headerShown: false,
+      screenOptions={({navigation, route}) => ({
+        headerShown: true,
+        headerRight: () => (
+          <TouchableOpacity
+            onPress={() =>
+              navigation.getParent()?.navigate(mainNavigations.CHAT)
+            }
+            style={{marginRight: 10}}>
+            <MaterialIcons name="chat" size={24} color={colors.BLACK} />
+          </TouchableOpacity>
+        ),
         tabBarActiveTintColor: colors.BLACK,
         tabBarInactiveTintColor: colors.GRAY_500,
         tabBarActiveBackgroundColor: colors.PINK_200,

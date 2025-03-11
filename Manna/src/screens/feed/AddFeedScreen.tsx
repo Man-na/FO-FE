@@ -53,7 +53,6 @@ export const AddFeedScreen = ({}: AddFeedScreenProps): React.JSX.Element => {
 
   useEffect(() => {
     navigation.setOptions({
-      // eslint-disable-next-line react/no-unstable-nested-components
       headerRight: () => (
         <AddMarkerHeaderRight onSubmit={postForm.handleSubmit(handleSubmit)} />
       ),

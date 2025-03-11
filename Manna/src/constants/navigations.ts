@@ -4,6 +4,7 @@ export const mainNavigations = {
   CALENDAR: 'Calendar',
   PROFILE: 'Profile',
   SETTING: 'Setting',
+  CHAT: 'Chat',
 } as const;
 
 export const authNavigations = {
@@ -36,4 +37,9 @@ export const profileNavigations = {
   PROFILE_HOME: 'ProfileHome',
   EDIT_PROFILE: 'EditProfile',
   EDIT_AVATAR: 'EditAvatar',
+} as const;
+
+export const chatNavigations = {
+  CHAT_HOME: 'ChatHome',
+  CHAT_ROOM_SCREEN: 'ChatRoomScreen',
 } as const;

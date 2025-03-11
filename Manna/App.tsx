@@ -1,3 +1,4 @@
+import {WebSocketProvider} from '@/context/WebSocketContext';
 import RootNavigator from '@/navigation/root/RootNavigator';
 import {queryClient} from '@/utils';
 import {NavigationContainer} from '@react-navigation/native';
@@ -7,9 +8,11 @@ import React from 'react';
 function App(): React.JSX.Element {
   return (
     <QueryClientProvider client={queryClient}>
-      <NavigationContainer>
-        <RootNavigator />
-      </NavigationContainer>
+      <WebSocketProvider>
+        <NavigationContainer>
+          <RootNavigator />
+        </NavigationContainer>
+      </WebSocketProvider>
     </QueryClientProvider>
   );
 }
