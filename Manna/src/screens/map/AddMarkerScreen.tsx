@@ -106,7 +106,6 @@ export const AddMarkerScreen = ({
 
   useEffect(() => {
     navigation.setOptions({
-      // eslint-disable-next-line react/no-unstable-nested-components
       headerRight: () => <AddMarkerHeaderRight onSubmit={handleSubmit} />,
     });
   }, [navigation, handleSubmit]);

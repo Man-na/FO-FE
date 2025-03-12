@@ -31,6 +31,7 @@ export const FeedList = ({}: FeedListProps): React.JSX.Element => {
     await refetch();
     setIsRefreshing(false);
   };
+
   return (
     <FlatList
       ref={ref}
