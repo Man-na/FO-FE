@@ -6,7 +6,7 @@ import {ChatHomeScreen} from '@/screens/chat/ChatHomeScreen';
 
 export type ChatStackParamList = {
   [chatNavigations.CHAT_HOME]: undefined;
-  [chatNavigations.CHAT_ROOM_SCREEN]: {id: string};
+  [chatNavigations.CHAT_ROOM_SCREEN]: {id: number};
 };
 
 const Stack = createStackNavigator<ChatStackParamList>();

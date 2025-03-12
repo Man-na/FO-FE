@@ -1,26 +1,22 @@
-import React, {useState} from 'react';
-import {Modal, View, TextInput, Button, StyleSheet} from 'react-native';
+import {useCreateChatRoom} from '@/services/chat';
+import React, {useCallback, useState} from 'react';
+import {Button, Modal, StyleSheet, TextInput, View} from 'react-native';
 
 interface CreateRoomModalProps {
   visible: boolean;
   onClose: () => void;
-  onCreate: (roomName: string) => void;
 }
 
 export const AddChatRoomModal: React.FC<CreateRoomModalProps> = ({
   visible,
   onClose,
-  onCreate,
 }) => {
   const [roomName, setRoomName] = useState('');
+  const createChatRoom = useCreateChatRoom();
 
-  const handleCreate = () => {
-    if (roomName.trim()) {
-      onCreate(roomName);
-      setRoomName('');
-      onClose();
-    }
-  };
+  const handleSubmit = useCallback(() => {
+    createChatRoom.mutate({title: roomName}, {onSuccess: () => onClose()});
+  }, [createChatRoom, roomName, onClose]);
 
   return (
     <Modal visible={visible} transparent animationType="slide">
@@ -32,7 +28,7 @@ export const AddChatRoomModal: React.FC<CreateRoomModalProps> = ({
             onChangeText={setRoomName}
             placeholder="채팅방 이름을 입력하세요"
           />
-          <Button title="만들기" onPress={handleCreate} />
+          <Button title="만들기" onPress={handleSubmit} />
           <Button title="취소" onPress={onClose} />
         </View>
       </View>

@@ -5,6 +5,8 @@ import React, {
   useState,
   useContext,
 } from 'react';
+import {Platform} from 'react-native';
+import Config from 'react-native-config';
 
 interface WebSocketContextType {
   ws: WebSocket | null;
@@ -19,7 +21,13 @@ export const WebSocketProvider: React.FC<{children: React.ReactNode}> = ({
   const [wsState, setWsState] = useState<WebSocket | null>(null);
 
   useEffect(() => {
-    wsRef.current = new WebSocket('ws://localhost:9001/ws');
+    let wsUrl = Config.WS_URL || 'ws://localhost:9001/ws';
+
+    if (Platform.OS === 'android' && wsUrl.includes('localhost')) {
+      wsUrl = wsUrl.replace('localhost', '10.0.2.2');
+    }
+
+    wsRef.current = new WebSocket(wsUrl);
 
     wsRef.current.onopen = () => {
       console.log('WebSocket 연결 성공');

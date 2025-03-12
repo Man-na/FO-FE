@@ -11,6 +11,9 @@ export const queryKeys = {
   FEED: 'feed',
   GET_FEEDS: 'getFeeds',
   GET_FEED: 'getFeed',
+  CHAT: 'chat',
+  GET_CHAT_ROOMS: 'getChatRooms',
+  GET_CHAT_MESSAGES: 'getChatMessages',
 };
 
 export const storageKeys = {

@@ -80,6 +80,18 @@ interface Profile extends User {
   background: string;
 }
 
+interface ChatRoom {
+  id: number;
+  title: string;
+}
+
+interface ChatMessage {
+  id: number;
+  senderId: number;
+  content: string;
+  timestamp: string;
+}
+
 export type {
   MarkerColor,
   Category,
@@ -89,4 +101,6 @@ export type {
   VoteOption,
   Profile,
   Comment,
+  ChatRoom,
+  ChatMessage,
 };

@@ -1,27 +1,76 @@
-import React, {useState, useEffect, useRef} from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  FlatList,
-  StyleSheet,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  Platform,
-  SafeAreaView,
-} from 'react-native';
+import React, {useState, useEffect, useCallback} from 'react';
+import {View, StyleSheet, SafeAreaView, ActivityIndicator} from 'react-native';
 import {useWebSocket} from '@/context/WebSocketContext';
+import {useGetInfiniteChatMessages} from '@/services/chat/queries/useGetInfiniteChatMessages';
+import {useAuth} from '@/services/auth';
+import {StackScreenProps} from '@react-navigation/stack';
+import {ChatStackParamList} from '@/navigation/stack/ChatStackNavigator';
+import {useQueryClient} from '@tanstack/react-query';
+import {queryKeys} from '@/constants';
+import {GiftedChat, IMessage} from 'react-native-gifted-chat';
 
-interface Message {
-  id: number;
+interface GiftedMessage extends IMessage {
+  _id: number;
   text: string;
+  createdAt: Date;
+  user: {
+    _id: number;
+  };
 }
 
-export const ChatRoomScreen: React.FC = () => {
+type ChatRoomScreenProps = StackScreenProps<ChatStackParamList>;
+
+export const ChatRoomScreen = ({
+  route,
+}: ChatRoomScreenProps): React.JSX.Element => {
+  const {id} = route.params ?? {id: 0};
   const {ws} = useWebSocket();
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [inputText, setInputText] = useState<string>('');
-  const flatListRef = useRef<FlatList<Message> | null>(null);
+  const [messages, setMessages] = useState<GiftedMessage[]>([]);
+  const queryClient = useQueryClient();
+
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    refetch,
+    isLoading,
+  } = useGetInfiniteChatMessages(id);
+  const {getProfileQuery} = useAuth();
+  const currentUserId = getProfileQuery.data?.id;
+
+  useEffect(() => {
+    queryClient.invalidateQueries({
+      queryKey: [queryKeys.CHAT, queryKeys.GET_CHAT_MESSAGES, id.toString()],
+    });
+    setMessages([]);
+    refetch();
+  }, [id, queryClient, refetch]);
+
+  useEffect(() => {
+    if (data) {
+      console.log('데이터 업데이트:', data.pages[0].content);
+      const allMessages = data.pages[0].content.map(msg => ({
+        _id: msg.id,
+        text: msg.content,
+        createdAt: new Date(msg.timestamp || new Date().toISOString()),
+        user: {
+          _id: msg.senderId,
+        },
+      }));
+      setMessages(prevMessages => {
+        const combinedMessages = [
+          ...allMessages,
+          ...prevMessages.filter(
+            pm => !allMessages.some(m => m._id === pm._id),
+          ),
+        ];
+        return combinedMessages.sort(
+          (a, b) => b.createdAt.getTime() - a.createdAt.getTime(),
+        );
+      });
+    }
+  }, [data]);
 
   useEffect(() => {
     if (!ws) {
@@ -31,13 +80,20 @@ export const ChatRoomScreen: React.FC = () => {
 
     ws.onmessage = (event: WebSocketMessageEvent) => {
       const response = JSON.parse(event.data);
-      const newMessage: Message = {
-        id: Date.now(),
-        text: response.message,
+      const newMessage: GiftedMessage = {
+        _id: response.id,
+        text: response.content,
+        createdAt: new Date(response.timestamp || new Date().toISOString()),
+        user: {
+          _id: response.senderId,
+        },
       };
-      console.log(newMessage);
-      setMessages(prevMessages => [...prevMessages, newMessage]);
-      flatListRef.current?.scrollToEnd({animated: true});
+      setMessages(prevMessages => {
+        if (prevMessages.some(msg => msg._id === newMessage._id)) {
+          return prevMessages;
+        }
+        return [newMessage, ...prevMessages];
+      });
     };
 
     return () => {
@@ -45,49 +101,60 @@ export const ChatRoomScreen: React.FC = () => {
     };
   }, [ws]);
 
-  const sendMessage = () => {
-    if (!ws) {
-      console.error('WebSocket 객체가 없습니다.');
-      return;
-    }
-    if (inputText.trim() && ws.readyState === WebSocket.OPEN) {
-      const message: Message = {id: Date.now(), text: inputText};
-      ws.send(JSON.stringify(message));
-      setMessages(prevMessages => [...prevMessages, message]);
-      setInputText('');
-      flatListRef.current?.scrollToEnd({animated: true});
+  const onSend = useCallback(
+    (newMessages: GiftedMessage[] = []) => {
+      if (!ws) {
+        console.error('WebSocket 객체가 없습니다.');
+        return;
+      }
+      if (ws.readyState === WebSocket.OPEN) {
+        const messageToSend = {
+          chatRoomId: id,
+          senderId: currentUserId,
+          content: newMessages[0].text,
+          timestamp: new Date().toISOString(),
+        };
+        ws.send(JSON.stringify(messageToSend));
+      } else {
+        console.error('WebSocket이 연결되지 않았습니다. 상태:', ws.readyState);
+      }
+    },
+    [ws, id, currentUserId],
+  );
+
+  const loadEarlierMessages = useCallback(() => {
+    if (hasNextPage && !isFetchingNextPage) {
+      console.log('fetchNextPage 호출: 다음 페이지 요청');
+      fetchNextPage();
     } else {
-      console.error('WebSocket이 연결되지 않았습니다. 상태:', ws.readyState);
+      console.log(
+        'fetchNextPage 호출 안 함: hasNextPage=',
+        hasNextPage,
+        'isFetchingNextPage=',
+        isFetchingNextPage,
+      );
     }
-  };
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <KeyboardAvoidingView
-        style={styles.container}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-        <FlatList<Message>
-          ref={flatListRef}
-          data={messages}
-          renderItem={({item}) => (
-            <View style={styles.messageBubble}>
-              <Text>{item.text}</Text>
-            </View>
-          )}
-          keyExtractor={item => item.id.toString()}
-        />
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            value={inputText}
-            onChangeText={setInputText}
-            placeholder="메시지를 입력하세요"
-          />
-          <TouchableOpacity onPress={sendMessage} style={styles.sendButton}>
-            <Text style={styles.sendButtonText}>전송</Text>
-          </TouchableOpacity>
+      {isLoading ? (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#007bff" />
         </View>
-      </KeyboardAvoidingView>
+      ) : (
+        <GiftedChat
+          messages={messages}
+          onSend={newMessages => onSend(newMessages)}
+          user={{
+            _id: currentUserId!,
+          }}
+          placeholder="메시지를 입력하세요"
+          loadEarlier={hasNextPage}
+          onLoadEarlier={loadEarlierMessages}
+          isLoadingEarlier={isFetchingNextPage}
+        />
+      )}
     </SafeAreaView>
   );
 };
@@ -96,35 +163,9 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
   },
-  container: {
+  loadingContainer: {
     flex: 1,
-    backgroundColor: '#fff',
-  },
-  messageBubble: {
-    padding: 10,
-    margin: 5,
-    backgroundColor: '#e1e1e1',
-    borderRadius: 5,
-    maxWidth: '80%',
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    padding: 10,
-  },
-  input: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    padding: 10,
-  },
-  sendButton: {
-    marginLeft: 10,
-    backgroundColor: '#007bff',
-    padding: 10,
-    borderRadius: 5,
-  },
-  sendButtonText: {
-    color: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

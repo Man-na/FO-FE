@@ -32,10 +32,9 @@ export const AvatarItem = ({uri, isSelected, ...props}: AvatarItemProps) => {
           style={styles.image}
           onLoadStart={() => setLoading(true)}
           onLoadEnd={() => setLoading(false)}
-          onError={e => {
+          onError={() => {
             setLoading(false);
             setError(true);
-            console.log(`Failed to load image: ${uri}`, e.nativeEvent.error);
           }}
         />
         {error && (

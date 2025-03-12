@@ -1,47 +1,61 @@
 import {AddChatRoomModal} from '@/components/chat/AddChatRoomModal';
 import {chatNavigations} from '@/constants';
 import {ChatStackParamList} from '@/navigation/stack/ChatStackNavigator';
-import {useNavigation} from '@react-navigation/native';
+import {useGetInfiniteChatRooms} from '@/services/chat/queries/useGetInfiniteChatRooms';
+import {useNavigation, useScrollToTop} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-
-interface ChatRoom {
-  id: string;
-  name: string;
-}
 
 type Navigation = StackNavigationProp<ChatStackParamList>;
 
 export const ChatHomeScreen: React.FC = () => {
-  const [rooms, setRooms] = useState<ChatRoom[]>([]);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const navigation = useNavigation<Navigation>();
+  const ref = useRef<FlatList | null>(null);
+  useScrollToTop(ref);
 
-  const handleCreateRoom = (roomName: string) => {
-    const newRoom: ChatRoom = {
-      id: Date.now().toString(),
-      name: roomName,
-    };
-    setRooms(prevRooms => [...prevRooms, newRoom]);
+  const {
+    data: chatRooms,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    refetch,
+  } = useGetInfiniteChatRooms();
+
+  const handlePressRoom = (roomId: number) => {
+    navigation.navigate(chatNavigations.CHAT_ROOM_SCREEN, {id: roomId});
   };
 
-  const handlePressRoom = (roomId: string) => {
-    navigation.navigate(chatNavigations.CHAT_ROOM_SCREEN, {id: roomId});
+  const handleEndReached = () => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  };
+
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    await refetch();
+    setIsRefreshing(false);
   };
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={rooms}
+        data={chatRooms?.pages.flat()}
         renderItem={({item}) => (
           <TouchableOpacity onPress={() => handlePressRoom(item.id)}>
             <View style={styles.roomItem}>
-              <Text>{item.name}</Text>
+              <Text>{item.title}</Text>
             </View>
           </TouchableOpacity>
         )}
-        keyExtractor={item => item.id}
+        keyExtractor={item => String(item.id)}
+        onEndReached={handleEndReached}
+        onEndReachedThreshold={0.5}
+        refreshing={isRefreshing}
+        onRefresh={handleRefresh}
       />
 
       <TouchableOpacity
@@ -53,7 +67,6 @@ export const ChatHomeScreen: React.FC = () => {
       <AddChatRoomModal
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
-        onCreate={handleCreateRoom}
       />
     </View>
   );
