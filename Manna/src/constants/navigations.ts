@@ -1,10 +1,10 @@
 export const mainNavigations = {
   HOME: 'Home',
   FEED: 'Feed',
-  CALENDAR: 'Calendar',
   PROFILE: 'Profile',
   SETTING: 'Setting',
   CHAT: 'Chat',
+  MATCHING: 'Matching',
 } as const;
 
 export const authNavigations = {
@@ -13,18 +13,19 @@ export const authNavigations = {
   SIGNUP: 'Signup',
 } as const;
 
-export const mapNavigations = {
-  MAP_HOME: 'MapHome',
-  ADD_MARKER: 'AddMarker',
-  MARKER_DETAIL: 'MarkerDetail',
-} as const;
-
-export const feedNavigations = {
-  FEED_HOME: 'FeedHome',
+export const communityNavigations = {
+  COMMUNITY_HOME: 'CommunityHome',
+  FREE_FEED: 'FreeFeed',
   FEED_DETAIL: 'FeedDetail',
   ADD_FEED: 'AddFeed',
   EDIT_FEED: 'EditFeed',
   IMAGE_ZOOM: 'ImageZoom',
+} as const;
+
+export const matchingNavigations = {
+  MATCHING_HOME: 'MatchingHome',
+  RAPID_MATCHING: 'RapidMatching',
+  CUSTOM_MATCHING: 'CustomMatching',
 } as const;
 
 export const settingNavigations = {

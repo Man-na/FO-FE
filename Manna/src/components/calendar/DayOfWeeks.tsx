@@ -3,6 +3,7 @@ import React from 'react';
 import {Dimensions, StyleSheet, Text, View} from 'react-native';
 
 const deviceWidth = Dimensions.get('window').width;
+const boxWidth = (deviceWidth - 32) / 7;
 
 export const DayOfWeeks = () => {
   return (
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   item: {
-    width: deviceWidth / 7,
+    width: boxWidth,
     alignItems: 'center',
   },
   text: {

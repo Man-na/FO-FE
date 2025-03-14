@@ -41,3 +41,12 @@ export const deleteFeed = async (id: number): Promise<number> => {
   const {data} = await axiosInstance.delete(`/feed/${id}`);
   return data.data;
 };
+
+export const uploadImages = async (body: FormData): Promise<string[]> => {
+  const {data} = await axiosInstance.post('/marker/images', body, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return data.data;
+};

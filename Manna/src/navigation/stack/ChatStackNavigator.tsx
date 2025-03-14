@@ -1,8 +1,8 @@
-import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {ChatRoomScreen} from '@/screens/chat/ChatRoomScreen';
+import React from 'react';
+
 import {chatNavigations} from '@/constants';
-import {ChatHomeScreen} from '@/screens/chat/ChatHomeScreen';
+import {ChatHomeScreen, ChatRoomScreen} from '@/screens/chat';
 
 export type ChatStackParamList = {
   [chatNavigations.CHAT_HOME]: undefined;
@@ -11,7 +11,7 @@ export type ChatStackParamList = {
 
 const Stack = createStackNavigator<ChatStackParamList>();
 
-function ChatStackNavigator() {
+const ChatStackNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -26,6 +26,6 @@ function ChatStackNavigator() {
       />
     </Stack.Navigator>
   );
-}
+};
 
 export default ChatStackNavigator;

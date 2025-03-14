@@ -1,14 +1,15 @@
-import {ProfileCustomButton} from '@/components/common/ProfileCustomButton';
-import {colors, mainNavigations, profileNavigations} from '@/constants';
-import {ProfileStackParamList} from '@/navigation/stack/ProfileStackNavigator';
-import {MainTabParamList} from '@/navigation/tab/MainTabNavigator';
-import {useAuth} from '@/services/auth';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import {CompositeNavigationProp, useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import React from 'react';
 import {FormProvider, useForm} from 'react-hook-form';
 import {Image, SafeAreaView, StyleSheet, View} from 'react-native';
+
+import {ProfileCustomButton} from '@/components/profile';
+import {colors, mainNavigations, profileNavigations} from '@/constants';
+import {ProfileStackParamList} from '@/navigation/stack/ProfileStackNavigator';
+import {MainTabParamList} from '@/navigation/tab/MainTabNavigator';
+import {useAuth} from '@/services/auth';
 
 type Navigation = CompositeNavigationProp<
   BottomTabNavigationProp<MainTabParamList, typeof mainNavigations.PROFILE>,
@@ -19,9 +20,7 @@ type FormValues = {
   nickname: string;
 };
 
-interface EditProfileScreenProps {}
-
-function EditProfileScreen({}: EditProfileScreenProps): React.JSX.Element {
+export const EditProfileScreen = () => {
   const {getProfileQuery} = useAuth();
   const nickname = getProfileQuery.data?.nickname || '';
   const imageUri = getProfileQuery.data?.imageUri || '';
@@ -62,7 +61,7 @@ function EditProfileScreen({}: EditProfileScreenProps): React.JSX.Element {
       </FormProvider>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -84,5 +83,3 @@ const styles = StyleSheet.create({
     gap: 16,
   },
 });
-
-export default EditProfileScreen;

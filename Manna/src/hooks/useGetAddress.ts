@@ -3,6 +3,7 @@ import axios from 'axios';
 import {useEffect, useState} from 'react';
 import {LatLng} from 'react-native-maps';
 import Config from 'react-native-config';
+
 export const useGetAddress = (location: LatLng) => {
   const {latitude, longitude} = location;
   const [result, setResult] = useState('');

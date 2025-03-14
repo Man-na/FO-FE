@@ -1,3 +1,4 @@
+import {colors} from '@/constants';
 import React from 'react';
 import {
   Dimensions,
@@ -7,7 +8,6 @@ import {
   Text,
   View,
 } from 'react-native';
-import {colors} from '@/constants';
 
 interface CustomButtonProps extends PressableProps {
   label: string;
@@ -18,13 +18,13 @@ interface CustomButtonProps extends PressableProps {
 
 const deviceHeight = Dimensions.get('screen').height;
 
-function CustomButton({
+export const CustomButton = ({
   label,
   variant = 'filled',
   size = 'large',
   inValid = false,
   ...props
-}: CustomButtonProps): React.JSX.Element {
+}: CustomButtonProps) => {
   return (
     <Pressable
       disabled={inValid}
@@ -40,7 +40,7 @@ function CustomButton({
       </View>
     </Pressable>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -91,5 +91,3 @@ const styles = StyleSheet.create({
     color: colors.PINK_700,
   },
 });
-
-export default CustomButton;

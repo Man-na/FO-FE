@@ -1,17 +1,17 @@
-import CustomButton from '@/components/common/CustomButton';
-import InputField from '@/components/common/InputField';
-import useForm from '@/hooks/useForm';
-import {useAuth} from '@/services/auth';
 import {validateLogin} from '@/utils';
 import React, {useRef} from 'react';
 import {SafeAreaView, StyleSheet, TextInput, View} from 'react-native';
+
+import {CustomButton, InputField} from '@/components/common';
+import {useForm} from '@/hooks/useForm';
+import {useAuth} from '@/services/auth';
 
 export interface LoginFormValues {
   email: string;
   password: string;
 }
 
-function LoginScreen(): React.JSX.Element {
+export const LoginScreen = () => {
   const passwordRef = useRef<TextInput | null>(null);
   const {loginMutation} = useAuth();
   const {values, errors, touched, getTextInputProps} = useForm<LoginFormValues>(
@@ -68,7 +68,7 @@ function LoginScreen(): React.JSX.Element {
       />
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -80,5 +80,3 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
 });
-
-export default LoginScreen;

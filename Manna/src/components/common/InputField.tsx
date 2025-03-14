@@ -20,7 +20,7 @@ interface InputFieldProps extends TextInputProps {
 
 const deviceHeight = Dimensions.get('screen').height;
 
-const InputField = forwardRef(
+export const InputField = forwardRef(
   (
     {disabled = false, error, touched, icon = null, ...props}: InputFieldProps,
     ref?: ForwardedRef<TextInput>,
@@ -95,5 +95,3 @@ const styles = StyleSheet.create({
     paddingTop: 5,
   },
 });
-
-export default InputField;

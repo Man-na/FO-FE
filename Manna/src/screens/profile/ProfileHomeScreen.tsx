@@ -1,22 +1,21 @@
-import {ProfileCustomButton} from '@/components/common/ProfileCustomButton';
-import {colors, mainNavigations, profileNavigations} from '@/constants';
-import {ProfileStackParamList} from '@/navigation/stack/ProfileStackNavigator';
-import {MainTabParamList} from '@/navigation/tab/MainTabNavigator';
-import {useAuth} from '@/services/auth';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import {CompositeNavigationProp, useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 
+import {ProfileCustomButton} from '@/components/profile';
+import {colors, mainNavigations, profileNavigations} from '@/constants';
+import {ProfileStackParamList} from '@/navigation/stack/ProfileStackNavigator';
+import {MainTabParamList} from '@/navigation/tab/MainTabNavigator';
+import {useAuth} from '@/services/auth';
+
 type Navigation = CompositeNavigationProp<
   BottomTabNavigationProp<MainTabParamList, typeof mainNavigations.PROFILE>,
   StackNavigationProp<ProfileStackParamList>
 >;
 
-interface ProfileHomeScreenProps {}
-
-function ProfileHomeScreen({}: ProfileHomeScreenProps): React.JSX.Element {
+export const ProfileHomeScreen = () => {
   const {getProfileQuery} = useAuth();
   const navigation = useNavigation<Navigation>();
 
@@ -51,7 +50,7 @@ function ProfileHomeScreen({}: ProfileHomeScreenProps): React.JSX.Element {
       </View>
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   header: {
@@ -88,5 +87,3 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
 });
-
-export default ProfileHomeScreen;

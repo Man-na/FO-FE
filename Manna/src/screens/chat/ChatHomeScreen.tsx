@@ -1,15 +1,16 @@
-import {AddChatRoomModal} from '@/components/chat/AddChatRoomModal';
-import {chatNavigations} from '@/constants';
-import {ChatStackParamList} from '@/navigation/stack/ChatStackNavigator';
-import {useGetInfiniteChatRooms} from '@/services/chat/queries/useGetInfiniteChatRooms';
 import {useNavigation, useScrollToTop} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import React, {useRef, useState} from 'react';
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
+import {AddChatRoomModal} from '@/components/chat';
+import {chatNavigations} from '@/constants';
+import {ChatStackParamList} from '@/navigation/stack/ChatStackNavigator';
+import {useGetInfiniteChatRooms} from '@/services/chat';
+
 type Navigation = StackNavigationProp<ChatStackParamList>;
 
-export const ChatHomeScreen: React.FC = () => {
+export const ChatHomeScreen = () => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const navigation = useNavigation<Navigation>();

@@ -7,10 +7,7 @@ interface CreateRoomModalProps {
   onClose: () => void;
 }
 
-export const AddChatRoomModal: React.FC<CreateRoomModalProps> = ({
-  visible,
-  onClose,
-}) => {
+export const AddChatRoomModal = ({visible, onClose}: CreateRoomModalProps) => {
   const [roomName, setRoomName] = useState('');
   const createChatRoom = useCreateChatRoom();
 

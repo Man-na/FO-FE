@@ -1,15 +1,12 @@
-import {SettingItem} from '@/components/setting/SettingItem';
-import {colors} from '@/constants';
-import {SettingStackParamList} from '@/navigation/stack/SettingStackNavigator';
-import {useAuth} from '@/services/auth';
 import Octicons from '@react-native-vector-icons/octicons';
-import {StackScreenProps} from '@react-navigation/stack';
 import React from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 
-type SettingHomeScreenProps = StackScreenProps<SettingStackParamList>;
+import {SettingItem} from '@/components/setting';
+import {colors} from '@/constants';
+import {useAuth} from '@/services/auth';
 
-function SettingHomeScreen({}: SettingHomeScreenProps) {
+export const SettingHomeScreen = () => {
   const {logoutMutation} = useAuth();
 
   const handlePressLogout = () => {
@@ -29,7 +26,7 @@ function SettingHomeScreen({}: SettingHomeScreenProps) {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

@@ -1,10 +1,10 @@
-import CustomButton from '@/components/common/CustomButton';
-import InputField from '@/components/common/InputField';
-import useForm from '@/hooks/useForm';
-import {useAuth} from '@/services/auth';
-import {validateSignup} from '@/utils';
 import React, {useRef} from 'react';
 import {SafeAreaView, StyleSheet, TextInput, View} from 'react-native';
+
+import {CustomButton, InputField} from '@/components/common';
+import {useForm} from '@/hooks/useForm';
+import {useAuth} from '@/services/auth';
+import {validateSignup} from '@/utils';
 
 export interface SignupFormValues {
   email: string;
@@ -12,7 +12,7 @@ export interface SignupFormValues {
   passwordConfirm: string;
 }
 
-function SignupScreen(): React.JSX.Element {
+export const SignupScreen = () => {
   const passwordRef = useRef<TextInput | null>(null);
   const passwordConfirmRef = useRef<TextInput | null>(null);
 
@@ -89,7 +89,7 @@ function SignupScreen(): React.JSX.Element {
       <CustomButton label="회원가입" onPress={handleSubmit} />
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -101,5 +101,3 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
 });
-
-export default SignupScreen;

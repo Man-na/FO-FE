@@ -5,22 +5,24 @@ import {Dimensions, Pressable, StyleSheet, Text, View} from 'react-native';
 interface DateBoxProps {
   date: number;
   isToday: boolean;
-  hasSchedule: boolean;
   selectedDate: number;
   onPressDate: (date: number) => void;
 }
 
 const deviceWidth = Dimensions.get('window').width;
+const boxWidth = (deviceWidth - 32) / 7;
 
 export const DateBox = ({
   date,
   isToday,
-  hasSchedule,
   selectedDate,
   onPressDate,
 }: DateBoxProps) => {
   return (
-    <Pressable style={styles.container} onPress={() => onPressDate(date)}>
+    <Pressable
+      style={styles.container}
+      onPress={() => onPressDate(date)}
+      disabled={date <= 0}>
       {date > 0 && (
         <>
           <View
@@ -39,7 +41,6 @@ export const DateBox = ({
               {date}
             </Text>
           </View>
-          {hasSchedule && <View style={styles.scheduleIndicator} />}
         </>
       )}
     </Pressable>
@@ -48,8 +49,8 @@ export const DateBox = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: deviceWidth / 7,
-    height: deviceWidth / 7,
+    width: boxWidth,
+    height: boxWidth,
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: colors.GRAY_200,
     alignItems: 'center',
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.PINK_700,
   },
   dateText: {
-    fontSize: 17,
+    fontSize: 16,
     color: colors.BLACK,
   },
   todayText: {

@@ -1,10 +1,13 @@
-import {BackButton} from '@/components/common/BackButton';
-import {colors, profileNavigations} from '@/constants';
-import EditAvatarScreen from '@/screens/profile/EditAvatarScreen';
-import EditProfileScreen from '@/screens/profile/EditProfileScreen';
-import ProfileHomeScreen from '@/screens/profile/ProfileHomeScreen';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
+
+import {BackButton} from '@/components/common/BackButton';
+import {colors, profileNavigations} from '@/constants';
+import {
+  EditAvatarScreen,
+  EditProfileScreen,
+  ProfileHomeScreen,
+} from '@/screens/profile';
 
 export type ProfileStackParamList = {
   [profileNavigations.PROFILE_HOME]: undefined;
@@ -14,7 +17,7 @@ export type ProfileStackParamList = {
 
 const Stack = createStackNavigator<ProfileStackParamList>();
 
-function ProfileStackNavigator() {
+const ProfileStackNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -58,6 +61,6 @@ function ProfileStackNavigator() {
       />
     </Stack.Navigator>
   );
-}
+};
 
 export default ProfileStackNavigator;

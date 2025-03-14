@@ -1,14 +1,15 @@
-import AuthStackNavigator from '@/navigation/stack/AuthStackNavigator';
-import MainTabNavigator from '@/navigation/tab/MainTabNavigator';
-import ChatStackNavigator from '@/navigation/stack/ChatStackNavigator';
-import {useAuth} from '@/services/auth';
-import {mainNavigations} from '@/constants';
-import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
+import React from 'react';
+
+import {mainNavigations} from '@/constants';
+import AuthStackNavigator from '@/navigation/stack/AuthStackNavigator';
+import ChatStackNavigator from '@/navigation/stack/ChatStackNavigator';
+import MainTabNavigator from '@/navigation/tab/MainTabNavigator';
+import {useAuth} from '@/services/auth';
 
 const Stack = createStackNavigator();
 
-function RootNavigator(): React.JSX.Element {
+function RootNavigator() {
   const {isLogin} = useAuth();
 
   return (

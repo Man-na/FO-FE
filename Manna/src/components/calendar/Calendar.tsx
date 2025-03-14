@@ -3,45 +3,32 @@ import {useModal} from '@/hooks/useModal';
 import {isSameAsCurrentDate, MonthYear} from '@/utils';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import MaterialIcons from '@react-native-vector-icons/material-icons';
-import {useNavigation} from '@react-navigation/native';
-import React, {useEffect} from 'react';
+import React from 'react';
 import {FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
-import {CalendarHomeHeaderRight} from './CalendarHomeHeaderRight';
 import {DateBox} from './DateBox';
 import {DayOfWeeks} from './DayOfWeeks';
 import {YearSelector} from './YearSelector';
 
-interface CalendarProps<T> {
+interface CalendarProps {
   monthYear: MonthYear;
   selectedDate: number;
-  schedules: Record<number, T[]>;
   onPressDate: (date: number) => void;
   onChangeMonth: (increment: number) => void;
-  moveToToday: () => void;
 }
 
-export const Calendar = <T,>({
+export const Calendar = ({
   monthYear,
   selectedDate,
-  schedules,
   onPressDate,
   onChangeMonth,
-  moveToToday,
-}: CalendarProps<T>): JSX.Element => {
+}: CalendarProps) => {
   const {lastDate, firstDOW, year, month} = monthYear;
-  const navigation = useNavigation();
   const yearSelector = useModal();
 
   const handleChangeYear = (selectYear: number) => {
     onChangeMonth((selectYear - year) * 12);
     yearSelector.hide();
   };
-
-  useEffect(() => {
-    navigation.setOptions({
-      headerRight: () => CalendarHomeHeaderRight(moveToToday),
-    });
-  }, [moveToToday, navigation]);
 
   return (
     <>
@@ -82,7 +69,6 @@ export const Calendar = <T,>({
             <DateBox
               date={item.date}
               isToday={isSameAsCurrentDate(year, month, item.date)}
-              hasSchedule={Boolean(schedules[item.date])}
               selectedDate={selectedDate}
               onPressDate={onPressDate}
             />

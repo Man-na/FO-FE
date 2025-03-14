@@ -1,9 +1,9 @@
 import {useEffect, useState} from 'react';
 
-function useForm<T>(
+export const useForm = <T>(
   initialValue: T,
   validate: (values: T) => Record<keyof T, string>,
-) {
+) => {
   const [values, setValues] = useState<T>(initialValue);
   const [touched, setTouched] = useState<Record<keyof T, boolean>>(
     {} as Record<keyof T, boolean>,
@@ -39,6 +39,4 @@ function useForm<T>(
   }, [validate, values]);
 
   return {values, errors, touched, getTextInputProps};
-}
-
-export default useForm;
+};

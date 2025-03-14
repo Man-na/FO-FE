@@ -1,25 +1,24 @@
-import {colors, mainNavigations} from '@/constants';
-import FeedStackNavigator, {
-  FeedStackParamList,
-} from '@/navigation/stack/FeedStackNavigator';
-import MapStackNavigator, {
-  MapStackParamList,
-} from '@/navigation/stack/MapStackNavigator';
-import SettingStackNavigator, {
-  SettingStackParamList,
-} from '@/navigation/stack/SettingStackNavigator';
-import CalendarHomeScreen from '@/screens/calendar/CalendarHomeScreen';
 import MaterialIcons from '@react-native-vector-icons/material-icons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigatorScreenParams, RouteProp} from '@react-navigation/native';
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
-import ProfileStackNavigator from '../stack/ProfileStackNavigator';
+
+import {colors, mainNavigations} from '@/constants';
+import FeedStackNavigator, {
+  FeedStackParamList,
+} from '@/navigation/stack/FeedStackNavigator';
+
+import MatchingStackNavigator from '@/navigation/stack/MatchingStackNavigator';
+import ProfileStackNavigator from '@/navigation/stack/ProfileStackNavigator';
+import SettingStackNavigator, {
+  SettingStackParamList,
+} from '@/navigation/stack/SettingStackNavigator';
 
 export type MainTabParamList = {
-  [mainNavigations.HOME]: NavigatorScreenParams<MapStackParamList>;
+  [mainNavigations.HOME]: undefined;
+  [mainNavigations.MATCHING]: undefined;
   [mainNavigations.FEED]: NavigatorScreenParams<FeedStackParamList>;
-  [mainNavigations.CALENDAR]: undefined;
   [mainNavigations.PROFILE]: undefined;
   [mainNavigations.SETTING]: NavigatorScreenParams<SettingStackParamList>;
 };
@@ -48,11 +47,6 @@ const TabBarIcons = ({
       size = 16;
       break;
     }
-    case mainNavigations.CALENDAR: {
-      iconName = 'event-note';
-      size = 16;
-      break;
-    }
     case mainNavigations.PROFILE: {
       iconName = 'person';
       size = 16;
@@ -74,7 +68,7 @@ const TabBarIcons = ({
   );
 };
 
-function MainTabNavigator(): React.JSX.Element {
+const MainTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({navigation, route}) => ({
@@ -105,18 +99,18 @@ function MainTabNavigator(): React.JSX.Element {
       })}>
       <Tab.Screen
         name={mainNavigations.HOME}
-        component={MapStackNavigator}
+        component={MatchingStackNavigator}
         options={{title: '홈'}}
+      />
+      <Tab.Screen
+        name={mainNavigations.MATCHING}
+        component={MatchingStackNavigator}
+        options={{title: '매칭', headerShown: true}}
       />
       <Tab.Screen
         name={mainNavigations.FEED}
         component={FeedStackNavigator}
-        options={{title: '피드'}}
-      />
-      <Tab.Screen
-        name={mainNavigations.CALENDAR}
-        component={CalendarHomeScreen}
-        options={{title: '캘린더', headerShown: true}}
+        options={{title: '커뮤니티'}}
       />
       <Tab.Screen
         name={mainNavigations.PROFILE}
@@ -130,6 +124,6 @@ function MainTabNavigator(): React.JSX.Element {
       />
     </Tab.Navigator>
   );
-}
+};
 
 export default MainTabNavigator;

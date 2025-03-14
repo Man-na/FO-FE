@@ -13,7 +13,7 @@ export const HeaderButton = ({
   icon,
   hasError = false,
   ...props
-}: HeaderButtonProps): React.JSX.Element => {
+}: HeaderButtonProps) => {
   return (
     <Pressable disabled={hasError} style={styles.container} {...props}>
       {!labelText && icon}

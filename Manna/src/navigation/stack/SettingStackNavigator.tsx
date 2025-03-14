@@ -11,7 +11,7 @@ export type SettingStackParamList = {
 
 const Stack = createStackNavigator<SettingStackParamList>();
 
-function SettingStackNavigator() {
+const SettingStackNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -32,10 +32,11 @@ function SettingStackNavigator() {
         component={SettingHomeScreen}
         options={{
           headerTitle: '설정',
+          headerShown: false,
         }}
       />
     </Stack.Navigator>
   );
-}
+};
 
 export default SettingStackNavigator;

@@ -1,13 +1,14 @@
-import React, {useState, useEffect, useCallback} from 'react';
-import {View, StyleSheet, SafeAreaView, ActivityIndicator} from 'react-native';
-import {useWebSocket} from '@/context/WebSocketContext';
-import {useGetInfiniteChatMessages} from '@/services/chat/queries/useGetInfiniteChatMessages';
-import {useAuth} from '@/services/auth';
 import {StackScreenProps} from '@react-navigation/stack';
-import {ChatStackParamList} from '@/navigation/stack/ChatStackNavigator';
 import {useQueryClient} from '@tanstack/react-query';
-import {queryKeys} from '@/constants';
+import React, {useCallback, useEffect, useState} from 'react';
+import {ActivityIndicator, SafeAreaView, StyleSheet, View} from 'react-native';
 import {GiftedChat, IMessage} from 'react-native-gifted-chat';
+
+import {queryKeys} from '@/constants';
+import {useWebSocket} from '@/context/WebSocketContext';
+import {ChatStackParamList} from '@/navigation/stack/ChatStackNavigator';
+import {useAuth} from '@/services/auth';
+import {useGetInfiniteChatMessages} from '@/services/chat';
 
 interface GiftedMessage extends IMessage {
   _id: number;
@@ -20,9 +21,7 @@ interface GiftedMessage extends IMessage {
 
 type ChatRoomScreenProps = StackScreenProps<ChatStackParamList>;
 
-export const ChatRoomScreen = ({
-  route,
-}: ChatRoomScreenProps): React.JSX.Element => {
+export const ChatRoomScreen = ({route}: ChatRoomScreenProps) => {
   const {id} = route.params ?? {id: 0};
   const {ws} = useWebSocket();
   const [messages, setMessages] = useState<GiftedMessage[]>([]);

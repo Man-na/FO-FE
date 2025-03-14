@@ -1,23 +1,28 @@
-import {BackButton} from '@/components/common/BackButton';
-import {colors, feedNavigations} from '@/constants';
-import {AddFeedScreen} from '@/screens/feed/AddFeedScreen';
-import {FeedDetailScreen} from '@/screens/feed/FeedDetailScreen';
-import FeedHomeScreen from '@/screens/feed/FeedHomeScreen';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {LatLng} from 'react-native-maps';
 
+import {BackButton} from '@/components/common';
+import {colors, communityNavigations} from '@/constants';
+import {
+  AddFeedScreen,
+  FeedDetailScreen,
+  FeedHomeScreen,
+  FreeFeedScreen,
+} from '@/screens/community';
+
 export type FeedStackParamList = {
-  [feedNavigations.FEED_HOME]: undefined;
-  [feedNavigations.FEED_DETAIL]: {id: number};
-  [feedNavigations.EDIT_FEED]: {location: LatLng};
-  [feedNavigations.IMAGE_ZOOM]: {index: number};
-  [feedNavigations.ADD_FEED]: undefined;
+  [communityNavigations.COMMUNITY_HOME]: undefined;
+  [communityNavigations.FREE_FEED]: undefined;
+  [communityNavigations.FEED_DETAIL]: {id: number};
+  [communityNavigations.EDIT_FEED]: {location: LatLng};
+  [communityNavigations.IMAGE_ZOOM]: {index: number};
+  [communityNavigations.ADD_FEED]: undefined;
 };
 
 const Stack = createStackNavigator<FeedStackParamList>();
 
-function FeedStackNavigator() {
+const FeedStackNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -34,14 +39,23 @@ function FeedStackNavigator() {
         headerTintColor: colors.BLACK,
       }}>
       <Stack.Screen
-        name={feedNavigations.FEED_HOME}
+        name={communityNavigations.COMMUNITY_HOME}
         component={FeedHomeScreen}
         options={() => ({
           headerTitle: '피드',
+          headerShown: false,
         })}
       />
       <Stack.Screen
-        name={feedNavigations.FEED_DETAIL}
+        name={communityNavigations.FREE_FEED}
+        component={FreeFeedScreen}
+        options={() => ({
+          headerTitle: '자유게시판',
+          headerLeft: () => <BackButton />,
+        })}
+      />
+      <Stack.Screen
+        name={communityNavigations.FEED_DETAIL}
         component={FeedDetailScreen}
         options={() => ({
           headerShown: true,
@@ -53,7 +67,7 @@ function FeedStackNavigator() {
         })}
       />
       <Stack.Screen
-        name={feedNavigations.ADD_FEED}
+        name={communityNavigations.ADD_FEED}
         component={AddFeedScreen}
         options={() => ({
           headerShown: true,
@@ -63,6 +77,6 @@ function FeedStackNavigator() {
       />
     </Stack.Navigator>
   );
-}
+};
 
 export default FeedStackNavigator;

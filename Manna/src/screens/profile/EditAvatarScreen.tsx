@@ -1,17 +1,16 @@
-import {AvatarItem} from '@/components/common/AvatarItem';
-import FixedBottomCTA from '@/components/common/FixedBottomCTA';
-import {Tab} from '@/components/common/Tab';
-import {colors} from '@/constants';
-import {useAuth} from '@/services/auth';
-import {useGetAvatarList} from '@/services/avatar';
-import {s3BaseUrl} from '@/utils';
 import {useNavigation} from '@react-navigation/native';
 import React, {useRef, useState} from 'react';
 import {FlatList, SafeAreaView, StyleSheet, View} from 'react-native';
 import PagerView from 'react-native-pager-view';
 import {SvgUri} from 'react-native-svg';
 
-function EditAvatarScreen(): React.JSX.Element {
+import {AvatarItem, AvatarTab, FixedBottomCTA} from '@/components/profile';
+import {colors} from '@/constants';
+import {useAuth} from '@/services/auth';
+import {useGetAvatarList} from '@/services/avatar';
+import {s3BaseUrl} from '@/utils';
+
+export const EditAvatarScreen = () => {
   const navigation = useNavigation();
   const {getProfileQuery, profileMutation} = useAuth();
   const pagerRef = useRef<PagerView | null>(null);
@@ -136,12 +135,12 @@ function EditAvatarScreen(): React.JSX.Element {
         </View>
         <View style={styles.tabContainer}>
           {['모자', '얼굴', '상의', '하의', '손', '피부'].map((tab, index) => (
-            <Tab
+            <AvatarTab
               key={index}
               isActive={currentTab === index}
               onPress={() => handlePressTab(index)}>
               {tab}
-            </Tab>
+            </AvatarTab>
           ))}
         </View>
         <PagerView
@@ -172,7 +171,7 @@ function EditAvatarScreen(): React.JSX.Element {
       <FixedBottomCTA label="저장" onPress={handleSaveAvatar} />
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   safeArea: {

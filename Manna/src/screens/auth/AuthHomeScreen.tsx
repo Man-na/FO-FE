@@ -1,7 +1,8 @@
 import {StackScreenProps} from '@react-navigation/stack';
 import React from 'react';
 import {Dimensions, Image, SafeAreaView, StyleSheet, View} from 'react-native';
-import CustomButton from '@/components/common/CustomButton';
+
+import {CustomButton} from '@/components/common/CustomButton';
 import {authNavigations} from '@/constants/navigations';
 import {AuthStackParamList} from '@/navigation/stack/AuthStackNavigator';
 
@@ -10,7 +11,7 @@ type AuthHomeScreenProps = StackScreenProps<
   typeof authNavigations.AUTH_HOME
 >;
 
-function AuthHomeScreen({navigation}: AuthHomeScreenProps): React.JSX.Element {
+export const AuthHomeScreen = ({navigation}: AuthHomeScreenProps) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.imageContainer}>
@@ -33,7 +34,7 @@ function AuthHomeScreen({navigation}: AuthHomeScreenProps): React.JSX.Element {
       </View>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -54,5 +55,3 @@ const styles = StyleSheet.create({
     gap: 10,
   },
 });
-
-export default AuthHomeScreen;
