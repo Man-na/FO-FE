@@ -11,7 +11,7 @@ import {
 
 interface ProfileCustomButtonProps extends PressableProps {
   label: string;
-  size?: 'medium' | 'large';
+  size?: 'small' | 'medium' | 'large';
   variant?: 'standard' | 'filled' | 'outlined';
   style?: StyleProp<ViewStyle>;
 }
@@ -51,6 +51,11 @@ const styles = StyleSheet.create({
   },
   medium: {
     height: 38,
+    alignSelf: 'center',
+    paddingHorizontal: 12,
+  },
+  small: {
+    height: 32,
     alignSelf: 'center',
     paddingHorizontal: 12,
   },

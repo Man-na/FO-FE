@@ -1,4 +1,5 @@
 import MaterialIcons from '@react-native-vector-icons/material-icons';
+import Ionicons from '@react-native-vector-icons/ionicons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigatorScreenParams, RouteProp} from '@react-navigation/native';
 import React from 'react';
@@ -8,12 +9,8 @@ import {colors, mainNavigations} from '@/constants';
 import FeedStackNavigator, {
   FeedStackParamList,
 } from '@/navigation/stack/FeedStackNavigator';
-
 import MatchingStackNavigator from '@/navigation/stack/MatchingStackNavigator';
 import ProfileStackNavigator from '@/navigation/stack/ProfileStackNavigator';
-import SettingStackNavigator, {
-  SettingStackParamList,
-} from '@/navigation/stack/SettingStackNavigator';
 import HomeStackNavigator from '../stack/HomeStackNavigator';
 
 export type MainTabParamList = {
@@ -21,7 +18,6 @@ export type MainTabParamList = {
   [mainNavigations.MATCHING]: undefined;
   [mainNavigations.FEED]: NavigatorScreenParams<FeedStackParamList>;
   [mainNavigations.PROFILE]: undefined;
-  [mainNavigations.SETTING]: NavigatorScreenParams<SettingStackParamList>;
 };
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
@@ -35,26 +31,31 @@ const TabBarIcons = ({
   focused: boolean;
   size: number;
 }) => {
+  if (route.name === mainNavigations.MATCHING) {
+    return (
+      <Ionicons
+        name="people"
+        size={16}
+        color={focused ? colors.BLACK : colors.GRAY_500}
+      />
+    );
+  }
+
   let iconName = '';
 
   switch (route.name) {
     case mainNavigations.HOME: {
-      iconName = 'location-on';
+      iconName = 'home';
       size = 16;
       break;
     }
     case mainNavigations.FEED: {
-      iconName = 'book';
+      iconName = 'feed';
       size = 16;
       break;
     }
     case mainNavigations.PROFILE: {
       iconName = 'person';
-      size = 16;
-      break;
-    }
-    case mainNavigations.SETTING: {
-      iconName = 'settings';
       size = 16;
       break;
     }
@@ -117,11 +118,6 @@ const MainTabNavigator = () => {
         name={mainNavigations.PROFILE}
         component={ProfileStackNavigator}
         options={{title: '프로필'}}
-      />
-      <Tab.Screen
-        name={mainNavigations.SETTING}
-        component={SettingStackNavigator}
-        options={{title: '설정'}}
       />
     </Tab.Navigator>
   );
