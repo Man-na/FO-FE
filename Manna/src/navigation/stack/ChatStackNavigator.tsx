@@ -3,6 +3,7 @@ import React from 'react';
 
 import {chatNavigations} from '@/constants';
 import {ChatHomeScreen, ChatRoomScreen} from '@/screens/chat';
+import {BackButton} from '@/components/common';
 
 export type ChatStackParamList = {
   [chatNavigations.CHAT_HOME]: undefined;
@@ -17,12 +18,12 @@ const ChatStackNavigator = () => {
       <Stack.Screen
         name={chatNavigations.CHAT_HOME}
         component={ChatHomeScreen}
-        options={{title: '채팅 홈'}}
+        options={{headerTitle: '채팅 홈', headerLeft: () => <BackButton />}}
       />
       <Stack.Screen
         name={chatNavigations.CHAT_ROOM_SCREEN}
         component={ChatRoomScreen}
-        options={{title: '채팅방'}}
+        options={{headerTitle: '채팅방', headerLeft: () => <BackButton />}}
       />
     </Stack.Navigator>
   );

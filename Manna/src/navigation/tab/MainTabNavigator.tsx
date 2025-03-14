@@ -11,7 +11,7 @@ import FeedStackNavigator, {
 } from '@/navigation/stack/FeedStackNavigator';
 import MatchingStackNavigator from '@/navigation/stack/MatchingStackNavigator';
 import ProfileStackNavigator from '@/navigation/stack/ProfileStackNavigator';
-import HomeStackNavigator from '../stack/HomeStackNavigator';
+import HomeStackNavigator from '@/navigation/stack/HomeStackNavigator';
 
 export type MainTabParamList = {
   [mainNavigations.HOME]: undefined;
