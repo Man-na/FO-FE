@@ -13,6 +13,10 @@ export const authNavigations = {
   SIGNUP: 'Signup',
 } as const;
 
+export const homeNavigations = {
+  HOME: 'Home',
+} as const;
+
 export const communityNavigations = {
   COMMUNITY_HOME: 'CommunityHome',
   FREE_FEED: 'FreeFeed',

@@ -14,6 +14,7 @@ import ProfileStackNavigator from '@/navigation/stack/ProfileStackNavigator';
 import SettingStackNavigator, {
   SettingStackParamList,
 } from '@/navigation/stack/SettingStackNavigator';
+import HomeStackNavigator from '../stack/HomeStackNavigator';
 
 export type MainTabParamList = {
   [mainNavigations.HOME]: undefined;
@@ -99,7 +100,7 @@ const MainTabNavigator = () => {
       })}>
       <Tab.Screen
         name={mainNavigations.HOME}
-        component={MatchingStackNavigator}
+        component={HomeStackNavigator}
         options={{title: '홈'}}
       />
       <Tab.Screen
