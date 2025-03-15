@@ -1,6 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {
+  Alert,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -15,16 +16,19 @@ import {
   LocationSelectionStep,
 } from '@/components/matching/custom';
 import {colors} from '@/constants';
+import {useCreateCustomMatching} from '@/services/matching';
 import {getMonthYearDetails, getNewMonthYear} from '@/utils';
 
 export const CustomMatchingScreen = () => {
   const navigation = useNavigation();
   const [currentStep, setCurrentStep] = useState<number>(1);
-  const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
+  const [selectedLocation, setSelectedLocation] = useState<string>('');
   const [selectedAtmosphere, setSelectedAtmosphere] = useState<string[]>([]);
   const currentMonthYear = getMonthYearDetails(new Date());
   const [monthYear, setMonthYear] = useState(currentMonthYear);
   const [selectedDate, setSelectedDate] = useState<number>(0);
+
+  const createCustomMatching = useCreateCustomMatching();
 
   const handlePressDate = (date: number): void => {
     setSelectedDate(date);
@@ -39,17 +43,27 @@ export const CustomMatchingScreen = () => {
     if (currentStep < 3) {
       setCurrentStep(currentStep + 1);
     } else {
-      proceedWithMatching();
+      Alert.alert(
+        '매칭 진행',
+        `날짜: ${monthYear.year}-${monthYear.month}-${selectedDate}\n장소: ${selectedLocation}\n매칭을 진행합니다.`,
+        [
+          {
+            text: '확인',
+            onPress: () => {
+              createCustomMatching.mutate(
+                {
+                  meetingDate: `${monthYear.year}-${monthYear.month}-${selectedDate}`,
+                  location: selectedLocation,
+                  agePreference: '상관없음',
+                  atmospheres: selectedAtmosphere,
+                },
+                {onSuccess: () => navigation.goBack()},
+              );
+            },
+          },
+        ],
+      );
     }
-  };
-
-  const proceedWithMatching = (): void => {
-    console.log('매칭 진행:', {
-      date: selectedDate,
-      location: selectedLocation,
-      atmosphere: selectedAtmosphere,
-    });
-    navigation.goBack();
   };
 
   const handleAtmosphereSelection = (atmosphere: string): void => {

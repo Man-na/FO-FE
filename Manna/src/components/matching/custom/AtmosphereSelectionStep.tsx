@@ -3,14 +3,14 @@ import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
 import {colors} from '@/constants';
 
 const ATMOSPHERE_OPTIONS: {id: string; title: string}[] = [
-  {id: 'fun', title: '다 같이 미친듯이 놀자! 🎮🔥'},
-  {id: 'chill', title: '술게임은 적당히, 대화 위주로! 🍷🗯️'},
-  {id: 'friendly', title: '처음 만나도 친구처럼 편하게! 🤝'},
-  {id: 'values', title: '서로의 가치관이 궁금한 사람들끼리 🤔'},
-  {id: 'mbti', title: 'MBTI, 연애 스타일 등 심도 있는 이야기 🧩'},
-  {id: 'relaxed', title: '편하게 마시고 떠들고! 가벼운 술자리 🍻'},
-  {id: 'hobby', title: '텐션보다는 분위기! 차분한 분위기 좋아하는 사람들 🛋️'},
-  {id: 'cool', title: '쿨하고 자유로운 만남, 가벼운 썸 느낌 🧊'},
+  {id: '1', title: '다 같이 미친듯이 놀자! 🎮🔥'},
+  {id: '2', title: '술게임은 적당히, 대화 위주로! 🍷🗯️'},
+  {id: '3', title: '처음 만나도 친구처럼 편하게! 🤝'},
+  {id: '4', title: '서로의 가치관이 궁금한 사람들끼리 🤔'},
+  {id: '5', title: 'MBTI, 연애 스타일 등 심도 있는 이야기 🧩'},
+  {id: '6', title: '편하게 마시고 떠들고! 가벼운 술자리 🍻'},
+  {id: '7', title: '텐션보다는 분위기! 차분한 분위기 좋아하는 사람들 🛋️'},
+  {id: '8', title: '쿨하고 자유로운 만남, 가벼운 썸 느낌 🧊'},
 ];
 
 interface AtmosphereSelectionStepProps {

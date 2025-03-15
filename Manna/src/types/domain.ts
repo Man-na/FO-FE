@@ -101,6 +101,16 @@ interface RapidMatching {
   status: 'PENDING' | 'MATCHED' | 'CANCELED';
 }
 
+interface CustomMatching {
+  id: number;
+  user: {id: number};
+  meetingDate: string;
+  location: string;
+  agePreference: string;
+  atmospheres: string[];
+  status: 'PENDING' | 'MATCHED' | 'CANCELED';
+}
+
 export type {
   MarkerColor,
   Category,
@@ -113,4 +123,5 @@ export type {
   ChatRoom,
   ChatMessage,
   RapidMatching,
+  CustomMatching,
 };
