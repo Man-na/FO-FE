@@ -92,6 +92,15 @@ interface ChatMessage {
   timestamp: string;
 }
 
+interface RapidMatching {
+  id: number;
+  user: {id: number};
+  priority1Day: string;
+  priority2Day: string;
+  agePreference: string;
+  status: 'PENDING' | 'MATCHED' | 'CANCELED';
+}
+
 export type {
   MarkerColor,
   Category,
@@ -103,4 +112,5 @@ export type {
   Comment,
   ChatRoom,
   ChatMessage,
+  RapidMatching,
 };

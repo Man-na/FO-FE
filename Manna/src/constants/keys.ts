@@ -14,6 +14,7 @@ export const queryKeys = {
   CHAT: 'chat',
   GET_CHAT_ROOMS: 'getChatRooms',
   GET_CHAT_MESSAGES: 'getChatMessages',
+  MATCHING: 'matching',
 };
 
 export const storageKeys = {

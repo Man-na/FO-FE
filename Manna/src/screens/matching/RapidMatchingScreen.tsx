@@ -8,14 +8,18 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+
 import {colors} from '@/constants';
 import {
   AgeSelection,
   DayPickerModal,
   DaySelection,
 } from '@/components/matching/rapid';
+import {useCreateRapidMatching} from '@/services/matching';
 
 export const RapidMatchingScreen = () => {
+  const navigation = useNavigation();
   const [selectedPriorities, setSelectedPriorities] = useState<{
     priority1: string | null;
     priority2: string | null;
@@ -32,6 +36,8 @@ export const RapidMatchingScreen = () => {
   >(null);
 
   const allDays: string[] = ['월', '화', '수', '목', '금', '토', '일'];
+
+  const createRapidMatching = useCreateRapidMatching();
 
   const openDayPicker = (priority: 'priority1' | 'priority2'): void => {
     setCurrentPriority(priority);
@@ -71,7 +77,7 @@ export const RapidMatchingScreen = () => {
     }
   };
 
-  const proceedWithMatching = (): void => {
+  const handleSubmit = (): void => {
     const selectedDays: string[] = [];
     if (selectedPriorities.priority1) {
       selectedDays.push(selectedPriorities.priority1);
@@ -105,17 +111,21 @@ export const RapidMatchingScreen = () => {
 
     Alert.alert(
       '매칭 진행',
-      `1순위: ${selectedPriorities.priority1 || '없음'}, 2순위: ${
+      `1순위: ${selectedPriorities.priority1 || '없음'}\n2순위: ${
         selectedPriorities.priority2 || '없음'
-      }, 연령대: ${agePreference}로 매칭을 진행합니다.`,
+      }\n연령대: ${agePreference}\n매칭을 진행합니다.`,
       [
         {
           text: '확인',
           onPress: () => {
-            console.log('매칭 진행:', {
-              days: selectedPriorities,
-              agePreference: selectedAge,
-            });
+            createRapidMatching.mutate(
+              {
+                priority1Day: selectedPriorities.priority1,
+                priority2Day: selectedPriorities.priority2,
+                agePreference: selectedAge,
+              },
+              {onSuccess: () => navigation.goBack()},
+            );
           },
         },
       ],
@@ -166,7 +176,7 @@ export const RapidMatchingScreen = () => {
             styles.proceedButton,
             !isMatchingButtonEnabled && styles.disabledButton,
           ]}
-          onPress={proceedWithMatching}
+          onPress={handleSubmit}
           disabled={!isMatchingButtonEnabled}>
           <Text style={styles.proceedButtonText}>빠른 매칭 진행하기</Text>
         </TouchableOpacity>
@@ -234,5 +244,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
-export default RapidMatchingScreen;
