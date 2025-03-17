@@ -1,4 +1,5 @@
 export * from './AddFeedHeaderRight';
+export * from './CategorySelector';
 export * from './DescriptionInput';
 export * from './FeedDetailOption';
 export * from './FeedItem';

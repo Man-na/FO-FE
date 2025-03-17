@@ -9,6 +9,7 @@ import {getFeedsWithPagination, ResponseFeed} from '../api';
 import {ResponseError} from '@/types';
 
 export const useGetInfiniteFeeds = (
+  categoryId: number,
   queryOptions?: UseInfiniteQueryOptions<
     ResponseFeed[],
     ResponseError,
@@ -19,8 +20,8 @@ export const useGetInfiniteFeeds = (
   >,
 ) => {
   return useInfiniteQuery({
-    queryFn: ({pageParam}) => getFeedsWithPagination(pageParam),
-    queryKey: [queryKeys.FEED, queryKeys.GET_FEEDS],
+    queryFn: ({pageParam}) => getFeedsWithPagination(pageParam, categoryId),
+    queryKey: [queryKeys.FEED, queryKeys.GET_FEEDS, categoryId],
     initialPageParam: 1,
     getNextPageParam: (lastPage, allpages) => {
       const lastFeed = lastPage[lastPage.length - 1];

@@ -16,13 +16,13 @@ type Navigation = CompositeNavigationProp<
   StackNavigationProp<CommunityStackParamList>
 >;
 
-export const FreeFeedScreen = () => {
+export const StudentFeedScreen = () => {
   const navigation = useNavigation<Navigation>();
   const {getProfileQuery} = useAuth();
 
   return (
     <SafeAreaView style={styles.container}>
-      <FeedList categoryId={1} />
+      <FeedList categoryId={2} />
       {getProfileQuery.data?.id && (
         <Pressable
           style={styles.writeButton}

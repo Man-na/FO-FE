@@ -1,22 +1,22 @@
-import MaterialIcons from '@react-native-vector-icons/material-icons';
 import Ionicons from '@react-native-vector-icons/ionicons';
+import MaterialIcons from '@react-native-vector-icons/material-icons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigatorScreenParams, RouteProp} from '@react-navigation/native';
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
 
 import {colors, mainNavigations} from '@/constants';
-import FeedStackNavigator, {
-  FeedStackParamList,
-} from '@/navigation/stack/FeedStackNavigator';
+import CommunityStackNavigator, {
+  CommunityStackParamList,
+} from '@/navigation/stack/CommunityStackNavigator';
+import HomeStackNavigator from '@/navigation/stack/HomeStackNavigator';
 import MatchingStackNavigator from '@/navigation/stack/MatchingStackNavigator';
 import ProfileStackNavigator from '@/navigation/stack/ProfileStackNavigator';
-import HomeStackNavigator from '@/navigation/stack/HomeStackNavigator';
 
 export type MainTabParamList = {
   [mainNavigations.HOME]: undefined;
   [mainNavigations.MATCHING]: undefined;
-  [mainNavigations.FEED]: NavigatorScreenParams<FeedStackParamList>;
+  [mainNavigations.COMMUNITY]: NavigatorScreenParams<CommunityStackParamList>;
   [mainNavigations.PROFILE]: undefined;
 };
 
@@ -49,7 +49,7 @@ const TabBarIcons = ({
       size = 16;
       break;
     }
-    case mainNavigations.FEED: {
+    case mainNavigations.COMMUNITY: {
       iconName = 'feed';
       size = 16;
       break;
@@ -110,8 +110,8 @@ const MainTabNavigator = () => {
         options={{title: '매칭', headerShown: true}}
       />
       <Tab.Screen
-        name={mainNavigations.FEED}
-        component={FeedStackNavigator}
+        name={mainNavigations.COMMUNITY}
+        component={CommunityStackNavigator}
         options={{title: '커뮤니티'}}
       />
       <Tab.Screen

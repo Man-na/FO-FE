@@ -12,8 +12,11 @@ export type ResponseFeed = Feed & {images: ImageUri[]};
 
 export const getFeedsWithPagination = async (
   page = 1,
+  categoryId: number,
 ): Promise<ResponseFeed[]> => {
-  const {data} = await axiosInstance.get(`/feed/feeds?page=${page}`);
+  const {data} = await axiosInstance.get(
+    `/feed/feeds?page=${page}&categoryId=${categoryId}`,
+  );
 
   return data.data.content;
 };

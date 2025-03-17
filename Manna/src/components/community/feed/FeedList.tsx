@@ -1,13 +1,16 @@
-import {colors} from '@/constants';
-import {useGetInfiniteFeeds} from '@/services/feed';
 import {useScrollToTop} from '@react-navigation/native';
 import React, {useRef, useState} from 'react';
 import {FlatList, StyleSheet} from 'react-native';
 import {FeedItem} from './FeedItem';
 
-interface FeedListProps {}
+import {colors} from '@/constants';
+import {useGetInfiniteFeeds} from '@/services/community';
 
-export const FeedList = ({}: FeedListProps) => {
+interface FeedListProps {
+  categoryId: number;
+}
+
+export const FeedList = ({categoryId}: FeedListProps) => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const ref = useRef<FlatList | null>(null);
   useScrollToTop(ref);
@@ -18,7 +21,7 @@ export const FeedList = ({}: FeedListProps) => {
     hasNextPage,
     isFetchingNextPage,
     refetch,
-  } = useGetInfiniteFeeds();
+  } = useGetInfiniteFeeds(categoryId);
 
   const handleEndReached = () => {
     if (hasNextPage && !isFetchingNextPage) {

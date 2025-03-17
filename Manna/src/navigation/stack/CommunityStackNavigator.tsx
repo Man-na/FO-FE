@@ -6,23 +6,29 @@ import {BackButton} from '@/components/common';
 import {colors, communityNavigations} from '@/constants';
 import {
   AddFeedScreen,
+  CommunityHomeScreen,
   FeedDetailScreen,
-  FeedHomeScreen,
   FreeFeedScreen,
+  PremiumPartyFeedScreen,
+  StudentFeedScreen,
+  WorkerFeedScreen,
 } from '@/screens/community';
 
-export type FeedStackParamList = {
+export type CommunityStackParamList = {
   [communityNavigations.COMMUNITY_HOME]: undefined;
   [communityNavigations.FREE_FEED]: undefined;
+  [communityNavigations.STUDENT_FEED]: undefined;
+  [communityNavigations.WORKER_FEED]: undefined;
+  [communityNavigations.PREMIUM_PARTY_FEED]: undefined;
   [communityNavigations.FEED_DETAIL]: {id: number};
   [communityNavigations.EDIT_FEED]: {location: LatLng};
   [communityNavigations.IMAGE_ZOOM]: {index: number};
   [communityNavigations.ADD_FEED]: undefined;
 };
 
-const Stack = createStackNavigator<FeedStackParamList>();
+const Stack = createStackNavigator<CommunityStackParamList>();
 
-const FeedStackNavigator = () => {
+const CommunityStackNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -40,7 +46,7 @@ const FeedStackNavigator = () => {
       }}>
       <Stack.Screen
         name={communityNavigations.COMMUNITY_HOME}
-        component={FeedHomeScreen}
+        component={CommunityHomeScreen}
         options={() => ({
           headerTitle: '피드',
           headerShown: false,
@@ -51,6 +57,30 @@ const FeedStackNavigator = () => {
         component={FreeFeedScreen}
         options={() => ({
           headerTitle: '자유게시판',
+          headerLeft: () => <BackButton />,
+        })}
+      />
+      <Stack.Screen
+        name={communityNavigations.STUDENT_FEED}
+        component={StudentFeedScreen}
+        options={() => ({
+          headerTitle: '대학생게시판',
+          headerLeft: () => <BackButton />,
+        })}
+      />
+      <Stack.Screen
+        name={communityNavigations.WORKER_FEED}
+        component={WorkerFeedScreen}
+        options={() => ({
+          headerTitle: '직장인게시판',
+          headerLeft: () => <BackButton />,
+        })}
+      />
+      <Stack.Screen
+        name={communityNavigations.PREMIUM_PARTY_FEED}
+        component={PremiumPartyFeedScreen}
+        options={() => ({
+          headerTitle: '프리미엄파티',
           headerLeft: () => <BackButton />,
         })}
       />
@@ -79,4 +109,4 @@ const FeedStackNavigator = () => {
   );
 };
 
-export default FeedStackNavigator;
+export default CommunityStackNavigator;

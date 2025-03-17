@@ -7,7 +7,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {colors} from '@/constants';
-import {useUploadImages} from '@/services/feed';
+import {useUploadImages} from '@/services/community';
 import {getFormDataImages} from '@/utils';
 
 export const FeedWriteFooter = () => {

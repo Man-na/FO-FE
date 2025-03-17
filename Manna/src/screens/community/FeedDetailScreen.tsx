@@ -17,13 +17,16 @@ import {CommentItem} from '@/components/community/comment';
 import {FeedItem} from '@/components/community/feed';
 import {InputField} from '@/components/community/InputField';
 import {colors, communityNavigations} from '@/constants';
-import {FeedStackParamList} from '@/navigation/stack/FeedStackNavigator';
+import {CommunityStackParamList} from '@/navigation/stack/CommunityStackNavigator';
 import {MainTabParamList} from '@/navigation/tab/MainTabNavigator';
 import {useCreateComment} from '@/services/comment';
-import {useGetFeed} from '@/services/feed';
+import {useGetFeed} from '@/services/community';
 
 type FeedDetailScreenProps = CompositeScreenProps<
-  StackScreenProps<FeedStackParamList, typeof communityNavigations.FEED_DETAIL>,
+  StackScreenProps<
+    CommunityStackParamList,
+    typeof communityNavigations.FEED_DETAIL
+  >,
   StackScreenProps<MainTabParamList>
 >;
 

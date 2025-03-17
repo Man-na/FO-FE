@@ -12,8 +12,9 @@ import {
   TitleInput,
 } from '@/components/community/feed';
 import {VoteAttached, VoteModal} from '@/components/community/vote';
-import {useCreateFeed} from '@/services/feed';
+import {useCreateFeed} from '@/services/community';
 import {ImageUri, VoteOption} from '@/types';
+import {CategorySelector} from '@/components/community/feed';
 
 type AddFeedFormValues = {
   title: string;
@@ -22,6 +23,7 @@ type AddFeedFormValues = {
   isVoteOpen: boolean;
   isVoteAttached: boolean;
   voteOptions: VoteOption[];
+  categoryId: number;
 };
 
 export const AddFeedScreen = () => {
@@ -35,6 +37,7 @@ export const AddFeedScreen = () => {
       isVoteOpen: false,
       isVoteAttached: false,
       voteOptions: [{displayPriority: 0, content: ''}],
+      categoryId: 1,
     },
   });
 
@@ -53,10 +56,18 @@ export const AddFeedScreen = () => {
     });
   }, [navigation, postForm, handleSubmit]);
 
+  const setCategoryId = (id: number) => {
+    postForm.setValue('categoryId', id);
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <FormProvider {...postForm}>
         <KeyboardAwareScrollView contentContainerStyle={styles.container}>
+          <CategorySelector
+            value={postForm.watch('categoryId')}
+            onChange={setCategoryId}
+          />
           <TitleInput />
           <DescriptionInput />
           <VoteAttached />

@@ -1,8 +1,7 @@
 export const mainNavigations = {
   HOME: 'Home',
-  FEED: 'Feed',
+  COMMUNITY: 'Community',
   PROFILE: 'Profile',
-  SETTING: 'Setting',
   CHAT: 'Chat',
   MATCHING: 'Matching',
 } as const;
@@ -14,12 +13,15 @@ export const authNavigations = {
 } as const;
 
 export const homeNavigations = {
-  HOME: 'Home',
+  HOME: 'MainHome',
 } as const;
 
 export const communityNavigations = {
   COMMUNITY_HOME: 'CommunityHome',
   FREE_FEED: 'FreeFeed',
+  STUDENT_FEED: 'StudentFeed',
+  WORKER_FEED: 'WorkerFeed',
+  PREMIUM_PARTY_FEED: 'PremiumPartyFeed',
   FEED_DETAIL: 'FeedDetail',
   ADD_FEED: 'AddFeed',
   EDIT_FEED: 'EditFeed',

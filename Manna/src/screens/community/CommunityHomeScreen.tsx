@@ -12,21 +12,32 @@ import {
 } from 'react-native';
 
 import {colors, communityNavigations} from '@/constants';
-import {FeedStackParamList} from '@/navigation/stack/FeedStackNavigator';
+import {CommunityStackParamList} from '@/navigation/stack/CommunityStackNavigator';
 
-type Navigation = StackNavigationProp<FeedStackParamList>;
+type Navigation = StackNavigationProp<CommunityStackParamList>;
 
-export const FeedHomeScreen = () => {
+export const CommunityHomeScreen = () => {
   const navigation = useNavigation<Navigation>();
 
   const categories = [
     {id: 1, title: '자유게시판', screen: communityNavigations.FREE_FEED},
-    {id: 2, title: '대학생 게시판', screen: null},
-    {id: 3, title: '직장인 게시판', screen: null},
-    {id: 4, title: '프리미엄 파티', screen: null},
+    {id: 2, title: '대학생 게시판', screen: communityNavigations.STUDENT_FEED},
+    {id: 3, title: '직장인 게시판', screen: communityNavigations.WORKER_FEED},
+    {
+      id: 4,
+      title: '프리미엄 파티',
+      screen: communityNavigations.PREMIUM_PARTY_FEED,
+    },
   ];
 
-  const navigateToScreen = (screen: 'FreeFeed' | null) => {
+  const navigateToScreen = (
+    screen:
+      | 'FreeFeed'
+      | 'StudentFeed'
+      | 'WorkerFeed'
+      | 'PremiumPartyFeed'
+      | null,
+  ) => {
     if (screen) {
       navigation.navigate(screen);
     }

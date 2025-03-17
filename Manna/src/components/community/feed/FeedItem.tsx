@@ -1,8 +1,7 @@
 import {colors, communityNavigations} from '@/constants';
-import {FeedStackParamList} from '@/navigation/stack/FeedStackNavigator';
+import {CommunityStackParamList} from '@/navigation/stack/CommunityStackNavigator';
 import {useAuth} from '@/services/auth';
-import {ResponseFeed} from '@/services/feed';
-import {useDeleteFeed} from '@/services/feed/queries/useDeleteFeed';
+import {ResponseFeed, useDeleteFeed} from '@/services/community';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -16,7 +15,8 @@ interface FeedListProps {
 }
 
 export const FeedItem = ({feed, isDetail = false}: FeedListProps) => {
-  const navigation = useNavigation<StackNavigationProp<FeedStackParamList>>();
+  const navigation =
+    useNavigation<StackNavigationProp<CommunityStackParamList>>();
 
   const {getProfileQuery} = useAuth();
   const likeUsers = feed.likes?.map(like => Number(like.userId));
