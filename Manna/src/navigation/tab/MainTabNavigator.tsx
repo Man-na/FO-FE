@@ -3,7 +3,13 @@ import MaterialIcons from '@react-native-vector-icons/material-icons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigatorScreenParams, RouteProp} from '@react-navigation/native';
 import React from 'react';
-import {TouchableOpacity} from 'react-native';
+import {
+  TouchableOpacity,
+  Image,
+  View,
+  StyleSheet,
+  SafeAreaView,
+} from 'react-native';
 
 import {colors, mainNavigations} from '@/constants';
 import CommunityStackNavigator, {
@@ -70,20 +76,35 @@ const TabBarIcons = ({
   );
 };
 
+const CustomHeader = ({navigation}) => {
+  return (
+    <SafeAreaView style={styles.headerContainer}>
+      <View style={styles.headerContent}>
+        <View style={styles.headerSide} />
+
+        <View style={styles.headerCenter}>
+          <Image source={require('@/assets/TT_Logo.png')} style={styles.logo} />
+        </View>
+
+        <View style={styles.headerSide}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.getParent()?.navigate(mainNavigations.CHAT)
+            }>
+            <MaterialIcons name="chat" size={24} color={colors.BLACK} />
+          </TouchableOpacity>
+        </View>
+      </View>
+    </SafeAreaView>
+  );
+};
+
 const MainTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({navigation, route}) => ({
         headerShown: true,
-        headerRight: () => (
-          <TouchableOpacity
-            onPress={() =>
-              navigation.getParent()?.navigate(mainNavigations.CHAT)
-            }
-            style={{marginRight: 10}}>
-            <MaterialIcons name="chat" size={24} color={colors.BLACK} />
-          </TouchableOpacity>
-        ),
+        header: () => <CustomHeader navigation={navigation} />,
         tabBarActiveTintColor: colors.BLACK,
         tabBarInactiveTintColor: colors.GRAY_500,
         tabBarActiveBackgroundColor: colors.PINK_200,
@@ -122,5 +143,32 @@ const MainTabNavigator = () => {
     </Tab.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  headerContainer: {
+    backgroundColor: colors.WHITE,
+    borderBottomWidth: 1,
+    borderBottomColor: '#EEEEEE',
+  },
+  headerContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    height: 50,
+    paddingHorizontal: 16,
+  },
+  headerSide: {
+    width: 40,
+    alignItems: 'center',
+  },
+  headerCenter: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  logo: {
+    height: 35,
+    resizeMode: 'contain',
+  },
+});
 
 export default MainTabNavigator;
