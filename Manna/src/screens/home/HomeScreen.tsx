@@ -1,7 +1,3 @@
-import React, {useState} from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {colors, mainNavigations} from '@/constants';
 import {
   AddMatchingCard,
   MatchCard,
@@ -9,6 +5,14 @@ import {
   PremiumPartyCard,
   SectionHeader,
 } from '@/components/home';
+import {colors, mainNavigations} from '@/constants';
+import {MainTabParamList} from '@/navigation/tab/MainTabNavigator';
+import {useNavigation} from '@react-navigation/native';
+import React, {useState} from 'react';
+import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
+type HomeNavigationProp = NativeStackNavigationProp<MainTabParamList>;
 
 export type Meeting = {
   id: number;
@@ -30,7 +34,7 @@ type PremiumParty = {
 };
 
 export const HomeScreen: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<HomeNavigationProp>();
   const [expandedMeetingId, setExpandedMeetingId] = useState<number | null>(
     null,
   );

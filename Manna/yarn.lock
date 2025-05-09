@@ -2669,6 +2669,40 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-navigation/elements@npm:^2.4.1":
+  version: 2.4.1
+  resolution: "@react-navigation/elements@npm:2.4.1"
+  dependencies:
+    color: "npm:^4.2.3"
+  peerDependencies:
+    "@react-native-masked-view/masked-view": ">= 0.2.0"
+    "@react-navigation/native": ^7.1.8
+    react: ">= 18.2.0"
+    react-native: "*"
+    react-native-safe-area-context: ">= 4.0.0"
+  peerDependenciesMeta:
+    "@react-native-masked-view/masked-view":
+      optional: true
+  checksum: 10c0/428cae3621fbbfb15e2d971fb8a3287fe7f2e3a91da705121a463b1df172ad10a0f55ea4f02c40f987c3e5e7748c99f8bbb729b75f00939b551e9557e6cc94f7
+  languageName: node
+  linkType: hard
+
+"@react-navigation/native-stack@npm:^7.3.12":
+  version: 7.3.12
+  resolution: "@react-navigation/native-stack@npm:7.3.12"
+  dependencies:
+    "@react-navigation/elements": "npm:^2.4.1"
+    warn-once: "npm:^0.1.1"
+  peerDependencies:
+    "@react-navigation/native": ^7.1.8
+    react: ">= 18.2.0"
+    react-native: "*"
+    react-native-safe-area-context: ">= 4.0.0"
+    react-native-screens: ">= 4.0.0"
+  checksum: 10c0/bce8600d652884480e9ac72bce45c26b9a58478337ca4b9d372d4f1b6bf08853d6becb4b30aa3cb8d0548f44718b1adc3bba4f45acb780026869a743770ce0c6
+  languageName: node
+  linkType: hard
+
 "@react-navigation/native@npm:^7.0.14":
   version: 7.0.15
   resolution: "@react-navigation/native@npm:7.0.15"
@@ -3208,6 +3242,7 @@ __metadata:
     "@react-navigation/bottom-tabs": "npm:^7.2.0"
     "@react-navigation/drawer": "npm:^7.1.1"
     "@react-navigation/native": "npm:^7.0.14"
+    "@react-navigation/native-stack": "npm:^7.3.12"
     "@react-navigation/stack": "npm:^7.1.1"
     "@tanstack/react-query": "npm:^5.66.0"
     "@types/react": "npm:^18.2.6"
@@ -10354,7 +10389,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"warn-once@npm:0.1.1, warn-once@npm:^0.1.0":
+"warn-once@npm:0.1.1, warn-once@npm:^0.1.0, warn-once@npm:^0.1.1":
   version: 0.1.1
   resolution: "warn-once@npm:0.1.1"
   checksum: 10c0/f531e7b2382124f51e6d8f97b8c865246db8ab6ff4e53257a2d274e0f02b97d7201eb35db481843dc155815e154ad7afb53b01c4d4db15fb5aa073562496aff7
