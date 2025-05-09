@@ -19,19 +19,23 @@ export const AddMatchingCard = ({onPress}: AddMatchingCardProps) => {
 
 const styles = StyleSheet.create({
   addMatchingCard: {
-    backgroundColor: colors.PINK_200,
-    borderRadius: 16,
+    backgroundColor: colors.WHITE,
+    borderRadius: 24,
     padding: 16,
     marginBottom: 12,
     justifyContent: 'center',
     alignItems: 'center',
     height: 120,
+    shadowColor: colors.BLACK,
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
   plusIconContainer: {
     width: 50,
     height: 50,
     borderRadius: 25,
-    backgroundColor: colors.PINK_200,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 10,
@@ -39,7 +43,7 @@ const styles = StyleSheet.create({
   plusIcon: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: colors.WHITE,
+    color: colors.BLACK,
   },
   addMatchingText: {
     fontSize: 16,

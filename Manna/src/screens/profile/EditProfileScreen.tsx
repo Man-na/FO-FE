@@ -62,7 +62,6 @@ export const EditProfileScreen = () => {
             <Text style={styles.nicknameText}>{nickname || '닉네임'}</Text>
 
             <View style={styles.profileDetailsList}>
-              {/* Here we can display summary of profile details when available */}
               <Text style={styles.profileDetailText}>
                 {getProfileQuery.data?.gender === 'male'
                   ? '남자'

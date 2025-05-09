@@ -5,7 +5,6 @@ import {colors, mainNavigations} from '@/constants';
 import {
   AddMatchingCard,
   MatchCard,
-  MatchDetailModal,
   PopularFeedCard,
   PremiumPartyCard,
   SectionHeader,
@@ -32,8 +31,7 @@ type PremiumParty = {
 
 export const HomeScreen: React.FC = () => {
   const navigation = useNavigation();
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const [selectedMeetingId, setSelectedMeetingId] = useState<number | null>(
+  const [expandedMeetingId, setExpandedMeetingId] = useState<number | null>(
     null,
   );
 
@@ -64,7 +62,7 @@ export const HomeScreen: React.FC = () => {
       id: 2,
       date: '2025.03.10(월)',
       location: '홍대',
-      status: '나의매칭',
+      status: '직접매칭',
       participants: {
         males: [
           {id: 1, active: true},
@@ -102,17 +100,13 @@ export const HomeScreen: React.FC = () => {
   };
 
   const handleMatchPress = (meetingId: number): void => {
-    setSelectedMeetingId(meetingId);
-    setModalVisible(true);
+    setExpandedMeetingId(expandedMeetingId === meetingId ? null : meetingId);
   };
 
   const navigateToMatchingPage = (): void => {
     navigation.navigate(mainNavigations.MATCHING);
   };
 
-  const selectedMeeting = meetingsData.find(
-    meeting => meeting.id === selectedMeetingId,
-  );
   const displayedMeetings = meetingsData.slice(0, 3);
   const needsAddButton = displayedMeetings.length < 3;
 
@@ -129,6 +123,7 @@ export const HomeScreen: React.FC = () => {
               key={meeting.id}
               meeting={meeting}
               onPress={handleMatchPress}
+              isExpanded={expandedMeetingId === meeting.id}
             />
           ))}
           {needsAddButton && (
@@ -161,12 +156,6 @@ export const HomeScreen: React.FC = () => {
           </View>
         </ScrollView>
       </ScrollView>
-
-      <MatchDetailModal
-        visible={modalVisible}
-        onClose={() => setModalVisible(false)}
-        meetingInfo={selectedMeeting || null}
-      />
     </SafeAreaView>
   );
 };
@@ -188,5 +177,6 @@ const styles = StyleSheet.create({
   },
   premiumCardContainer: {
     flexDirection: 'row',
+    marginVertical: 16,
   },
 });

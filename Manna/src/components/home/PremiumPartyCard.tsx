@@ -13,10 +13,10 @@ export const PremiumPartyCard = ({
 }: PremiumPartyCardProps) => {
   return (
     <View style={styles.premiumCard}>
+      <Text style={styles.cardTitle}>{title}</Text>
       <View style={styles.imageContainer}>
         <View style={styles.placeholderImage} />
       </View>
-      <Text style={styles.cardTitle}>{title}</Text>
       <Text style={styles.cardDescription}>{description}</Text>
     </View>
   );
@@ -25,10 +25,15 @@ export const PremiumPartyCard = ({
 const styles = StyleSheet.create({
   premiumCard: {
     width: 150,
-    backgroundColor: colors.PINK_200,
     borderRadius: 16,
     padding: 12,
     marginRight: 12,
+    backgroundColor: colors.WHITE,
+    shadowColor: colors.BLACK,
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
   imageContainer: {
     height: 100,
@@ -39,12 +44,12 @@ const styles = StyleSheet.create({
   placeholderImage: {
     width: 80,
     height: 80,
-    borderRadius: 40,
+    borderRadius: 12,
     backgroundColor: '#E0E0E0',
   },
   cardTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 14,
+    fontWeight: '500',
     marginBottom: 4,
     textAlign: 'center',
   },

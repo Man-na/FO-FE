@@ -6,9 +6,10 @@ import {StyleSheet, Text, View} from 'react-native';
 export const PopularFeedCard = () => {
   return (
     <View style={styles.notificationCard}>
-      <Text style={styles.notificationTitle}>제목 제목 제목</Text>
+      <Text style={styles.notificationTitle}>첫 매칭 후기 썰푼 ㄷㅏ</Text>
       <Text style={styles.notificationContent}>
-        본문본문본문본문본문본문본문본문본문본문본문
+        어제 강남에서 4대4 매칭했음..{'\n'}첫 매 칭이라 얼떨떨하게
+        장소갔는데거...
       </Text>
       <View style={styles.reactionContainer}>
         <Text style={styles.reactionText}>자유 게시판</Text>
@@ -29,14 +30,19 @@ export const PopularFeedCard = () => {
 
 const styles = StyleSheet.create({
   notificationCard: {
-    backgroundColor: colors.PINK_200,
+    backgroundColor: colors.WHITE,
     borderRadius: 16,
     padding: 16,
     marginBottom: 16,
+    shadowColor: colors.BLACK,
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
   notificationTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 14,
+    fontWeight: '600',
     marginBottom: 8,
   },
   notificationContent: {
