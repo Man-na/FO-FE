@@ -44,6 +44,7 @@ export const profileNavigations = {
   PROFILE_HOME: 'ProfileHome',
   EDIT_PROFILE: 'EditProfile',
   EDIT_AVATAR: 'EditAvatar',
+  EDIT_PROFILE_DETAILS: 'EditProfileDetails',
 } as const;
 
 export const chatNavigations = {

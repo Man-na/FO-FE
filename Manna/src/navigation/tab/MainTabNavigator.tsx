@@ -91,7 +91,7 @@ const CustomHeader = ({navigation}) => {
             onPress={() =>
               navigation.getParent()?.navigate(mainNavigations.CHAT)
             }>
-            <MaterialIcons name="chat" size={24} color={colors.BLACK} />
+            <MaterialIcons name="chat" size={20} color={colors.BLACK} />
           </TouchableOpacity>
         </View>
       </View>
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    height: 50,
+    height: 55,
     paddingHorizontal: 16,
   },
   headerSide: {
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logo: {
-    height: 35,
+    height: 40,
     resizeMode: 'contain',
   },
 });

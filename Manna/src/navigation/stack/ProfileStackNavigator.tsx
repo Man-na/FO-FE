@@ -8,11 +8,13 @@ import {
   EditProfileScreen,
   ProfileHomeScreen,
 } from '@/screens/profile';
+import {EditProfileDetailsScreen} from '@/screens/profile/EditProfileDetails';
 
 export type ProfileStackParamList = {
   [profileNavigations.PROFILE_HOME]: undefined;
   [profileNavigations.EDIT_PROFILE]: undefined;
   [profileNavigations.EDIT_AVATAR]: undefined;
+  [profileNavigations.EDIT_PROFILE_DETAILS]: undefined;
 };
 
 const Stack = createStackNavigator<ProfileStackParamList>();
@@ -58,6 +60,14 @@ const ProfileStackNavigator = () => {
           headerTitle: '아바타 변경',
           headerLeft: () => <BackButton />,
         })}
+      />
+      <Stack.Screen
+        name={profileNavigations.EDIT_PROFILE_DETAILS}
+        component={EditProfileDetailsScreen}
+        options={{
+          title: '프로필 편집',
+          headerTitleAlign: 'center',
+        }}
       />
     </Stack.Navigator>
   );
